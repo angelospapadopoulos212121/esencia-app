@@ -145,7 +145,7 @@ if (window.appInited) {
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <meta name="apple-mobile-web-app-capable" content="yes"/>
-<title>Esencia · Sistema de Producción v4</title>
+<title>Esencia · Sistema de Producción v5</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet"/>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js">
 function updVitInfo(i){
@@ -722,7 +722,7 @@ input,select,textarea,button{font-family:'Montserrat',sans-serif}
 
   <div class="app-body">
     <div class="sidebar" id="sidebar">
-      <div class="sb-top"><div class="sb-e">Esencia</div><div class="sb-s">Sistema v4.0</div></div>
+      <div class="sb-top"><div class="sb-e">Esencia</div><div class="sb-s">Sistema v5.0</div></div>
       <div class="sb-sec">Principal</div>
       <div class="ni on" onclick="goTo('dashboard',this)"><svg viewBox="0 0 16 16"><rect x="1" y="1" width="6" height="6" rx="1"/><rect x="9" y="1" width="6" height="6" rx="1"/><rect x="1" y="9" width="6" height="6" rx="1"/><rect x="9" y="9" width="6" height="6" rx="1"/></svg><span>Dashboard</span></div>
       <div class="ni" onclick="goTo('metas',this)"><svg viewBox="0 0 16 16"><circle cx="8" cy="8" r="6"/><circle cx="8" cy="8" r="3"/><circle cx="8" cy="8" r="1" fill="currentColor" stroke="none"/></svg><span>Metas del día</span><span class="nb nb-g" id="metaNb">HOY</span></div>
@@ -1094,7 +1094,7 @@ input,select,textarea,button{font-family:'Montserrat',sans-serif}
   <div id="histList"></div>
 
   <!-- MODAL VER REPORTE -->
-  <div id="histModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:999;overflow-y:auto;padding:20px">
+  <div id="histModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.8);z-index:9999;overflow-y:auto;padding:20px">
     <div style="background:var(--bg1);border:1px solid var(--bord);border-radius:16px;max-width:700px;margin:0 auto;padding:24px">
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
         <div id="histModalTtl" style="font-family:'Cormorant Garamond',serif;font-size:20px;color:var(--gold2)"></div>
@@ -1844,10 +1844,27 @@ function addVit(){const n=$('vit-n').value.trim(),r=$('vit-r').value.trim(),l=$(
 // ══════════════════════════════════════════════════════════════
 function openAddOp(){$('op-p').innerHTML='<option value="">Sin asignar</option>'+[1,2,3,4,5,6,7,8,9,10].map(n=>`<option value="${n}">Pareja ${n}</option>`).join('');$('addOpForm').classList.toggle('show')}
 function renderOps(){
-  ['e','p'].forEach(t=>{const canEdit=PERMS[currentUser?.rol]?.editarOp;
-  $(`opGrid-${t}`).innerHTML=OPS.filter(o=>o.tipo===t).map(o=>`<div class="op-card"><div class="op-av" style="background:${o.col}">${o.ini}</div><div class="op-name">${o.n}</div><span class="op-tipo ${o.tipo}">${o.roles?o.roles.map(r=>r==='empunero'?'Empuñero/a':r==='pegador'?'Pegador/a':r==='recapador'?'Recapador/a':'Bonchero/a').join(' · '):o.tipo==='e'?'Empuñero/a':'Pegador/a'}</span><div class="op-pareja">${o.pareja?`Pareja ${o.pareja}`:'Sin asignar'}</div>${canEdit?`<div class="op-acts"><button class="op-act del" onclick="delOp(${o.id})">Quitar</button></div>`:''}</div>`).join('')||`<div style="color:var(--txt3);font-size:11px;padding:10px">No hay ${t==='e'?'empuñeras/os':'pegadoras/os'}.</div>`;});
-  $('dv-ops').textContent=OPS.length;const e=OPS.filter(o=>o.tipo==='e').length,p2=OPS.filter(o=>o.tipo==='p').length;$('dv-ops-sub').textContent=`${e} empuñeras · ${p2} pegadoras`}
-function delOp(id){OPS=OPS.filter(o=>o.id!==id);renderOps();notif2('Operario removido','suc')}
+  const canEdit=PERMS[currentUser?.rol]?.editarOp;
+  const opCard = o => {
+    const rolLbl = o.roles&&o.roles.length ? o.roles.map(r=>r==='empunero'?'Empuñero/a':r==='pegador'?'Pegador/a':r==='recapador'?'Recapador/a':'Bonchero/a').join(' · ') : o.tipo==='e'?'Empuñero/a':o.tipo==='p'?'Pegador/a':o.tipo==='r'?'Recapador/a':'Operario';
+    return `<div class="op-card"><div class="op-av" style="background:${o.col||'#5A2E6A'}">${o.ini||'?'}</div><div class="op-name">${o.n}</div><span class="op-tipo ${o.tipo||'e'}">${rolLbl}</span><div class="op-pareja">${o.pareja?`Pareja ${o.pareja}`:'Sin asignar'}</div>${canEdit?`<div class="op-acts"><button class="op-act del" onclick="delOp(${o.id})">Quitar</button></div>`:''}</div>`;
+  };
+  ['e','p','r','b'].forEach(t=>{
+    const el=$(`opGrid-${t}`);if(!el)return;
+    el.innerHTML=OPS.filter(o=>(o.tipo||'e')===t).map(opCard).join('')||`<div style="color:var(--txt3);font-size:11px;padding:10px">Sin operarios de este tipo.</div>`;
+  });
+  // Show ALL ops in one grid if opGrid-e doesn't exist (fallback)
+  const mainGrid=$('opGrid-e');
+  if(mainGrid&&mainGrid.innerHTML==='') {
+    mainGrid.innerHTML=OPS.map(opCard).join('');
+  }
+  $('dv-ops').textContent=OPS.length;
+  const e=OPS.filter(o=>(o.tipo||'e')==='e').length;
+  const p2=OPS.filter(o=>(o.tipo||'e')==='p').length;
+  const r=OPS.filter(o=>(o.tipo||'e')==='r').length;
+  $('dv-ops-sub').textContent=`${e} empuñeros · ${p2} pegadores${r>0?' · '+r+' recapadores':''}`;
+}
+function delOp(id){OPS=OPS.filter(o=>o.id!==id);renderOps();renderMetaConfig();notif2('Operario removido','suc');if(window.fbSaveArr)window.fbSaveArr('operarios',OPS);lsSave();}
 function addOp(){const n=$('op-n').value.trim();if(!n){notif2('Ingresa el nombre','err');return}const tipo=$('op-t').value,par=$('op-p').value;const ini=n.split(' ').filter(Boolean).slice(0,2).map(w=>w[0]).join('').toUpperCase();OPS.push({id:Date.now(),n,ini,tipo,col:AV_COLS[OPS.length%AV_COLS.length],pareja:par?parseInt(par):null});$('op-n').value='';$('addOpForm').classList.remove('show');renderOps();renderMetaConfig();notif2(`${n} agregado/a`,'suc');if(window.fbSaveArr)window.fbSaveArr('operarios',OPS);lsSave();}
 
 // ══════════════════════════════════════════════════════════════
@@ -1929,7 +1946,7 @@ function renderInvTable(){
 function openAdj(id){const e=INV.find(x=>x.id===id);if(!e) return;adjTargetId=id;$('adjTitle').textContent=`Ajustar stock`;$('adjSub').textContent=`${e.box} · ${e.name}${e.tipo!=='—'?' · '+e.tipo:''}`;$('adjCurr').textContent=e.lb.toFixed(2)+' lb';$('adjBoxLbl').textContent=e.box;$('adjAmt').value='';$('adjModal').classList.add('show')}
 function closeAdj(){$('adjModal').classList.remove('show');adjTargetId=null}
 function confirmAdj(){if(adjTargetId===null) return;const e=INV.find(x=>x.id===adjTargetId);if(!e) return;const adj=parseFloat($('adjAmt').value);if(isNaN(adj)||adj===0){notif2('Ingresa una cantidad válida','err');return}e.lb=Math.max(0,+(e.lb+adj).toFixed(3));closeAdj();notif2(`${e.box} · ${e.name}: ${e.lb.toFixed(2)} lb`,'suc');renderInvSummary();renderInvAlerts();updateInvNb();renderInvTable()}
-function addInvEntry(){const box=$('af-box').value.trim(),name=$('af-name').value.trim(),cat=$('af-cat').value,tipo=$('af-tipo').value,lb=parseFloat($('af-lb').value)||0,grade=$('af-grade').value.trim(),origin=$('af-origin').value.trim(),minLb=parseFloat($('af-min').value)||15,proveedor=$('af-prov')?.value.trim()||'',precio=parseFloat($('af-precio')?.value)||0,fechaCompra=$('af-fechac')?.value||'',notas=$('af-notas')?.value.trim()||'';if(!name){notif2('El nombre es obligatorio','err');return}INV.push({id:nextInvId++,box:box||`Nueva ${nextInvId}`,name,cat,tipo,lb,minLb,grade,origin,proveedor,precio,fechaCompra,notas});['af-box','af-name','af-grade','af-origin','af-prov','af-notas'].forEach(f=>{if($(f))$(f).value=''});$('af-lb').value='';$('af-min').value='15';if($('af-precio'))$('af-precio').value='';if($('af-fechac'))$('af-fechac').value='';$('addInvForm').classList.remove('show');notif2(`"${name}" agregado`,'suc');renderInvSummary();renderInvAlerts();updateInvNb();renderInvTable();if(window.fbReady&&window.fbSaveInventario)window.fbSaveInventario(INV[INV.length-1]);}
+function addInvEntry(){const box=$('af-box').value.trim(),name=$('af-name').value.trim(),cat=$('af-cat').value,tipo=$('af-tipo').value,lb=parseFloat($('af-lb').value)||0,grade=$('af-grade').value.trim(),origin=$('af-origin').value.trim(),minLb=parseFloat($('af-min').value)||15,proveedor=$('af-prov')?.value.trim()||'',precio=parseFloat($('af-precio')?.value)||0,fechaCompra=$('af-fechac')?.value||'',notas=$('af-notas')?.value.trim()||'';if(!name){notif2('El nombre es obligatorio','err');return}INV.push({id:nextInvId++,box:box||`Nueva ${nextInvId}`,name,cat,tipo,lb,minLb,grade,origin,proveedor,precio,fechaCompra,notas});['af-box','af-name','af-grade','af-origin','af-prov','af-notas'].forEach(f=>{if($(f))$(f).value=''});$('af-lb').value='';$('af-min').value='15';if($('af-precio'))$('af-precio').value='';if($('af-fechac'))$('af-fechac').value='';$('addInvForm').classList.remove('show');notif2(`"${name}" agregado`,'suc');renderInvSummary();renderInvAlerts();updateInvNb();renderInvTable();if(window.fbReady&&window.fbSaveInventario)window.fbSaveInventario(INV[INV.length-1]);lsSave();}
 function delInv(id){const e=INV.find(x=>x.id===id);if(!e||!confirm(`¿Eliminar "${e.box} · ${e.name}"?`)) return;INV=INV.filter(x=>x.id!==id);notif2(`"${e.name}" eliminado`,'suc');renderInvSummary();renderInvAlerts();updateInvNb();renderInvTable()}
 function descontarStock(name,tipo,lb){const e=INV.find(i=>i.name.toLowerCase()===name.toLowerCase()&&(tipo==='—'||i.tipo===tipo||i.cat!=='Tripa'));if(e){e.lb=Math.max(0,+(e.lb-lb).toFixed(3));return true}return false}
 
@@ -2372,6 +2389,9 @@ function openHistReport(idx) {
   const editBtn = document.getElementById('histModalEditBtn');
   if (!modal || !body) return;
 
+  // Define tipoLabel here so template can use it
+  const tipoLabel = r.tipoProd ? r.tipoProd.map((t,i)=>`P${i+1}: ${t==='recape'?'🔄 Recape':'🆕 Nuevo'}`).join(' · ') : '';
+
   if (ttl) ttl.textContent = `Reporte ${r.fecha} · ${r.sup}`;
   if (editBtn) {
     editBtn.style.display = currentUser?.rol==='admin' ? 'inline-block' : 'none';
@@ -2686,7 +2706,7 @@ function renderPedidos() {
 function updPedSts(id,v){const p=PEDIDOS.find(x=>x.id===id);if(p){p.sts=v;renderPedidos();}}
 function updPedPrio(id,v){const p=PEDIDOS.find(x=>x.id===id);if(p){p.prio=v;renderPedidos();}}
 function updPedItem(pid,vit,val){const p=PEDIDOS.find(x=>x.id===pid);if(!p)return;const it=p.items.find(i=>i.vit===vit);if(it){it.producido=Math.max(0,Math.min(it.total,parseInt(val)||0));renderPedidos();}}
-function delPedido(id){if(!confirm('¿Eliminar este pedido?'))return;PEDIDOS=PEDIDOS.filter(x=>x.id!==id);renderPedidos();notif('Pedido eliminado','suc');if(window.fbReady&&window.fbDeletePedido)window.fbDeletePedido(id);}
+function delPedido(id){if(!confirm('¿Eliminar este pedido?'))return;PEDIDOS=PEDIDOS.filter(x=>x.id!==id);renderPedidos();notif('Pedido eliminado','suc');if(window.fbReady&&window.fbDeletePedido)window.fbDeletePedido(id);lsSave();}
 
 // ══════════════════════════════════════════════════════
 // BLENDS
@@ -2853,7 +2873,7 @@ function renderBlends() {
       }).join('')+'</div>';
   }).join('');
 }
-function delBlend(id){const b=BLENDS.find(x=>x.id===id);if(!b||!confirm('¿Eliminar "'+b.nombre+'"?'))return;BLENDS=BLENDS.filter(x=>x.id!==id);renderBlends();notif('Blend eliminado','suc');if(window.fbReady&&window.fbDeleteBlend)window.fbDeleteBlend(id);}
+function delBlend(id){const b=BLENDS.find(x=>x.id===id);if(!b||!confirm('¿Eliminar "'+b.nombre+'"?'))return;BLENDS=BLENDS.filter(x=>x.id!==id);renderBlends();notif('Blend eliminado','suc');if(window.fbReady&&window.fbDeleteBlend)window.fbDeleteBlend(id);lsSave();}
 
 // notif alias (in case notif2 is the name used)
 function notif(msg,tipo){if(typeof notif2==='function'){notif2(msg,tipo);}else{alert(msg);}}
@@ -3410,7 +3430,7 @@ function openEditInv(id) {
   if (existing) existing.remove();
   const modal = document.createElement('div');
   modal.id = 'invEditModal';
-  modal.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:1000;display:flex;align-items:center;justify-content:center;padding:20px';
+  modal.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,.8);z-index:9999;display:flex;align-items:center;justify-content:center;padding:20px';
   modal.innerHTML = `
     <div style="background:var(--bg1);border:1px solid var(--bord);border-radius:16px;padding:24px;width:100%;max-width:560px;max-height:90vh;overflow-y:auto">
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
@@ -3477,7 +3497,7 @@ function saveEditInv(id) {
   document.getElementById('invEditModal')?.remove();
   renderInvTable();
   renderInvSummary();
-  notif2(`"${e.name}" actualizado ✓`,'suc');
+  notif2(`"${e.name}" actualizado ✓`,'suc');lsSave();
   logAct(`Inventario editado: ${e.name} Caja ${e.box}`);
 }
 
@@ -3497,6 +3517,7 @@ function lsSave() {
       blends:      BLENDS,
       pedidos:     PEDIDOS,
       reportes:    savedReports.slice(-200),
+      inv_lb:      INV.map(i=>({id:i.id,lb:i.lb,proveedor:i.proveedor||'',precio:i.precio||0,fechaCompra:i.fechaCompra||'',notas:i.notas||''})),
       ts:          Date.now()
     };
     localStorage.setItem(LS_KEY, JSON.stringify(data));
@@ -3517,6 +3538,19 @@ function lsLoad() {
     if (data.blends    && data.blends.length)    { BLENDS = data.blends; nextBlendId = Math.max(nextBlendId, ...data.blends.map(b=>b.id||0))+1; }
     if (data.pedidos   && data.pedidos.length)   { PEDIDOS = data.pedidos; nextPedId = Math.max(nextPedId, ...data.pedidos.map(p=>parseInt(p.id)||0))+1; }
     if (data.reportes  && data.reportes.length)  { savedReports = data.reportes; }
+    // Restore inventory lb
+    if (data.inv_lb && data.inv_lb.length) {
+      data.inv_lb.forEach(fi => {
+        const local = INV.find(i=>i.id===fi.id);
+        if (local) {
+          local.lb = fi.lb !== undefined ? fi.lb : local.lb;
+          local.proveedor   = fi.proveedor   || local.proveedor   || '';
+          local.precio      = fi.precio      || local.precio      || 0;
+          local.fechaCompra = fi.fechaCompra || local.fechaCompra || '';
+          local.notas       = fi.notas       || local.notas       || '';
+        }
+      });
+    }
     console.log('✓ lsLoad OK: marcas='+(data.marcas?.length||0)+' vitolas='+(data.vitolas?.length||0));
     // Re-save immediately to refresh the timestamp and reinforce data
     try { localStorage.setItem(LS_KEY+'_bak', raw); } catch(e) {}
