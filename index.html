@@ -1099,6 +1099,8 @@ input,select,textarea,button{font-family:'Montserrat',sans-serif}
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
         <div id="histModalTtl" style="font-family:'Cormorant Garamond',serif;font-size:20px;color:var(--gold2)"></div>
         <div style="display:flex;gap:8px">
+          <button onclick="exportarPDF(savedReports[currentHistIdx])" style="background:rgba(184,150,46,.15);border:1px solid rgba(184,150,46,.4);color:var(--gold2);cursor:pointer;padding:6px 14px;border-radius:7px;font-size:9px;font-family:Montserrat,sans-serif;font-weight:500;letter-spacing:.1em;text-transform:uppercase">📄 PDF</button>
+          <button onclick="compartirWhatsApp(savedReports[currentHistIdx])" style="background:rgba(37,211,102,.12);border:1px solid rgba(37,211,102,.3);color:#25d366;cursor:pointer;padding:6px 14px;border-radius:7px;font-size:9px;font-family:Montserrat,sans-serif;font-weight:500;letter-spacing:.1em;text-transform:uppercase">💬 WhatsApp</button>
           <button id="histModalEditBtn" onclick="histEditReport()" style="display:none;background:rgba(32,96,160,.15);border:1px solid rgba(32,96,160,.4);color:#74B3E8;cursor:pointer;padding:6px 14px;border-radius:7px;font-size:9px;font-family:Montserrat,sans-serif;font-weight:500;letter-spacing:.1em;text-transform:uppercase">Editar</button>
           <button onclick="closeHistModal()" style="background:transparent;border:1px solid rgba(255,255,255,.15);color:var(--txt2);cursor:pointer;padding:6px 14px;border-radius:7px;font-size:9px;font-family:Montserrat,sans-serif;font-weight:500;letter-spacing:.1em;text-transform:uppercase">Cerrar</button>
         </div>
@@ -1334,7 +1336,17 @@ input,select,textarea,button{font-family:'Montserrat',sans-serif}
 <div class="mwrap" id="mWrap">
   <div class="mbg"><div class="mbox">
     <div class="m-e">Esencia</div><div class="m-ao">Arte &amp; Origen</div><div class="m-orn"></div>
-    <div class="mstats" id="mStats"></div>
+    <div style="display:none;gap:8px;margin-bottom:10px;flex-wrap:wrap" id="reportBtns">
+  <button onclick="exportarPDFHoy()" style="background:rgba(184,150,46,.15);border:1px solid rgba(184,150,46,.4);color:var(--gold2);cursor:pointer;padding:7px 14px;border-radius:8px;font-size:9px;font-family:Montserrat,sans-serif;font-weight:500;letter-spacing:.1em;text-transform:uppercase;display:flex;align-items:center;gap:6px">
+    <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="2" width="10" height="12" rx="1"/><path d="M5 6h6M5 8h6M5 10h4"/></svg>
+    Exportar PDF
+  </button>
+  <button onclick="compartirWhatsAppHoy()" style="background:rgba(37,211,102,.12);border:1px solid rgba(37,211,102,.35);color:#25d366;cursor:pointer;padding:7px 14px;border-radius:8px;font-size:9px;font-family:Montserrat,sans-serif;font-weight:500;letter-spacing:.1em;text-transform:uppercase;display:flex;align-items:center;gap:6px">
+    <svg width="13" height="13" viewBox="0 0 16 16" fill="currentColor"><path d="M8 1C4.13 1 1 4.13 1 8c0 1.24.32 2.4.88 3.41L1 15l3.69-.86A6.96 6.96 0 008 15c3.87 0 7-3.13 7-7s-3.13-7-7-7z"/></svg>
+    WhatsApp
+  </button>
+</div>
+<div class="mstats" id="mStats"></div>
     <div class="mplist" id="mList"></div>
     <div id="mInvChanges" style="margin-bottom:12px"></div>
     <div id="mMetaSection" style="margin-bottom:12px"></div>
@@ -2160,6 +2172,7 @@ function guardar(){
     });
   }
   
+  const rb=document.getElementById('reportBtns');if(rb)rb.style.display='flex';
   $('mStats').innerHTML=`<div class="mstat"><div class="mstat-v" style="color:var(--gold3)">${pa}</div><div class="mstat-l">Parejas</div></div><div class="mstat"><div class="mstat-v" style="color:#5DBF8A">${b}</div><div class="mstat-l">Buenos</div></div><div class="mstat"><div class="mstat-v" style="color:#E57373">${m}</div><div class="mstat-l">Malos</div></div><div class="mstat"><div class="mstat-v">${lb.toFixed(2)}</div><div class="mstat-l">Libras</div></div>`;
   $('mList').innerHTML=rows.map(r=>`<div class="mprow"><span class="mpname">Pareja ${r.i} · ${r.vit}</span><span style="font-size:10px;color:var(--txt)">${r.bn+r.ml} cig · ${r.tl.toFixed(2)} lb</span><span class="mppct ${r.pct>15?'mpwarn':'mpok'}">${r.pct.toFixed(1)}%</span></div>`).join('');
   if(invChanges.length) $('mInvChanges').innerHTML=`<div style="background:rgba(26,110,58,.1);border:1px solid rgba(26,110,58,.25);border-radius:8px;padding:10px 12px"><div style="font-size:8px;letter-spacing:.14em;text-transform:uppercase;color:#5DBF8A;margin-bottom:6px;font-weight:500">Inventario descontado</div>${invChanges.slice(0,8).map(c=>`<div style="font-size:10px;color:var(--txt2);padding:2px 0">${c}</div>`).join('')}${invChanges.length>8?`<div style="font-size:9px;color:var(--txt3)">+${invChanges.length-8} más...</div>`:''}</div>`;
@@ -2178,6 +2191,30 @@ function guardar(){
   $('mWrap').classList.add('show');
   renderInvSummary();renderInvAlerts();updateInvNb();updateDashStats();updateDashMeta();
   lsSave();logAct(`Reporte guardado: ${fecha} · ${pa} parejas · ${b} buenos · Meta: ${metaPct.toFixed(0)}%`);
+
+  // ── AUTO-UPDATE PEDIDOS ──
+  // Find pedidos that match this report's marca/vitola and update producido
+  let pedidosActualizados = 0;
+  if (PEDIDOS.length > 0 && rows.length > 0) {
+    PEDIDOS.forEach(ped => {
+      if (!ped.items) return;
+      ped.items.forEach(item => {
+        // Find matching rows in this report (same vitola)
+        const matchRows = rows.filter(r => r.vit && item.vit && r.vit.toLowerCase().includes(item.vit.toLowerCase().split('(')[0].trim().toLowerCase()));
+        if (matchRows.length > 0) {
+          const nuevos = matchRows.reduce((a, r) => a + (r.bn || 0), 0);
+          item.producido = (item.producido || 0) + nuevos;
+          if (item.producido > item.total) item.producido = item.total;
+          pedidosActualizados++;
+        }
+      });
+      if (window.fbReady && window.fbSavePedido) window.fbSavePedido(ped);
+    });
+    if (pedidosActualizados > 0) {
+      setTimeout(() => notif2(`📦 ${pedidosActualizados} pedido${pedidosActualizados!==1?'s':''} actualizado${pedidosActualizados!==1?'s':''} automáticamente`, 'suc'), 2000);
+      lsSave();
+    }
+  }
   try{localStorage.removeItem('esencia_draft')}catch(e){}
   notif2('Reporte guardado · Inventario actualizado','suc');
   if(metaPct>=100) setTimeout(()=>notif2('🏆 ¡Meta del día alcanzada! Excelente trabajo del equipo.','suc'),1500);
@@ -2395,7 +2432,8 @@ function openHistReport(idx) {
   if (ttl) ttl.textContent = `Reporte ${r.fecha} · ${r.sup}`;
   if (editBtn) {
     editBtn.style.display = currentUser?.rol==='admin' ? 'inline-block' : 'none';
-    editBtn.onclick = () => histEditReport(idx);
+    window.currentHistIdx = idx;
+  editBtn.onclick = () => histEditReport(idx);
   }
 
   body.innerHTML = `
@@ -3580,6 +3618,177 @@ setTimeout(() => {
     console.log('✓ Datos iniciales guardados');
   }
 }, 1000);
+
+
+// ══════════ WHATSAPP RESUMEN ══════════
+function compartirWhatsApp(rep) {
+  if (!rep) {
+    // Use last saved report
+    if (!savedReports.length) { notif2('No hay reportes guardados','err'); return; }
+    rep = savedReports[savedReports.length-1];
+  }
+  const ef = (rep.b+rep.m) > 0 ? ((rep.b/(rep.b+rep.m))*100).toFixed(1) : 0;
+  const lineas = [
+    `📋 *REPORTE ESENCIA · ${rep.fecha}*`,
+    `─────────────────────`,
+    `👷 Supervisor: ${rep.sup}`,
+    `🏭 Parejas: ${rep.pa}`,
+    ``,
+    `✅ Cigarros buenos: *${rep.b.toLocaleString()}*`,
+    `❌ Malos/Rechazo: ${rep.m}`,
+    `📊 Eficiencia: *${ef}%*`,
+    `🎯 Meta: *${rep.metaPct||0}%*`,
+    ``,
+    `🌿 Tabaco consumido: ${(rep.lb||0).toFixed(2)} lb`,
+    rep.totalLbTripa>0 ? `   • Tripa: ${(rep.totalLbTripa||0).toFixed(2)} lb` : '',
+    rep.totalLbCap>0   ? `   • Capote: ${(rep.totalLbCap||0).toFixed(2)} lb` : '',
+    rep.totalLbCapa>0  ? `   • Capa: ${(rep.totalLbCapa||0).toFixed(2)} lb` : '',
+    ``,
+    `_Tabacalera Esencia · Arte & Origen · RD_`
+  ].filter(l => l !== '').join('\n');
+  
+  const url = `https://wa.me/?text=${encodeURIComponent(lineas)}`;
+  window.open(url, '_blank');
+}
+
+function compartirWhatsAppHoy() {
+  const hoy = getTodayStr ? getTodayStr() : new Date().toISOString().slice(0,10);
+  const rep = savedReports.filter(r=>r.fecha===hoy).sort((a,b)=>b.ts-a.ts)[0];
+  if (!rep) { notif2('No hay reporte de hoy','err'); return; }
+  compartirWhatsApp(rep);
+}
+
+// ══════════ EXPORTAR PDF REPORTE ══════════
+function exportarPDF(rep) {
+  if (!rep) {
+    if (!savedReports.length) { notif2('No hay reportes guardados','err'); return; }
+    rep = savedReports[savedReports.length-1];
+  }
+  
+  const ef = (rep.b+rep.m)>0 ? ((rep.b/(rep.b+rep.m))*100).toFixed(1) : 0;
+  const metaC = rep.metaPct>=100?'#1a7a4a':rep.metaPct>=70?'#7a5a1a':'#7a2a1a';
+  
+  const rowsHTML = rep.rows && rep.rows.length ? rep.rows.map((row,i) => `
+    <tr style="border-bottom:1px solid #e8e0d0">
+      <td style="padding:6px 8px;font-weight:500">Pareja ${row.i||i+1}</td>
+      <td style="padding:6px 8px">${row.vit||'—'}</td>
+      <td style="padding:6px 8px">${row.marca||rep.marca||'—'}</td>
+      <td style="padding:6px 8px;text-align:center;color:#1a7a4a;font-weight:600">${row.bn||0}</td>
+      <td style="padding:6px 8px;text-align:center;color:#7a2a1a">${row.ml||0}</td>
+      <td style="padding:6px 8px;text-align:center">${(row.tl||row.lb||0).toFixed(2)}lb</td>
+      <td style="padding:6px 8px;text-align:center">${(row.mlCap||0).toFixed(2)}lb</td>
+      <td style="padding:6px 8px;text-align:center">${(row.mlCapa||0).toFixed(2)}lb</td>
+    </tr>`).join('') : '<tr><td colspan="8" style="text-align:center;padding:12px;color:#888">Sin detalle de parejas</td></tr>';
+
+  const html = `<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<title>Reporte Esencia ${rep.fecha}</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family: 'Georgia', serif; color: #1a1208; background: #fff; padding: 30px; }
+  .header { display:flex; align-items:center; justify-content:space-between; border-bottom: 3px solid #B8962E; padding-bottom: 16px; margin-bottom: 20px; }
+  .logo-area { display:flex; align-items:center; gap:14px; }
+  .logo-circle { width:70px; height:70px; border-radius:50%; background:#0A0A08; border:2px solid #B8962E; display:flex; align-items:center; justify-content:center; overflow:hidden; }
+  .brand { font-size:28px; letter-spacing:4px; color:#B8962E; font-weight:bold; }
+  .brand-sub { font-size:9px; letter-spacing:3px; color:#8a6a2a; margin-top:2px; }
+  .report-info { text-align:right; }
+  .report-title { font-size:13px; color:#666; }
+  .report-date { font-size:20px; font-weight:bold; color:#1a1208; }
+  .kpis { display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin:20px 0; }
+  .kpi { background:#f9f5ee; border:1px solid #e8d8b0; border-radius:8px; padding:12px; text-align:center; }
+  .kpi-v { font-size:26px; font-weight:bold; }
+  .kpi-l { font-size:9px; letter-spacing:1px; text-transform:uppercase; color:#888; margin-top:3px; }
+  .section-title { font-size:10px; letter-spacing:2px; text-transform:uppercase; color:#B8962E; font-weight:bold; margin:18px 0 8px; border-left:3px solid #B8962E; padding-left:10px; }
+  table { width:100%; border-collapse:collapse; font-size:11px; }
+  thead tr { background:#1a1208; color:#C9A84C; }
+  th { padding:8px; text-align:left; font-weight:500; letter-spacing:.5px; font-size:9px; text-transform:uppercase; }
+  .footer { margin-top:30px; padding-top:14px; border-top:1px solid #e8d8b0; display:flex; justify-content:space-between; align-items:center; }
+  .sig-line { border-top:1px solid #1a1208; width:180px; text-align:center; padding-top:4px; font-size:9px; color:#666; margin-top:40px; }
+  .gold { color:#B8962E; }
+  @media print { body { padding:15px; } }
+</style>
+</head>
+<body>
+<div class="header">
+  <div class="logo-area">
+    <div class="logo-circle">
+      <span style="color:#C9A84C;font-size:28px;font-weight:bold;font-family:Georgia">E</span>
+    </div>
+    <div>
+      <div class="brand">ESENCIA</div>
+      <div class="brand-sub">ARTE & ORIGEN · REPÚBLICA DOMINICANA</div>
+    </div>
+  </div>
+  <div class="report-info">
+    <div class="report-title">Reporte Diario de Producción</div>
+    <div class="report-date">${rep.fecha}</div>
+    <div style="font-size:11px;color:#888;margin-top:3px">Supervisor: <strong>${rep.sup}</strong> · ${rep.pa} pareja${rep.pa!==1?'s':''}</div>
+  </div>
+</div>
+
+<div class="kpis">
+  <div class="kpi">
+    <div class="kpi-v" style="color:#1a7a4a">${rep.b.toLocaleString()}</div>
+    <div class="kpi-l">Cigarros buenos</div>
+  </div>
+  <div class="kpi">
+    <div class="kpi-v" style="color:#7a2a1a">${rep.m}</div>
+    <div class="kpi-l">Malos / Rechazo</div>
+  </div>
+  <div class="kpi">
+    <div class="kpi-v" style="color:${metaC}">${rep.metaPct||0}%</div>
+    <div class="kpi-l">Meta del día</div>
+  </div>
+  <div class="kpi">
+    <div class="kpi-v" style="color:#2a5a8a">${ef}%</div>
+    <div class="kpi-l">Eficiencia</div>
+  </div>
+</div>
+
+<div class="section-title">Tabaco consumido</div>
+<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:18px">
+  <div class="kpi"><div class="kpi-v" style="font-size:18px">${(rep.lb||0).toFixed(2)}<span style="font-size:11px">lb</span></div><div class="kpi-l">Total</div></div>
+  <div class="kpi"><div class="kpi-v" style="font-size:18px">${(rep.totalLbTripa||0).toFixed(2)}<span style="font-size:11px">lb</span></div><div class="kpi-l">Tripa</div></div>
+  <div class="kpi"><div class="kpi-v" style="font-size:18px">${(rep.totalLbCap||0).toFixed(2)}<span style="font-size:11px">lb</span></div><div class="kpi-l">Capote</div></div>
+  <div class="kpi"><div class="kpi-v" style="font-size:18px">${(rep.totalLbCapa||0).toFixed(2)}<span style="font-size:11px">lb</span></div><div class="kpi-l">Capa</div></div>
+</div>
+
+<div class="section-title">Detalle por pareja</div>
+<table>
+  <thead><tr>
+    <th>Pareja</th><th>Vitola</th><th>Marca</th>
+    <th style="text-align:center">Buenos</th><th style="text-align:center">Malos</th>
+    <th style="text-align:center">Tripa</th><th style="text-align:center">Capote</th><th style="text-align:center">Capa</th>
+  </tr></thead>
+  <tbody>${rowsHTML}</tbody>
+</table>
+
+<div class="footer">
+  <div>
+    <div class="sig-line">${rep.sup}<br>Supervisor</div>
+  </div>
+  <div style="text-align:right;font-size:9px;color:#aaa">
+    <div>Tabacalera Esencia · Sistema de Producción v5</div>
+    <div>Generado: ${new Date().toLocaleString('es-DO')}</div>
+  </div>
+</div>
+</body>
+</html>`;
+
+  const win = window.open('', '_blank');
+  win.document.write(html);
+  win.document.close();
+  setTimeout(() => win.print(), 500);
+}
+
+function exportarPDFHoy() {
+  const hoy = getTodayStr ? getTodayStr() : new Date().toISOString().slice(0,10);
+  const rep = savedReports.filter(r=>r.fecha===hoy).sort((a,b)=>b.ts-a.ts)[0];
+  if (!rep) { notif2('No hay reporte de hoy para exportar','err'); return; }
+  exportarPDF(rep);
+}
 
 </script>
 </body>
