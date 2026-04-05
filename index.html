@@ -1749,6 +1749,66 @@ let nextInvId=96,adjTargetId=null,invFilters={cat:'',tipo:'',search:'',stock:''}
 // ══════════════════════════════════════════════════════════════
 // INIT APP
 // ══════════════════════════════════════════════════════════════
+// ══════════ LOCALSTORAGE PERSIST ══════════
+const LS_KEY = 'esencia_data_v1';
+
+function lsSave() {
+  try {
+    const data = {
+      marcas:    MARCAS,
+      vitolas:   vitolas,
+      operarios: OPS,
+      metas:     METAS,
+      blends:    BLENDS,
+      pedidos:   PEDIDOS,
+      reportes:  savedReports.slice(-200),
+      inv_lb:    INV.map(i=>({id:i.id,box:i.box,name:i.name,cat:i.cat,tipo:i.tipo,grade:i.grade||'',origin:i.origin||'',lb:i.lb,minLb:i.minLb||15,proveedor:i.proveedor||'',precio:i.precio||0,fechaCompra:i.fechaCompra||'',notas:i.notas||''})),
+      ts:        Date.now()
+    };
+    localStorage.setItem(LS_KEY, JSON.stringify(data));
+  } catch(e) { console.warn('lsSave error:', e); }
+}
+
+function lsLoad() {
+  try {
+    const raw = localStorage.getItem(LS_KEY);
+    if (!raw) return false;
+    const data = JSON.parse(raw);
+    if (!data) return false;
+    if (data.marcas    && data.marcas.length)    MARCAS = data.marcas;
+    if (data.vitolas   && data.vitolas.length)   vitolas = data.vitolas;
+    if (data.operarios && data.operarios.length) OPS = data.operarios;
+    if (data.metas     && typeof data.metas==='object') Object.assign(METAS, data.metas);
+    if (data.blends    && data.blends.length)    { BLENDS = data.blends; nextBlendId = Math.max(nextBlendId,...data.blends.map(b=>b.id||0))+1; }
+    if (data.pedidos   && data.pedidos.length)   { PEDIDOS = data.pedidos; nextPedId = Math.max(nextPedId,...data.pedidos.map(p=>parseInt(p.id)||0))+1; }
+    if (data.reportes  && data.reportes.length)  savedReports = data.reportes;
+    if (data.inv_lb    && data.inv_lb.length) {
+      data.inv_lb.forEach(fi => {
+        const local = INV.find(i=>i.id===fi.id);
+        if (local) {
+          if (fi.name)  local.name  = fi.name;
+          if (fi.box)   local.box   = fi.box;
+          if (fi.cat)   local.cat   = fi.cat;
+          if (fi.tipo)  local.tipo  = fi.tipo;
+          if (fi.grade!==undefined) local.grade = fi.grade;
+          if (fi.minLb) local.minLb = fi.minLb;
+          local.lb          = fi.lb !== undefined ? fi.lb : local.lb;
+          local.proveedor   = fi.proveedor   || '';
+          local.precio      = fi.precio      || 0;
+          local.fechaCompra = fi.fechaCompra || '';
+          local.notas       = fi.notas       || '';
+        }
+      });
+    }
+    // Restore nominas
+    const nomT = localStorage.getItem('esencia_nom_tasas');
+    if (nomT) { try { const p=JSON.parse(nomT); if(p.casa?.length||p.cigarro?.length) NOM_TASAS=p; } catch(e){} }
+    const nomA = localStorage.getItem('esencia_nom_ajustes');
+    if (nomA) { try { NOM_AJUSTES=JSON.parse(nomA)||[]; } catch(e){} }
+    return true;
+  } catch(e) { console.warn('lsLoad error:', e); return false; }
+}
+
 function initApp(){
   $('loginScreen').style.display='none';$('appScreen').style.display='block';
   const u=currentUser,p=PERMS[u.rol];
