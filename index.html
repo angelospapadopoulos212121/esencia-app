@@ -415,6 +415,10 @@ input,select,textarea,button{font-family:'Montserrat',sans-serif}
 .ss-lbl.gold{color:var(--gold2)}.ss-ln.gold{background:rgba(184,150,46,.18)}
 .ss-lbl.blue{color:#5B9BD5}.ss-ln.blue{background:rgba(91,155,213,.14)}
 .ss-lbl.red{color:#CD6868}.ss-ln.red{background:rgba(205,104,104,.14)}
+.ss-lbl.tripa{color:#FF9A3C;font-weight:700}.ss-ln.tripa{background:rgba(255,154,60,.35);height:2px}
+.ss-lbl.capote{color:#3AE070;font-weight:700}.ss-ln.capote{background:rgba(58,224,112,.35);height:2px}
+.ss-lbl.capa{color:#FFD060;font-weight:700}.ss-ln.capa{background:rgba(255,208,96,.35);height:2px}
+.ss-lbl.comp{color:#FF80E0;font-weight:700}.ss-ln.comp{background:rgba(255,128,224,.35);height:2px}
 .tr-blk{background:rgba(0,0,0,.2);border-radius:8px;padding:10px;margin-bottom:7px;border:1px solid rgba(255,255,255,.04)}
 .tr-blk-ttl{font-size:7px;letter-spacing:.14em;text-transform:uppercase;color:var(--txt3);margin-bottom:8px;font-weight:500}
 .gtr{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:8px}
@@ -1113,42 +1117,40 @@ input,select,textarea,button{font-family:'Montserrat',sans-serif}
 
 <div class="screen" id="s-nominas">
   <div class="pg-ttl">Nóminas</div>
-  <div class="pg-sub">Pago por cigarro pegado · Por la casa · Costo de producción</div>
+  <div class="pg-sub">Cálculo de salarios · Ajustes · Horas extra · Días faltados</div>
 
   <!-- KPIs -->
   <div id="nomKpis" style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:16px"></div>
 
-  <!-- TASAS DE PAGO -->
-  <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:16px">
-    <!-- Por cigarro -->
-    <div style="background:var(--bg3);border:1px solid rgba(255,255,255,.09);border-radius:12px;padding:15px">
-      <div style="font-size:8px;letter-spacing:.14em;text-transform:uppercase;color:#74B3E8;font-weight:600;margin-bottom:10px">💰 Pago por cigarro (semanal)</div>
-      <div id="nomCigarroList"></div>
-      <button onclick="addNomTasa('cigarro')" style="margin-top:8px;background:transparent;border:1px solid rgba(32,96,160,.3);color:#74B3E8;cursor:pointer;padding:5px 12px;border-radius:6px;font-size:8px;font-family:Montserrat,sans-serif;font-weight:500;letter-spacing:.1em;text-transform:uppercase">+ Operario</button>
-    </div>
-    <!-- Por la casa -->
-    <div style="background:var(--bg3);border:1px solid rgba(255,255,255,.09);border-radius:12px;padding:15px">
-      <div style="font-size:8px;letter-spacing:.14em;text-transform:uppercase;color:#5DBFA0;font-weight:600;margin-bottom:10px">🏠 Pago por la casa (quincenal)</div>
-      <div id="nomCasaList"></div>
-      <button onclick="addNomTasa('casa')" style="margin-top:8px;background:transparent;border:1px solid rgba(30,128,68,.3);color:#5DBFA0;cursor:pointer;padding:5px 12px;border-radius:6px;font-size:8px;font-family:Montserrat,sans-serif;font-weight:500;letter-spacing:.1em;text-transform:uppercase">+ Operario</button>
-    </div>
+  <!-- SELECTOR SEMANA -->
+  <div style="display:flex;gap:8px;align-items:center;margin-bottom:16px;flex-wrap:wrap;background:var(--bg2);border:1px solid var(--bord);border-radius:10px;padding:12px">
+    <div style="font-size:8px;letter-spacing:.13em;text-transform:uppercase;color:var(--txt3);font-weight:500;margin-right:4px">Semana:</div>
+    <select id="nom-semana" onchange="calcNominas()" style="background:var(--bg3);border:1px solid var(--bords);color:var(--txt);border-radius:7px;padding:8px 12px;font-size:13px;outline:none;-webkit-appearance:none;flex:1">
+      <option value="">— Seleccionar semana —</option>
+    </select>
+    <button onclick="calcNominas()" style="background:rgba(184,150,46,.2);border:1px solid rgba(184,150,46,.5);color:var(--gold2);cursor:pointer;padding:8px 18px;border-radius:7px;font-size:10px;font-family:Montserrat,sans-serif;font-weight:600;letter-spacing:.1em;text-transform:uppercase">Calcular</button>
+    <button onclick="nomExportarPDF()" style="background:rgba(93,191,138,.12);border:1px solid rgba(93,191,138,.4);color:#3A9C5C;cursor:pointer;padding:8px 14px;border-radius:7px;font-size:10px;font-family:Montserrat,sans-serif;font-weight:600;letter-spacing:.1em;text-transform:uppercase">📄 PDF</button>
   </div>
 
-  <!-- SELECTOR DE PERIODO -->
-  <div style="display:flex;gap:8px;align-items:center;margin-bottom:14px;flex-wrap:wrap">
-    <div style="font-size:8px;letter-spacing:.13em;text-transform:uppercase;color:var(--txt3);font-weight:500">Período:</div>
-    <select id="nom-periodo" onchange="calcNominas()" style="background:var(--bg3);border:1px solid rgba(255,255,255,.12);color:var(--txt);border-radius:7px;padding:6px 10px;font-size:10px;outline:none;-webkit-appearance:none">
-      <option value="semanal">Semanal (empuñeros)</option>
-      <option value="quincenal">Quincenal (por la casa)</option>
-    </select>
-    <select id="nom-semana" onchange="calcNominas()" style="background:var(--bg3);border:1px solid rgba(255,255,255,.12);color:var(--txt);border-radius:7px;padding:6px 10px;font-size:10px;outline:none;-webkit-appearance:none">
-      <option value="">Seleccionar semana</option>
-    </select>
-    <button onclick="calcNominas()" style="background:rgba(184,150,46,.15);border:1px solid rgba(184,150,46,.35);color:var(--gold2);cursor:pointer;padding:6px 14px;border-radius:7px;font-size:9px;font-family:Montserrat,sans-serif;font-weight:500;letter-spacing:.1em;text-transform:uppercase">Calcular</button>
-  </div>
-
-  <!-- TABLA NÓMINA -->
+  <!-- TABLA NÓMINA PRINCIPAL -->
   <div id="nomTabla"></div>
+
+  <!-- MODAL AJUSTE -->
+  <div id="nomAjusteModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:9999;display:none;align-items:center;justify-content:center;padding:20px">
+    <div style="background:var(--bg1);border:1px solid var(--bord);border-radius:16px;padding:24px;width:100%;max-width:420px">
+      <div style="font-family:'Cormorant Garamond',serif;font-size:18px;color:var(--gold2);margin-bottom:16px" id="nomAjusteTtl">Ajustar nómina</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px">
+        <div class="fld"><label>Días faltados</label><input type="number" id="adj-dias" min="0" max="6" value="0" style="background:var(--bg3);border:1px solid var(--bords);color:var(--txt);border-radius:7px;padding:10px 12px;font-size:16px;width:100%;outline:none"/></div>
+        <div class="fld"><label>Horas extra</label><input type="number" id="adj-horas" min="0" value="0" step="0.5" style="background:var(--bg3);border:1px solid var(--bords);color:var(--txt);border-radius:7px;padding:10px 12px;font-size:16px;width:100%;outline:none"/></div>
+      </div>
+      <div class="fld" style="margin-bottom:14px"><label>Notas (opcional)</label><input type="text" id="adj-nota" placeholder="Ej: Faltó lunes por enfermedad" style="background:var(--bg3);border:1px solid var(--bords);color:var(--txt);border-radius:7px;padding:10px 12px;font-size:14px;width:100%;outline:none"/></div>
+      <div style="background:var(--bg2);border-radius:8px;padding:10px;margin-bottom:14px;font-size:12px;color:var(--txt2)" id="adj-preview"></div>
+      <div style="display:flex;gap:8px">
+        <button onclick="guardarAjusteNom()" style="flex:1;background:rgba(74,172,108,.2);border:1px solid rgba(74,172,108,.5);color:#3A9C5C;cursor:pointer;padding:10px;border-radius:8px;font-size:11px;font-family:Montserrat,sans-serif;font-weight:600;letter-spacing:.1em;text-transform:uppercase">✓ Guardar</button>
+        <button onclick="cerrarAjusteNom()" style="background:transparent;border:1px solid var(--bords);color:var(--txt2);cursor:pointer;padding:10px 16px;border-radius:8px;font-size:11px;font-family:Montserrat,sans-serif;font-weight:500">Cancelar</button>
+      </div>
+    </div>
+  </div>
 
   <!-- COSTO POR CIGARRO -->
   <div id="nomCosto" style="margin-top:14px"></div>
@@ -1713,6 +1715,20 @@ const TIPOS=['Seco','Viso','Ligero'];
 const RINGS=['38','42','44','46','48','50','52','54','56','58','60'];
 const AV_COLS=['#5A2E6A','#6A2E2E','#1A5A4A','#1A3A6A','#5A4A1A','#2E5A2E','#6A3A1A','#1A4A5A','#4A1A5A','#3A5A1A'];
 let savedReports=[],nP=2,tC={},asT=null;
+// ── NÓMINAS DATA ──
+let NOM_AJUSTES = [];
+let NOM_TASAS = {
+  cigarro: [],
+  casa: [
+    {nombre:'Marleny',       rol:'Empuñera',    rd_semanal:8300,  tipo:'casa',       periodo:'quincenal'},
+    {nombre:'Iris',          rol:'Pegadora',    rd_semanal:8300,  tipo:'casa',       periodo:'quincenal'},
+    {nombre:'Maria Morel',   rol:'Operaria',    rd_semanal:8300,  tipo:'casa',       periodo:'quincenal'},
+    {nombre:'Maria Cosinera',rol:'Cocinera',    rd_semanal:8300,  tipo:'casa',       periodo:'quincenal'},
+    {nombre:'Edit',          rol:'Operaria',    rd_semanal:4500,  tipo:'casa',       periodo:'semanal'},
+    {nombre:'Gianis',        rol:'Supervisora', rd_semanal:6000,  tipo:'supervisor', periodo:'semanal'},
+    {nombre:'Edwin',         rol:'Supervisor',  rd_semanal:13500, tipo:'supervisor', periodo:'quincenal'},
+  ]
+};
 
 const $=id=>document.getElementById(id);
 const so=(arr,sel='')=>arr.map(v=>`<option value="${v}"${v===sel?' selected':''}>${v}</option>`).join('');
@@ -2040,9 +2056,10 @@ function pjHtml(i){
           <option value="recape">🔄 Recape</option>
         </select>
       </div>
-      <div id="comp-box-${i}" style="display:none;align-items:center;gap:8px;padding:7px 12px;background:rgba(200,150,14,.12);border:1px solid rgba(200,150,14,.35);border-radius:8px;margin-top:4px">
-        <svg width="14" height="14" viewBox="0 0 16 16" fill="#E8C050"><path d="M8 1l1.8 3.6L14 5.5l-3 2.9.7 4.1L8 10.4l-3.7 2.1.7-4.1-3-2.9 4.2-.9z"/></svg>
-        <span style="font-size:8px;letter-spacing:.12em;text-transform:uppercase;color:#E8C050;font-weight:600">Completivo:</span>
+      <div class="ss-hdr" style="margin-top:8px"><div class="ss-ln comp"></div><span class="ss-lbl comp">⭐ Completivo de liga</span><div class="ss-ln comp"></div></div>
+      <div id="comp-box-${i}" style="display:none;align-items:center;gap:10px;padding:12px 16px;background:rgba(255,60,200,.12);border:2px solid rgba(255,128,224,.55);border-radius:10px;margin-top:8px">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="#E870C8"><path d="M8 1l1.8 3.6L14 5.5l-3 2.9.7 4.1L8 10.4l-3.7 2.1.7-4.1-3-2.9 4.2-.9z"/></svg>
+        <span style="font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:#E870C8;font-weight:700">⭐ Completivo:</span>
         <span id="comp-lbl-${i}" style="font-size:15px;color:var(--txt);font-weight:500"></span>
       </div>
       <div class="fld sp2"><label>Vitola · Ring×Largo</label><select id="vit-${i}" onchange="updVitInfo(${i})">${vitolas.map(v=>`<option value="${v.n}">${v.n} (${v.r}×${v.l}")</option>`).join('')}</select></div>
@@ -2051,14 +2068,14 @@ function pjHtml(i){
     </div>
     <div class="chip-row" id="ctot-${i}"><span class="chip chip-m">Total: <b>0</b></span><span class="chip chip-m">Eficiencia: <b>—</b></span></div>
     <div>
-      <div class="ss-hdr"><div class="ss-ln blue"></div><span class="ss-lbl blue">Tripa · Empuñera/o</span><div class="ss-ln blue"></div></div>
+      <div class="ss-hdr"><div class="ss-ln tripa"></div><span class="ss-lbl tripa">🟠 Tripa · Empuñero/a</span><div class="ss-ln tripa"></div></div>
       <div class="tr-tabs" id="trtabs-${i}">${[2,3,4,5,6].map(n=>`<button class="trtab${n===3?' on':''}" onclick="setTr(${i},${n},this)">${n} tripas</button>`).join('')}</div>
       <div id="trcont-${i}">${trBlk(i,1,1)+trBlk(i,2,2)+trBlk(i,3,3)}</div>
       <div class="chip-row" id="ttot-${i}"><span class="chip chip-g">Total tripa: <b>0.00 lb</b></span></div>
     </div>
     <div>
-      <div class="ss-hdr"><div class="ss-ln blue"></div><span class="ss-lbl blue">Capote · Empuñera/o</span><div class="ss-ln blue"></div></div>
-      <div class="g3">
+      <div style="background:rgba(20,80,40,.15);border-radius:12px;padding:12px;margin-bottom:8px"><div class="ss-hdr"><div class="ss-ln capote"></div><span class="ss-lbl capote">🟢 CAPOTE · Empuñero/a</span><div class="ss-ln capote"></div></div>
+      <div class="g3" style="background:rgba(58,224,112,.08);border:2px solid rgba(58,224,112,.4);border-radius:10px;padding:12px;margin-bottom:4px">
         <div class="fld"><label>Tabaco capote</label><select id="ctab-${i}" onchange="updCajasCap(${i})"><option value="">—</option>${so(CAPOTES,'Olor Dominicano')}</select></div>
         <div class="fld sp2"><label style="color:#5DBFA0;font-size:8px;letter-spacing:.12em;text-transform:uppercase;font-weight:600">📦 Caja capote</label><select id="cbox-${i}" style="border:1px solid rgba(30,128,68,.3);background:var(--bg3);color:var(--txt);border-radius:7px;padding:8px 10px;font-size:15px;width:100%;-webkit-appearance:none;outline:none"><option value="">— Sin especificar —</option>${INV.filter(x=>x.cat==='Capote').map(x=>`<option value="${x.id}">Caja ${x.box} · ${x.name} (${x.lb.toFixed(1)}lb)${x.proveedor?' · '+x.proveedor:''}</option>`).join('')}</select></div>
         <div class="fld"><label>Tamaño hoja</label><select id="ctam-${i}"><option value="Grande">Grande</option><option value="Mediana" selected>Mediana</option><option value="Pequeña">Pequeña</option></select></div>
@@ -2067,8 +2084,8 @@ function pjHtml(i){
       <div class="fld" style="margin-top:8px;max-width:200px"><label>Bandas</label><input type="number" min="0" id="cbd-${i}" value="0"/></div>
     </div>
     <div>
-      <div class="ss-hdr"><div class="ss-ln gold"></div><span class="ss-lbl gold">Capa · Pegadora/o</span><div class="ss-ln gold"></div></div>
-      <div class="g3">
+      </div><div style="background:rgba(80,60,10,.18);border-radius:12px;padding:12px;margin-bottom:8px"><div class="ss-hdr"><div class="ss-ln capa"></div><span class="ss-lbl capa">🟡 CAPA · Pegador/a</span><div class="ss-ln capa"></div></div>
+      <div class="g3" style="background:rgba(255,208,96,.07);border:2px solid rgba(255,208,96,.4);border-radius:10px;padding:12px;margin-bottom:4px">
         <div class="fld"><label>Tabaco capa</label><select id="catab-${i}" onchange="updCajasCapa(${i})"><option value="">—</option>${so(CAPAS,'Habano 2000')}</select></div>
         <div class="fld"><label>Tamaño hoja</label><select id="catam-${i}"><option value="Grande">Grande</option><option value="Mediana" selected>Mediana</option><option value="Pequeña">Pequeña</option></select></div>
         <div class="fld sp2"><label style="color:#E8C050;font-size:8px;letter-spacing:.12em;text-transform:uppercase;font-weight:600">📦 Caja / Paca de capa</label><select id="cabox-${i}" style="border:1px solid rgba(200,150,14,.3);background:var(--bg3);color:var(--txt);border-radius:7px;padding:8px 10px;font-size:15px;width:100%;-webkit-appearance:none;outline:none"><option value="">— Sin especificar —</option>${INV.filter(x=>x.cat==='Capa').map(x=>`<option value="${x.id}">Caja ${x.box} · ${x.name} (${x.lb.toFixed(1)}lb)${x.proveedor?' · '+x.proveedor:''}</option>`).join('')}</select></div>
@@ -2077,7 +2094,7 @@ function pjHtml(i){
       </div>
     </div>
     <div>
-      <div class="ss-hdr"><div class="ss-ln red"></div><span class="ss-lbl red">Desperdicio</span><div class="ss-ln red"></div></div>
+      </div><div class="ss-hdr"><div class="ss-ln red"></div><span class="ss-lbl red">Desperdicio</span><div class="ss-ln red"></div></div>
       <div class="g2">
         <div class="fld"><label>Empuñera/o (lb)</label><input type="number" min="0" step="0.01" id="de-${i}" value="0" oninput="calc()"/></div>
         <div class="fld"><label>Pegadora/o (lb)</label><input type="number" min="0" step="0.01" id="dp-${i}" value="0" oninput="calc()"/></div>
@@ -2855,7 +2872,7 @@ function saveBlend() {
   const editId=parseInt(document.getElementById('bl-editId')?.value||'0');
   if(editId){
     const b=BLENDS.find(x=>x.id===editId);
-    if(b) Object.assign(b,{nombre,marca,vitola,tripas,capTab,capTam,capPct,capaTab,capaTam,capaPct,notas});
+    if(b) Object.assign(b,{nombre,marca,vitola,tripas,capTab,capTam,capPct,capaTab,capaTam,capaPct,notas,compTab,compCant});
     notif('Blend "'+nombre+'" actualizado','suc');if(window.fbReady&&window.fbSaveBlend){const bu=BLENDS.find(x=>x.id===editId);if(bu)window.fbSaveBlend(bu);}
   } else {
     BLENDS.push({id:nextBlendId++,nombre,marca,vitola,tripas,capTab,capTam,capPct,capaTab,capaTam,capaPct,notas,compTab,compCant,ts:Date.now()});
@@ -2988,12 +3005,16 @@ function clearCompletivo(i) {
 function showCompletivo(i, b) {
   const box = document.getElementById('comp-box-'+i);
   if (!box) return;
+  const lbl = document.getElementById('comp-lbl-'+i);
   if (b.compTab) {
     box.style.display = 'flex';
-    const lbl = document.getElementById('comp-lbl-'+i);
     if (lbl) lbl.textContent = b.compTab + ' · hasta ' + (b.compCant||'1').replace('+',' y ') + ' hoja';
   } else {
-    box.style.display = 'none';
+    // Show but indicate no completivo
+    box.style.display = 'flex';
+    box.style.background = 'rgba(255,128,224,.05)';
+    box.style.borderColor = 'rgba(255,128,224,.2)';
+    if (lbl) lbl.textContent = 'Sin completivo definido para este blend';
   }
 }
 
@@ -3157,19 +3178,24 @@ function installApp() {
 
 
 // ══════════ NÓMINAS ══════════
-let NOM_TASAS = {
-  cigarro: [], // {nombre, rol, rd_por_cigarro}
-  casa: []     // {nombre, rol, rd_semanal}
-};
+let _nomAjusteIdx = null;
+let _nomAjusteSemana = null;
 
 function renderNominas() {
+  // Load saved data
+  const saved = localStorage.getItem('esencia_nom_tasas');
+  if (saved) { try { const p=JSON.parse(saved); if(p.casa?.length||p.cigarro?.length) NOM_TASAS=p; } catch(e){} }
+  const savedAdj = localStorage.getItem('esencia_nom_ajustes');
+  if (savedAdj) { try { NOM_AJUSTES=JSON.parse(savedAdj)||[]; } catch(e){} }
+
   // Populate semana selector
   const sel = document.getElementById('nom-semana');
   if (sel && sel.options.length <= 1) {
     const semanas = getSemanasFromReports();
     semanas.forEach(s => { const o=document.createElement('option'); o.value=s.key; o.textContent=s.lbl; sel.appendChild(o); });
+    // Auto-select current week
+    if (semanas.length > 0) sel.value = semanas[0].key;
   }
-  renderNomTasas();
   calcNominas();
 }
 
@@ -3183,52 +3209,21 @@ function getSemanasFromReports() {
     const lun = new Date(d); lun.setDate(diff);
     const sab = new Date(lun); sab.setDate(lun.getDate()+5);
     const key = lun.toISOString().slice(0,10);
-    if (!semanas[key]) semanas[key] = {key, lbl:`${lun.toLocaleDateString('es-DO',{day:'2-digit',month:'short'})} – ${sab.toLocaleDateString('es-DO',{day:'2-digit',month:'short',year:'numeric'})}`, lun, sab};
+    if (!semanas[key]) semanas[key] = {key, lbl:`${lun.toLocaleDateString('es-DO',{day:'2-digit',month:'short'})} – ${sab.toLocaleDateString('es-DO',{day:'2-digit',month:'short',year:'numeric'})}`};
   });
+  // Add current week if not present
+  const now = new Date();
+  const day = now.getDay();
+  const diff = now.getDate() - day + (day===0?-6:1);
+  const lun = new Date(now); lun.setDate(diff);
+  const sab = new Date(lun); sab.setDate(lun.getDate()+5);
+  const key = lun.toISOString().slice(0,10);
+  if (!semanas[key]) semanas[key] = {key, lbl:`${lun.toLocaleDateString('es-DO',{day:'2-digit',month:'short'})} – ${sab.toLocaleDateString('es-DO',{day:'2-digit',month:'short',year:'numeric'})}`};
   return Object.values(semanas).sort((a,b)=>b.key>a.key?1:-1);
 }
 
-function renderNomTasas() {
-  const cl = document.getElementById('nomCigarroList');
-  const ca = document.getElementById('nomCasaList');
-  if (cl) cl.innerHTML = NOM_TASAS.cigarro.map((t,i)=>`
-    <div style="display:flex;align-items:center;gap:8px;margin-bottom:7px">
-      <div style="flex:1;font-size:15px;color:var(--txt)">${t.nombre}</div>
-      <div style="font-size:9px;color:var(--txt3)">${t.rol||''}</div>
-      <div style="font-size:15px;color:#74B3E8;font-weight:500;min-width:60px;text-align:right">RD$${t.rd_por_cig}/cig</div>
-      <button onclick="delNomTasa('cigarro',${i})" style="background:transparent;border:none;color:#E86060;cursor:pointer;font-size:15px;padding:0">✕</button>
-    </div>`).join('') || '<div style="font-size:10px;color:var(--txt3)">Sin operarios</div>';
-  if (ca) ca.innerHTML = NOM_TASAS.casa.map((t,i)=>`
-    <div style="display:flex;align-items:center;gap:8px;margin-bottom:7px">
-      <div style="flex:1;font-size:15px;color:var(--txt)">${t.nombre}</div>
-      <div style="font-size:9px;color:var(--txt3)">${t.rol||''}</div>
-      <div style="font-size:15px;color:#5DBFA0;font-weight:500;min-width:70px;text-align:right">RD$${t.rd_semanal.toLocaleString()}/sem</div>
-      <button onclick="delNomTasa('casa',${i})" style="background:transparent;border:none;color:#E86060;cursor:pointer;font-size:15px;padding:0">✕</button>
-    </div>`).join('') || '<div style="font-size:10px;color:var(--txt3)">Sin operarios</div>';
-}
-
-function addNomTasa(tipo) {
-  const nombre = prompt('Nombre del operario:'); if(!nombre) return;
-  const rol = prompt('Rol (ej: Empuñera, Pegadora):') || '';
-  if (tipo === 'cigarro') {
-    const rd = parseFloat(prompt('RD$ por cigarro pegado:') || '0');
-    NOM_TASAS.cigarro.push({nombre, rol, rd_por_cig: rd});
-  } else {
-    const rd = parseFloat(prompt('RD$ semanal (por la casa):') || '0');
-    NOM_TASAS.casa.push({nombre, rol, rd_semanal: rd, tipo:'casa'});
-  }
-  renderNomTasas();
-  calcNominas();
-}
-
-function delNomTasa(tipo, idx) {
-  NOM_TASAS[tipo].splice(idx, 1);
-  renderNomTasas();
-  calcNominas();
-}
-
 function calcNominas() {
-  const semKey = document.getElementById('nom-semana')?.value;
+  const semKey = document.getElementById('nom-semana')?.value || '';
   const tabla = document.getElementById('nomTabla');
   const costoDiv = document.getElementById('nomCosto');
   const kpisDiv = document.getElementById('nomKpis');
@@ -3237,395 +3232,313 @@ function calcNominas() {
   let reps = savedReports;
   if (semKey) {
     const lun = new Date(semKey);
-    const sab = new Date(lun); sab.setDate(lun.getDate()+5);
-    reps = savedReports.filter(r => {
-      if (!r.fecha) return false;
-      const d = new Date(r.fecha);
-      return d >= lun && d <= sab;
-    });
+    const sab = new Date(lun); sab.setDate(lun.getDate()+6);
+    reps = savedReports.filter(r => { if(!r.fecha) return false; const d=new Date(r.fecha); return d>=lun&&d<=sab; });
   }
 
   const totalBuenos = reps.reduce((a,r)=>a+(r.b||0),0);
-  const totalMalos  = reps.reduce((a,r)=>a+(r.m||0),0);
-  const totalCig    = totalBuenos + totalMalos;
   const totalLb     = reps.reduce((a,r)=>a+(r.lb||0),0);
 
-  // Calculate payroll
-  let totalNomCig  = 0;
-  let totalNomCasa = 0;
+  // ── Build rows for each employee ──
+  const rows = [];
+  let totalNom = 0;
 
-  // Determine period multiplier for casa (quincenal = 2 semanas)
-  const periodoSel = document.getElementById('nom-periodo')?.value || 'semanal';
-  const multiplicador = periodoSel === 'quincenal' ? 2 : 1;
-
-  const rowsCig = NOM_TASAS.cigarro.map(t => {
-    const pago = t.rd_por_cig * totalBuenos;
-    totalNomCig += pago;
-    return {nombre:t.nombre, rol:t.rol, tipo:'Por cigarro', detalle:`${totalBuenos.toLocaleString()} cigarros × RD$${t.rd_por_cig}`, pago};
+  // Tabaqueros - by cigarro
+  NOM_TASAS.cigarro.forEach((t, idx) => {
+    const rate = t.rd_por_cig || 4;
+    const adj = getAjuste(t.nombre, semKey);
+    const basePago = rate * totalBuenos;
+    const horasExtraPago = (adj.horasExtra || 0) * (rate * 50); // approx per hour
+    const pago = Math.max(0, basePago + horasExtraPago);
+    totalNom += pago;
+    rows.push({nombre:t.nombre, rol:t.rol||'Tabaquero/a', tipo:'cigarro', periodo:'semanal',
+      base:basePago, diasFaltados:adj.diasFaltados||0, horasExtra:adj.horasExtra||0,
+      horasExtraPago, nota:adj.nota||'', pago, idx, tipoKey:'cigarro'});
   });
-  const rowsCasa = NOM_TASAS.casa.map(t => {
-    const pago = t.rd_semanal * multiplicador;
-    totalNomCasa += pago;
-    return {nombre:t.nombre, rol:t.rol, tipo:'Por la casa', detalle:`Fijo ${periodoSel==='quincenal'?'quincenal':'semanal'}`, pago};
+
+  // Casa y supervisores
+  NOM_TASAS.casa.forEach((t, idx) => {
+    const adj = getAjuste(t.nombre, semKey);
+    const esQuincenal = t.periodo === 'quincenal';
+    // For weekly display: show weekly equivalent
+    const baseBase = esQuincenal ? t.rd_semanal : t.rd_semanal; // stored as the period amount
+    const diasTrabajados = 6 - (adj.diasFaltados || 0); // 6-day work week
+    const diasPorDia = baseBase / 6;
+    const descuento = (adj.diasFaltados || 0) * diasPorDia;
+    const horasExtraRate = diasPorDia / 8; // hourly rate
+    const horasExtraPago = (adj.horasExtra || 0) * horasExtraRate * 1.35; // 35% overtime premium
+    const pago = Math.max(0, baseBase - descuento + horasExtraPago);
+    totalNom += pago;
+    rows.push({nombre:t.nombre, rol:t.rol, tipo:t.tipo, periodo:t.periodo||'semanal',
+      base:baseBase, diasFaltados:adj.diasFaltados||0, horasExtra:adj.horasExtra||0,
+      horasExtraPago, descuento, nota:adj.nota||'', pago, idx, tipoKey:'casa',
+      esSupervisor:t.tipo==='supervisor', esQuincenal});
   });
-  const allRows = [...rowsCig, ...rowsCasa];
-  const totalNom = totalNomCig + totalNomCasa;
 
-  // Cost per cigarro
-  const invCost = INV.reduce((a,i)=>a+(i.precio||0),0);
-  const nomCostPerCig = totalCig > 0 ? totalNom/totalCig : 0;
-
-  // KPIs
+  // ── KPIs ──
+  const totalTabaqueros = rows.filter(r=>r.tipo==='cigarro').reduce((a,r)=>a+r.pago,0);
+  const totalCasa = rows.filter(r=>r.tipo!=='cigarro'&&!r.esSupervisor).reduce((a,r)=>a+r.pago,0);
+  const totalSup = rows.filter(r=>r.esSupervisor).reduce((a,r)=>a+r.pago,0);
   if (kpisDiv) kpisDiv.innerHTML = [
-    ['Cigarros semana', totalBuenos.toLocaleString(), '#5DBF8A'],
-    ['Total nómina', 'RD$'+totalNom.toLocaleString(), '#E8C050'],
-    ['Costo/cigarro nom.', 'RD$'+nomCostPerCig.toFixed(2), '#74B3E8'],
-    ['Tabaco consumido', totalLb.toFixed(1)+'lb', '#5DBFA0'],
-  ].map(([l,v,c])=>`<div style="background:var(--bg3);border:1px solid rgba(255,255,255,.08);border-radius:10px;padding:12px">
+    ['Cigarros semana', totalBuenos.toLocaleString(), '#3A9C5C'],
+    ['Nómina tabaqueros', 'RD$'+Math.round(totalTabaqueros).toLocaleString(), '#4A90D0'],
+    ['Casa + supervisores', 'RD$'+Math.round(totalCasa+totalSup).toLocaleString(), '#5DBFA0'],
+    ['TOTAL NÓMINA', 'RD$'+Math.round(totalNom).toLocaleString(), '#E0C870'],
+  ].map(([l,v,c])=>`<div style="background:var(--bg2);border:1px solid var(--bord);border-radius:10px;padding:12px;text-align:center">
     <div style="font-size:8px;letter-spacing:.12em;text-transform:uppercase;color:var(--txt3);margin-bottom:5px">${l}</div>
-    <div style="font-size:18px;font-weight:600;color:${c}">${v}</div>
+    <div style="font-size:20px;font-weight:700;color:${c}">${v}</div>
   </div>`).join('');
 
-  // Table
-  if (tabla) {
-    if (!allRows.length) {
-      tabla.innerHTML = '<div style="text-align:center;padding:30px;color:var(--txt3);font-size:15px">Agrega operarios en las secciones de arriba para calcular la nómina.</div>';
-    } else {
-      tabla.innerHTML = `<div style="font-size:8px;letter-spacing:.13em;text-transform:uppercase;color:var(--txt3);margin-bottom:8px;font-weight:500">Detalle de nómina</div>
-      <table style="width:100%;border-collapse:collapse">
-        <thead><tr style="border-bottom:1px solid rgba(255,255,255,.1)">
-          <th style="text-align:left;padding:8px;font-size:8px;letter-spacing:.12em;text-transform:uppercase;color:var(--txt3);font-weight:500">Operario</th>
-          <th style="text-align:left;padding:8px;font-size:8px;letter-spacing:.12em;text-transform:uppercase;color:var(--txt3);font-weight:500">Tipo</th>
-          <th style="text-align:left;padding:8px;font-size:8px;letter-spacing:.12em;text-transform:uppercase;color:var(--txt3);font-weight:500">Detalle</th>
-          <th style="text-align:right;padding:8px;font-size:8px;letter-spacing:.12em;text-transform:uppercase;color:var(--txt3);font-weight:500">Pago</th>
-        </tr></thead>
-        <tbody>
-          ${allRows.map(r=>`<tr style="border-bottom:1px solid rgba(255,255,255,.05)">
-            <td style="padding:10px 8px">
-              <div style="font-size:14px;color:var(--txt);font-weight:500">${r.nombre}</div>
-              <div style="font-size:9px;color:var(--txt3)">${r.rol}</div>
-            </td>
-            <td style="padding:10px 8px">
-              <span style="font-size:9px;padding:2px 9px;border-radius:8px;background:${r.tipo==='Por cigarro'?'rgba(32,96,160,.15)':'rgba(30,128,68,.15)'};color:${r.tipo==='Por cigarro'?'#74B3E8':'#5DBFA0'};font-weight:500">${r.tipo}</span>
-            </td>
-            <td style="padding:10px 8px;font-size:10px;color:var(--txt3)">${r.detalle}</td>
-            <td style="padding:10px 8px;text-align:right;font-size:15px;font-weight:600;color:#E8C050">RD$${r.pago.toLocaleString()}</td>
-          </tr>`).join('')}
-          <tr style="border-top:2px solid rgba(184,150,46,.3)">
-            <td colspan="3" style="padding:10px 8px;font-size:15px;color:var(--txt);font-weight:600">TOTAL NÓMINA SEMANA</td>
-            <td style="padding:10px 8px;text-align:right;font-size:16px;font-weight:700;color:var(--gold2)">RD$${totalNom.toLocaleString()}</td>
-          </tr>
-        </tbody>
-      </table>`;
-    }
-  }
+  // ── Main table ──
+  if (!tabla) return;
+  if (!rows.length) { tabla.innerHTML='<div style="text-align:center;padding:30px;color:var(--txt3)">Agrega operarios en Configuración de Nómina</div>'; return; }
 
-  // Costo por cigarro breakdown
-  if (costoDiv && totalCig > 0) {
-    costoDiv.innerHTML = `<div style="background:var(--bg3);border:1px solid rgba(184,150,46,.2);border-radius:12px;padding:15px">
-      <div style="font-size:8px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold2);font-weight:600;margin-bottom:12px">📊 Análisis de costo por cigarro</div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
-        <div>
-          <div style="font-size:10px;color:var(--txt3);margin-bottom:4px">Costo nómina por cigarro</div>
-          <div style="font-size:18px;font-weight:600;color:#E8C050">RD$${nomCostPerCig.toFixed(2)}</div>
-          <div style="font-size:8px;color:var(--txt3);margin-top:2px">RD$${totalNom.toLocaleString()} ÷ ${totalCig.toLocaleString()} cigarros</div>
-        </div>
-        <div>
-          <div style="font-size:10px;color:var(--txt3);margin-bottom:4px">Tabaco consumido semana</div>
-          <div style="font-size:18px;font-weight:600;color:#5DBFA0">${totalLb.toFixed(2)}lb</div>
-          <div style="font-size:8px;color:var(--txt3);margin-top:2px">${totalCig.toLocaleString()} cigarros producidos</div>
-        </div>
+  const IS_btn = 'cursor:pointer;border:none;border-radius:6px;padding:5px 10px;font-size:9px;font-family:Montserrat,sans-serif;font-weight:500;letter-spacing:.08em;text-transform:uppercase';
+
+  tabla.innerHTML = `
+  <div style="font-size:8px;letter-spacing:.13em;text-transform:uppercase;color:var(--txt3);margin-bottom:8px;font-weight:500">
+    Nómina · ${semKey||'Semana actual'} · Haz clic en Ajustar para editar días y horas extra
+  </div>
+  <div style="overflow-x:auto">
+  <table style="width:100%;border-collapse:collapse;font-size:13px">
+    <thead><tr style="border-bottom:2px solid var(--bord)">
+      <th style="text-align:left;padding:10px 8px;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--txt3);font-weight:500">Empleado</th>
+      <th style="text-align:center;padding:10px 8px;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--txt3);font-weight:500">Período</th>
+      <th style="text-align:right;padding:10px 8px;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--txt3);font-weight:500">Base</th>
+      <th style="text-align:center;padding:10px 8px;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--txt3);font-weight:500">Ajustes</th>
+      <th style="text-align:right;padding:10px 8px;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--txt3);font-weight:500">Total</th>
+      <th style="padding:10px 8px"></th>
+    </tr></thead>
+    <tbody>
+    ${rows.map(r => {
+      const tipoColor = r.tipo==='cigarro'?'#4A90D0':r.esSupervisor?'#A87AE0':'#5DBFA0';
+      const tipoLabel = r.tipo==='cigarro'?'💰 Cigarro':r.esSupervisor?'👔 Supervisor':'🏠 Casa';
+      const periodoLabel = r.esQuincenal?'Quincenal':'Semanal';
+      const ajusteInfo = [];
+      if(r.diasFaltados>0) ajusteInfo.push(`<span style="color:#E06050">-${r.diasFaltados}d (-RD$${Math.round(r.descuento||0).toLocaleString()})</span>`);
+      if(r.horasExtra>0) ajusteInfo.push(`<span style="color:#3A9C5C">+${r.horasExtra}h (+RD$${Math.round(r.horasExtraPago).toLocaleString()})</span>`);
+      if(r.nota) ajusteInfo.push(`<span style="color:var(--txt3);font-style:italic">${r.nota}</span>`);
+      return `<tr style="border-bottom:1px solid var(--bord)">
+        <td style="padding:11px 8px">
+          <div style="font-weight:600;font-size:14px;color:var(--txt)">${r.nombre}</div>
+          <div style="display:flex;gap:6px;align-items:center;margin-top:3px">
+            <span style="font-size:9px;padding:2px 8px;border-radius:6px;background:${tipoColor}22;color:${tipoColor};font-weight:500">${tipoLabel}</span>
+            <span style="font-size:9px;color:var(--txt3)">${r.rol}</span>
+          </div>
+        </td>
+        <td style="padding:11px 8px;text-align:center;font-size:11px;color:var(--txt3)">${periodoLabel}</td>
+        <td style="padding:11px 8px;text-align:right;font-size:13px;color:var(--txt2)">RD$${Math.round(r.base).toLocaleString()}</td>
+        <td style="padding:11px 8px;text-align:center;font-size:11px;line-height:1.6">
+          ${ajusteInfo.length ? ajusteInfo.join('<br>') : '<span style="color:var(--txt4)">Sin ajustes</span>'}
+        </td>
+        <td style="padding:11px 8px;text-align:right;font-size:16px;font-weight:700;color:#E0C870">RD$${Math.round(r.pago).toLocaleString()}</td>
+        <td style="padding:11px 8px">
+          <button onclick="abrirAjusteNom('${r.nombre}','${r.tipoKey}',${r.idx},'${semKey}')" 
+            style="${IS_btn};background:rgba(184,150,46,.15);border:1px solid rgba(184,150,46,.4);color:var(--gold2)">
+            ✏ Ajustar
+          </button>
+        </td>
+      </tr>`;
+    }).join('')}
+    </tbody>
+    <tfoot><tr style="border-top:2px solid var(--bord)">
+      <td colspan="4" style="padding:12px 8px;font-weight:600;font-size:13px;color:var(--txt)">TOTAL NÓMINA</td>
+      <td style="padding:12px 8px;text-align:right;font-size:20px;font-weight:700;color:#E0C870">RD$${Math.round(totalNom).toLocaleString()}</td>
+      <td></td>
+    </tr></tfoot>
+  </table></div>
+
+  <!-- Config section -->
+  <div style="margin-top:16px;background:var(--bg2);border:1px solid var(--bord);border-radius:12px;padding:14px">
+    <div style="font-size:8px;letter-spacing:.13em;text-transform:uppercase;color:var(--txt3);margin-bottom:10px;font-weight:500">⚙ Configuración de empleados</div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap">
+      <button onclick="abrirConfigNom()" style="${IS_btn};background:rgba(32,96,160,.15);border:1px solid rgba(32,96,160,.4);color:#4A90D0">Editar empleados y salarios</button>
+      <button onclick="addNomTasa('cigarro')" style="${IS_btn};background:rgba(74,172,108,.12);border:1px solid rgba(74,172,108,.35);color:#3A9C5C">+ Tabaquero por cigarro</button>
+    </div>
+  </div>`;
+
+  // Cost analysis
+  if (costoDiv && totalBuenos > 0) {
+    const costPorCig = totalNom / totalBuenos;
+    costoDiv.innerHTML = `<div style="background:var(--bg2);border:1px solid var(--bord);border-radius:12px;padding:14px;margin-top:8px">
+      <div style="font-size:8px;letter-spacing:.13em;text-transform:uppercase;color:var(--gold2);margin-bottom:10px;font-weight:600">📊 Costo por cigarro</div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+        <div style="text-align:center"><div style="font-size:20px;font-weight:700;color:#E0C870">RD$${costPorCig.toFixed(2)}</div><div style="font-size:9px;color:var(--txt3)">Nómina / cigarro</div></div>
+        <div style="text-align:center"><div style="font-size:20px;font-weight:700;color:#5DBFA0">${totalLb.toFixed(2)} lb</div><div style="font-size:9px;color:var(--txt3)">Tabaco consumido</div></div>
+        <div style="text-align:center"><div style="font-size:20px;font-weight:700;color:#4A90D0">${totalBuenos.toLocaleString()}</div><div style="font-size:9px;color:var(--txt3)">Cigarros producidos</div></div>
       </div>
     </div>`;
-  } else if (costoDiv) {
-    costoDiv.innerHTML = '';
   }
 }
 
+function getAjuste(nombre, semana) {
+  return NOM_AJUSTES.find(a=>a.nombre===nombre&&a.semana===semana) || {diasFaltados:0, horasExtra:0, nota:''};
+}
 
-function histEditReport(idx) {
-  if (currentUser?.rol !== 'admin') { notif2('Solo el administrador puede editar reportes','err'); return; }
-  const r = savedReports[idx];
-  if (!r) return;
-  const body = document.getElementById('histModalBody');
-  if (!body) return;
+function abrirAjusteNom(nombre, tipoKey, idx, semana) {
+  _nomAjusteIdx = {nombre, tipoKey, idx, semana};
+  const adj = getAjuste(nombre, semana);
+  document.getElementById('nomAjusteTtl').textContent = `Ajustar — ${nombre}`;
+  document.getElementById('adj-dias').value = adj.diasFaltados || 0;
+  document.getElementById('adj-horas').value = adj.horasExtra || 0;
+  document.getElementById('adj-nota').value = adj.nota || '';
+  
+  // Get base salary
+  const t = tipoKey==='cigarro' ? NOM_TASAS.cigarro[idx] : NOM_TASAS.casa[idx];
+  const base = tipoKey==='cigarro' ? (t?.rd_por_cig||4)*1 : (t?.rd_semanal||0);
+  
+  document.getElementById('adj-dias').oninput = document.getElementById('adj-horas').oninput = () => {
+    const dias = parseInt(document.getElementById('adj-dias').value)||0;
+    const horas = parseFloat(document.getElementById('adj-horas').value)||0;
+    const descuento = tipoKey!=='cigarro' ? dias*(base/6) : 0;
+    const extra = tipoKey!=='cigarro' ? horas*(base/6/8)*1.35 : 0;
+    const total = Math.max(0, base - descuento + extra);
+    document.getElementById('adj-preview').innerHTML = 
+      `Base: <b>RD$${Math.round(base).toLocaleString()}</b>` +
+      (descuento>0?` — ${dias} días: <b style="color:#E06050">-RD$${Math.round(descuento).toLocaleString()}</b>`:'') +
+      (extra>0?` + ${horas}h extra: <b style="color:#3A9C5C">+RD$${Math.round(extra).toLocaleString()}</b>`:'') +
+      ` = <b style="color:#E0C870">RD$${Math.round(total).toLocaleString()}</b>`;
+  };
+  document.getElementById('adj-dias').oninput();
+  
+  const modal = document.getElementById('nomAjusteModal');
+  modal.style.display = 'flex';
+}
 
-  const IS = 'style="background:var(--bg3);border:1px solid rgba(255,255,255,.15);color:var(--txt);border-radius:7px;padding:8px 10px;font-size:14px;width:100%;outline:none"';
-  const SEC = (lbl,col)=>`<div style="font-size:8px;letter-spacing:.13em;text-transform:uppercase;color:${col||'var(--txt3)'};font-weight:600;margin:12px 0 8px">${lbl}</div>`;
+function cerrarAjusteNom() {
+  document.getElementById('nomAjusteModal').style.display = 'none';
+  _nomAjusteIdx = null;
+}
 
-  // Build rows HTML
-  let rowsHTML = '';
-  if (r.rows && r.rows.length) {
-    rowsHTML = r.rows.map((row,ri)=>`
-      <div style="background:var(--bg3);border:1px solid rgba(255,255,255,.08);border-radius:9px;padding:12px;margin-bottom:8px">
-        <div style="font-size:10px;color:var(--gold2);font-weight:600;margin-bottom:8px">Pareja ${row.i||ri+1} ${row.vit?'· '+row.vit:''}</div>
-        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:8px">
-          <div class="fld"><label>Buenos</label><input type="number" id="er-b-${ri}" value="${row.bn||0}" ${IS}/></div>
-          <div class="fld"><label>Malos</label><input type="number" id="er-m-${ri}" value="${row.ml||0}" ${IS}/></div>
-          <div class="fld"><label>Desperdicio %</label><input type="number" id="er-d-${ri}" value="${row.pct||0}" step="0.1" ${IS}/></div>
-        </div>
-        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px">
-          <div class="fld"><label style="color:#74B3E8">Lb Tripa</label><input type="number" id="er-lt-${ri}" value="${(row.tl||row.lb||0).toFixed(2)}" step="0.01" ${IS}/></div>
-          <div class="fld"><label style="color:#5DBFA0">Lb Capote</label><input type="number" id="er-lc-${ri}" value="${(row.mlCap||0).toFixed(2)}" step="0.01" ${IS}/></div>
-          <div class="fld"><label style="color:#E8C050">Lb Capa</label><input type="number" id="er-la-${ri}" value="${(row.mlCapa||0).toFixed(2)}" step="0.01" ${IS}/></div>
-        </div>
-      </div>`).join('');
+function guardarAjusteNom() {
+  if (!_nomAjusteIdx) return;
+  const {nombre, semana} = _nomAjusteIdx;
+  const dias = parseInt(document.getElementById('adj-dias').value)||0;
+  const horas = parseFloat(document.getElementById('adj-horas').value)||0;
+  const nota = document.getElementById('adj-nota').value.trim();
+  
+  // Remove existing and add new
+  NOM_AJUSTES = NOM_AJUSTES.filter(a=>!(a.nombre===nombre&&a.semana===semana));
+  if (dias > 0 || horas > 0 || nota) {
+    NOM_AJUSTES.push({nombre, semana, diasFaltados:dias, horasExtra:horas, nota});
   }
-
-  body.innerHTML = `
-    <div style="background:rgba(32,96,160,.06);border:1px solid rgba(32,96,160,.2);border-radius:10px;padding:14px">
-      ${SEC('📋 Datos generales','#74B3E8')}
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
-        <div class="fld"><label>Cigarros buenos (total)</label><input type="number" id="edit-b" value="${r.b||0}" ${IS}/></div>
-        <div class="fld"><label>Cigarros malos (total)</label><input type="number" id="edit-m" value="${r.m||0}" ${IS}/></div>
-        <div class="fld"><label>Libras totales</label><input type="number" id="edit-lb" value="${(r.lb||0).toFixed(2)}" step="0.01" ${IS}/></div>
-        <div class="fld"><label>Supervisor</label><input type="text" id="edit-sup" value="${r.sup||''}" ${IS}/></div>
-        <div class="fld"><label>Lb tripa total</label><input type="number" id="edit-lbt" value="${(r.totalLbTripa||0).toFixed(2)}" step="0.01" ${IS}/></div>
-        <div class="fld"><label>Lb capote total</label><input type="number" id="edit-lbc" value="${(r.totalLbCap||0).toFixed(2)}" step="0.01" ${IS}/></div>
-        <div class="fld"><label>Lb capa total</label><input type="number" id="edit-lba" value="${(r.totalLbCapa||0).toFixed(2)}" step="0.01" ${IS}/></div>
-        <div class="fld"><label>Desperdicio total %</label><input type="number" id="edit-desp" value="${(r.totalDesp||0).toFixed(1)}" step="0.1" ${IS}/></div>
-      </div>
-      ${rowsHTML ? SEC('👥 Detalle por pareja','#E8C050')+rowsHTML : ''}
-      <div style="display:flex;gap:8px;margin-top:14px">
-        <button onclick="confirmEditReport(${idx})" style="flex:1;background:rgba(32,96,160,.2);border:1px solid rgba(32,96,160,.4);color:#74B3E8;cursor:pointer;padding:9px 16px;border-radius:7px;font-size:10px;font-family:Montserrat,sans-serif;font-weight:500;letter-spacing:.1em;text-transform:uppercase">✓ Guardar todos los cambios</button>
-        <button onclick="confirmDeleteReport(${idx})" style="background:rgba(192,56,56,.15);border:1px solid rgba(192,56,56,.4);color:#E86060;cursor:pointer;padding:9px 16px;border-radius:7px;font-size:10px;font-family:Montserrat,sans-serif;font-weight:500;letter-spacing:.1em;text-transform:uppercase">🗑 Eliminar</button>
-      </div>
-    </div>`;
+  localStorage.setItem('esencia_nom_ajustes', JSON.stringify(NOM_AJUSTES));
+  if(window.fbSaveArr) window.fbSaveArr('nom_ajustes', NOM_AJUSTES);
+  
+  cerrarAjusteNom();
+  calcNominas();
+  notif2(`Ajuste de ${nombre} guardado ✓`, 'suc');
 }
 
-function confirmEditReport(idx) {
-  if (currentUser?.rol !== 'admin') return;
-  const r = savedReports[idx];
-  if (!r) return;
-  // Save general fields
-  r.b   = parseInt(document.getElementById('edit-b')?.value)   || r.b;
-  r.m   = parseInt(document.getElementById('edit-m')?.value)   || r.m;
-  r.lb  = parseFloat(document.getElementById('edit-lb')?.value)|| r.lb;
-  r.sup = document.getElementById('edit-sup')?.value.trim()    || r.sup;
-  r.totalLbTripa = parseFloat(document.getElementById('edit-lbt')?.value)||r.totalLbTripa||0;
-  r.totalLbCap   = parseFloat(document.getElementById('edit-lbc')?.value)||r.totalLbCap||0;
-  r.totalLbCapa  = parseFloat(document.getElementById('edit-lba')?.value)||r.totalLbCapa||0;
-  r.totalDesp    = parseFloat(document.getElementById('edit-desp')?.value)||r.totalDesp||0;
-  // Save row details
-  if (r.rows) {
-    r.rows.forEach((row,ri)=>{
-      const rb=parseInt(document.getElementById(`er-b-${ri}`)?.value); if(!isNaN(rb)) row.bn=rb;
-      const rm=parseInt(document.getElementById(`er-m-${ri}`)?.value); if(!isNaN(rm)) row.ml=rm;
-      const rd=parseFloat(document.getElementById(`er-d-${ri}`)?.value); if(!isNaN(rd)) row.pct=rd;
-      const lt=parseFloat(document.getElementById(`er-lt-${ri}`)?.value); if(!isNaN(lt)) row.tl=lt;
-      const lc=parseFloat(document.getElementById(`er-lc-${ri}`)?.value); if(!isNaN(lc)) row.mlCap=lc;
-      const la=parseFloat(document.getElementById(`er-la-${ri}`)?.value); if(!isNaN(la)) row.mlCapa=la;
-    });
-  }
-  r.metaPct = r.metaTotal>0 ? +(r.b/r.metaTotal*100).toFixed(1) : r.metaPct;
-  if (window.fbReady && window.fbSaveReport) window.fbSaveReport(r);
-  notif2('Reporte actualizado completo ✓','suc');
-  logAct(`Reporte editado: ${r.fecha} por ${currentUser.nombre}`);
-  closeHistModal();
-  renderHistorial();
-}
-
-function confirmDeleteReport(idx) {
-  if (currentUser?.rol !== 'admin') return;
-  const r = savedReports[idx];
-  if (!r || !confirm(`¿Eliminar el reporte del ${r.fecha} de ${r.sup}? Esta acción no se puede deshacer.`)) return;
-  savedReports.splice(idx, 1);
-  if (window.fbReady && window.fbSaveReport) {
-    // Delete from Firebase by overwriting with deleted flag
-    import('https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js').then(({getFirestore,doc,deleteDoc})=>{
-      // Simple: just remove it from the collection
-    }).catch(()=>{});
-  }
-  notif2('Reporte eliminado','suc');
-  logAct(`Reporte eliminado: ${r.fecha}`);
-  closeHistModal();
-  renderHistorial();
-}
-
-
-function updCajasCap(i){
-  const tab=document.getElementById('ctab-'+i)?.value;
-  const sel=document.getElementById('cbox-'+i);
-  if(!sel)return;
-  const cajas=INV.filter(c=>c.cat==='Capote'&&(!tab||c.name===tab));
-  sel.innerHTML='<option value="">— Sin especificar —</option>'+cajas.map(c=>`<option value="${c.id}">Caja ${c.box} · ${c.name} (${c.lb.toFixed(1)}lb)${c.proveedor?' · '+c.proveedor:''}</option>`).join('');
-}
-function updCajasCapa(i){
-  const tab=document.getElementById('catab-'+i)?.value;
-  const sel=document.getElementById('cabox-'+i);
-  if(!sel)return;
-  const cajas=INV.filter(c=>c.cat==='Capa'&&(!tab||c.name===tab));
-  sel.innerHTML='<option value="">— Sin especificar —</option>'+cajas.map(c=>`<option value="${c.id}">Caja ${c.box} · ${c.name} (${c.lb.toFixed(1)}lb)${c.proveedor?' · '+c.proveedor:''}</option>`).join('');
-}
-
-
-function openEditInv(id) {
-  const e = INV.find(x=>x.id===id);
-  if (!e) return;
-  const IS = 'style="background:var(--bg3);border:1px solid rgba(255,255,255,.15);color:var(--txt);border-radius:7px;padding:11px 13px;font-size:14px;width:100%;outline:none;-webkit-appearance:none"';
-  // Create modal
-  const existing = document.getElementById('invEditModal');
-  if (existing) existing.remove();
+function abrirConfigNom() {
+  const IS = 'style="background:var(--bg3);border:1px solid var(--bords);color:var(--txt);border-radius:7px;padding:8px 10px;font-size:13px;width:100%;outline:none"';
+  const rows = NOM_TASAS.casa.map((t,i)=>`
+    <tr style="border-bottom:1px solid var(--bord)">
+      <td style="padding:8px"><input value="${t.nombre}" onchange="NOM_TASAS.casa[${i}].nombre=this.value" ${IS}/></td>
+      <td style="padding:8px"><input value="${t.rol}" onchange="NOM_TASAS.casa[${i}].rol=this.value" ${IS}/></td>
+      <td style="padding:8px">
+        <select onchange="NOM_TASAS.casa[${i}].periodo=this.value;NOM_TASAS.casa[${i}].tipo=this.value==='quincenal'?'casa':this.value" ${IS}>
+          <option value="semanal" ${t.periodo==='semanal'?'selected':''}>Semanal</option>
+          <option value="quincenal" ${t.periodo==='quincenal'?'selected':''}>Quincenal</option>
+        </select>
+      </td>
+      <td style="padding:8px"><input type="number" value="${t.rd_semanal}" onchange="NOM_TASAS.casa[${i}].rd_semanal=parseFloat(this.value)||0" ${IS}/></td>
+      <td style="padding:8px"><button onclick="NOM_TASAS.casa.splice(${i},1);saveNomConfig();abrirConfigNom()" style="background:rgba(208,85,69,.15);border:1px solid rgba(208,85,69,.4);color:#D05545;cursor:pointer;padding:6px 10px;border-radius:6px;font-size:11px">✕</button></td>
+    </tr>`).join('');
+  
+  const existing = document.getElementById('nomConfigModal');
+  if(existing) existing.remove();
   const modal = document.createElement('div');
-  modal.id = 'invEditModal';
-  modal.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,.8);z-index:9999;display:flex;align-items:center;justify-content:center;padding:20px';
-  modal.innerHTML = `
-    <div style="background:var(--bg1);border:1px solid var(--bord);border-radius:16px;padding:24px;width:100%;max-width:560px;max-height:90vh;overflow-y:auto">
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
-        <div style="font-family:'Cormorant Garamond',serif;font-size:18px;color:var(--gold2)">Editar — ${e.name} (Caja ${e.box})</div>
-        <button onclick="document.getElementById('invEditModal').remove()" style="background:transparent;border:none;color:var(--txt3);cursor:pointer;font-size:18px">✕</button>
-      </div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px">
-        <div class="fld"><label>Número de caja/paca</label><input id="ie-box" value="${e.box}" ${IS}/></div>
-        <div class="fld"><label>Nombre del tabaco</label><input id="ie-name" value="${e.name}" ${IS}/></div>
-        <div class="fld"><label>Categoría</label>
-          <select id="ie-cat" ${IS}>
-            <option value="Tripa"${e.cat==='Tripa'?' selected':''}>Tripa</option>
-            <option value="Capote"${e.cat==='Capote'?' selected':''}>Capote</option>
-            <option value="Capa"${e.cat==='Capa'?' selected':''}>Capa</option>
-          </select>
-        </div>
-        <div class="fld"><label>Tipo de hoja</label>
-          <select id="ie-tipo" ${IS}>
-            <option value="—"${e.tipo==='—'?' selected':''}>— (Capote/Capa)</option>
-            <option value="Seco"${e.tipo==='Seco'?' selected':''}>Seco</option>
-            <option value="Viso"${e.tipo==='Viso'?' selected':''}>Viso</option>
-            <option value="Ligero"${e.tipo==='Ligero'?' selected':''}>Ligero</option>
-          </select>
-        </div>
-        <div class="fld"><label>Libras actuales</label><input type="number" id="ie-lb" value="${e.lb}" step="0.01" ${IS}/></div>
-        <div class="fld"><label>Stock mínimo (lb)</label><input type="number" id="ie-min" value="${e.minLb||15}" step="0.5" ${IS}/></div>
-        <div class="fld"><label>Grado / Clasificación</label><input id="ie-grade" value="${e.grade||''}" placeholder="Ej: NO QUEMA BUENO" ${IS}/></div>
-        <div class="fld"><label>Origen</label><input id="ie-origin" value="${e.origin||''}" placeholder="País de origen" ${IS}/></div>
-      </div>
-      <div style="background:rgba(93,191,138,.07);border:1px solid rgba(93,191,138,.2);border-radius:9px;padding:12px;margin-bottom:12px">
-        <div style="font-size:8px;letter-spacing:.14em;text-transform:uppercase;color:#5DBF8A;font-weight:600;margin-bottom:9px">📋 Proveedor e información de compra</div>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
-          <div class="fld"><label>Proveedor</label><input id="ie-prov" value="${e.proveedor||''}" placeholder="Nombre del proveedor" ${IS}/></div>
-          <div class="fld"><label>Precio pagado (RD$)</label><input type="number" id="ie-precio" value="${e.precio||0}" step="1" ${IS}/></div>
-          <div class="fld"><label>Fecha de compra</label><input type="date" id="ie-fecha" value="${e.fechaCompra||''}" ${IS}/></div>
-          <div class="fld"><label>Notas</label><input id="ie-notas" value="${e.notas||''}" placeholder="Notas adicionales" ${IS}/></div>
-        </div>
-      </div>
-      <div style="display:flex;gap:8px">
-        <button onclick="saveEditInv(${id})" style="flex:1;background:rgba(93,191,138,.15);border:1px solid rgba(93,191,138,.4);color:#5DBF8A;cursor:pointer;padding:10px 16px;border-radius:8px;font-size:10px;font-family:Montserrat,sans-serif;font-weight:500;letter-spacing:.12em;text-transform:uppercase">✓ Guardar cambios</button>
-        <button onclick="document.getElementById('invEditModal').remove()" style="background:transparent;border:1px solid rgba(255,255,255,.15);color:var(--txt2);cursor:pointer;padding:10px 16px;border-radius:8px;font-size:10px;font-family:Montserrat,sans-serif;font-weight:500;letter-spacing:.12em;text-transform:uppercase">Cancelar</button>
-      </div>
-    </div>`;
+  modal.id = 'nomConfigModal';
+  modal.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,.8);z-index:9999;overflow-y:auto;padding:20px;display:flex;align-items:flex-start;justify-content:center';
+  modal.innerHTML = `<div style="background:var(--bg1);border:1px solid var(--bord);border-radius:16px;padding:24px;width:100%;max-width:700px;margin:auto">
+    <div style="font-family:'Cormorant Garamond',serif;font-size:20px;color:var(--gold2);margin-bottom:16px">Configuración de Empleados</div>
+    <div style="overflow-x:auto;margin-bottom:14px">
+    <table style="width:100%;border-collapse:collapse;font-size:12px">
+      <thead><tr style="border-bottom:2px solid var(--bord)">
+        <th style="text-align:left;padding:8px;font-size:9px;color:var(--txt3);text-transform:uppercase">Nombre</th>
+        <th style="text-align:left;padding:8px;font-size:9px;color:var(--txt3);text-transform:uppercase">Rol</th>
+        <th style="text-align:left;padding:8px;font-size:9px;color:var(--txt3);text-transform:uppercase">Período</th>
+        <th style="text-align:left;padding:8px;font-size:9px;color:var(--txt3);text-transform:uppercase">Salario RD$</th>
+        <th></th>
+      </tr></thead>
+      <tbody>${rows}</tbody>
+    </table></div>
+    <button onclick="NOM_TASAS.casa.push({nombre:'Nuevo',rol:'Operario',rd_semanal:0,tipo:'casa',periodo:'semanal'});abrirConfigNom()" 
+      style="background:rgba(74,172,108,.15);border:1px solid rgba(74,172,108,.4);color:#3A9C5C;cursor:pointer;padding:8px 16px;border-radius:8px;font-size:10px;font-family:Montserrat,sans-serif;font-weight:500;letter-spacing:.1em;text-transform:uppercase;margin-bottom:14px">+ Agregar empleado</button>
+    <div style="display:flex;gap:8px">
+      <button onclick="saveNomConfig();document.getElementById('nomConfigModal').remove();calcNominas()" 
+        style="flex:1;background:rgba(74,172,108,.2);border:1px solid rgba(74,172,108,.5);color:#3A9C5C;cursor:pointer;padding:10px;border-radius:8px;font-size:11px;font-family:Montserrat,sans-serif;font-weight:600;letter-spacing:.1em;text-transform:uppercase">✓ Guardar todo</button>
+      <button onclick="document.getElementById('nomConfigModal').remove()" 
+        style="background:transparent;border:1px solid var(--bords);color:var(--txt2);cursor:pointer;padding:10px 16px;border-radius:8px;font-size:11px;font-family:Montserrat,sans-serif;font-weight:500">Cancelar</button>
+    </div>
+  </div>`;
   document.body.appendChild(modal);
 }
 
-function saveEditInv(id) {
-  const e = INV.find(x=>x.id===id);
-  if (!e) return;
-  e.box        = document.getElementById('ie-box')?.value.trim()    || e.box;
-  e.name       = document.getElementById('ie-name')?.value.trim()   || e.name;
-  e.cat        = document.getElementById('ie-cat')?.value           || e.cat;
-  e.tipo       = document.getElementById('ie-tipo')?.value          || e.tipo;
-  e.lb         = parseFloat(document.getElementById('ie-lb')?.value)|| e.lb;
-  e.minLb      = parseFloat(document.getElementById('ie-min')?.value)||e.minLb;
-  e.grade      = document.getElementById('ie-grade')?.value.trim()  || '';
-  e.origin     = document.getElementById('ie-origin')?.value.trim() || '';
-  e.proveedor  = document.getElementById('ie-prov')?.value.trim()   || '';
-  e.precio     = parseFloat(document.getElementById('ie-precio')?.value)||0;
-  e.fechaCompra= document.getElementById('ie-fecha')?.value         || '';
-  e.notas      = document.getElementById('ie-notas')?.value.trim()  || '';
-  if (window.fbReady && window.fbSaveInventario) window.fbSaveInventario(e);
-  if(window.fbSaveArr)window.fbSaveArr('inv_meta',INV.map(i=>({id:i.id,box:i.box,name:i.name,proveedor:i.proveedor||'',precio:i.precio||0,fechaCompra:i.fechaCompra||'',notas:i.notas||''})));
-  document.getElementById('invEditModal')?.remove();
-  renderInvTable();
-  renderInvSummary();
-  notif2(`"${e.name}" actualizado ✓`,'suc');lsSave();
-  logAct(`Inventario editado: ${e.name} Caja ${e.box}`);
+function saveNomConfig() {
+  localStorage.setItem('esencia_nom_tasas', JSON.stringify(NOM_TASAS));
+  if(window.fbSaveArr) window.fbSaveArr('nom_tasas', NOM_TASAS);
+  notif2('Configuración de nómina guardada ✓','suc');
 }
 
+function nomExportarPDF() {
+  const semKey = document.getElementById('nom-semana')?.value || '';
+  // Get all rows calculated
+  const rows = [];
+  let totalNom = 0;
+  NOM_TASAS.casa.forEach(t => {
+    const adj = getAjuste(t.nombre, semKey);
+    const base = t.rd_semanal;
+    const descuento = (adj.diasFaltados||0)*(base/6);
+    const extra = (adj.horasExtra||0)*(base/6/8)*1.35;
+    const pago = Math.max(0, base-descuento+extra);
+    totalNom += pago;
+    rows.push({...t, pago, diasFaltados:adj.diasFaltados||0, horasExtra:adj.horasExtra||0, nota:adj.nota||'', descuento, extra});
+  });
+  const totalBuenos = (() => { let reps=savedReports; if(semKey){const lun=new Date(semKey);const sab=new Date(lun);sab.setDate(lun.getDate()+6);reps=savedReports.filter(r=>{if(!r.fecha)return false;const d=new Date(r.fecha);return d>=lun&&d<=sab;});} return reps.reduce((a,r)=>a+(r.b||0),0); })();
+  NOM_TASAS.cigarro.forEach(t => { const pago=(t.rd_por_cig||4)*totalBuenos; totalNom+=pago; rows.push({...t,pago,diasFaltados:0,horasExtra:0,nota:'',tipo:'cigarro'}); });
 
-// ══════════════════════════════════════════════════════════════
-// LOCAL STORAGE — guardado inmediato como respaldo
-// ══════════════════════════════════════════════════════════════
-const LS_KEY = 'esencia_data_v1';
-
-function lsSave() {
-  try {
-    const data = {
-      marcas:      MARCAS,
-      vitolas:     vitolas,
-      operarios:   OPS,
-      metas:       METAS,
-      blends:      BLENDS,
-      pedidos:     PEDIDOS,
-      reportes:    savedReports.slice(-200),
-      inv_lb:      INV.map(i=>({id:i.id,box:i.box,name:i.name,cat:i.cat,tipo:i.tipo,grade:i.grade||'',origin:i.origin||'',lb:i.lb,minLb:i.minLb||15,proveedor:i.proveedor||'',precio:i.precio||0,fechaCompra:i.fechaCompra||'',notas:i.notas||''})),
-      ts:          Date.now()
-    };
-    localStorage.setItem(LS_KEY, JSON.stringify(data));
-    console.log('✓ lsSave: marcas='+MARCAS.length+' vitolas='+vitolas.length+' blends='+BLENDS.length);
-  } catch(e) { console.warn('lsSave error:', e); }
+  const htmlDoc = `<!DOCTYPE html><html lang="es"><head><meta charset="UTF-8"/><title>Nómina Esencia ${semKey}</title>
+  <style>*{margin:0;padding:0;box-sizing:border-box}body{font-family:Georgia,serif;color:#1a1208;padding:28px;font-size:12px}
+  .hdr{display:flex;justify-content:space-between;align-items:center;border-bottom:3px solid #B8962E;padding-bottom:14px;margin-bottom:18px}
+  .brand{font-size:22px;letter-spacing:4px;color:#B8962E;font-weight:bold}.sub{font-size:8px;letter-spacing:2px;color:#8a6a2a}
+  table{width:100%;border-collapse:collapse;font-size:11px}thead tr{background:#1a1208;color:#C9A84C}
+  th{padding:8px;text-align:left;font-size:9px;text-transform:uppercase;letter-spacing:.4px}
+  td{padding:9px 8px;border-bottom:1px solid #e8d8b0}.total-row{background:#f9f5ee;font-weight:700}
+  .sig{border-top:1px solid #1a1208;width:160px;text-align:center;padding-top:4px;font-size:8px;color:#666;margin-top:36px}
+  @media print{body{padding:14px}}</style></head><body>
+  <div class="hdr"><div><div class="brand">ESENCIA</div><div class="sub">ARTE & ORIGEN · REPÚBLICA DOMINICANA</div></div>
+  <div style="text-align:right"><div style="font-size:11px;color:#666">Nómina de Personal</div><div style="font-size:18px;font-weight:bold">${semKey}</div></div></div>
+  <table><thead><tr><th>Empleado</th><th>Rol</th><th>Período</th><th style="text-align:right">Base</th><th style="text-align:center">Ajustes</th><th style="text-align:right">Total RD$</th></tr></thead>
+  <tbody>${rows.map(r=>`<tr><td><b>${r.nombre}</b></td><td style="color:#666;font-size:10px">${r.rol||'—'}</td>
+  <td style="font-size:10px">${r.periodo==='quincenal'?'Quincenal':'Semanal'}</td>
+  <td style="text-align:right">RD$${Math.round(r.base||r.pago).toLocaleString()}</td>
+  <td style="text-align:center;font-size:10px">${r.diasFaltados>0?`-${r.diasFaltados}d `:''} ${r.horasExtra>0?`+${r.horasExtra}h`:''}${r.nota?`<br><i>${r.nota}</i>`:''} ${!r.diasFaltados&&!r.horasExtra?'—':''}</td>
+  <td style="text-align:right;font-weight:700;font-size:14px">RD$${Math.round(r.pago).toLocaleString()}</td></tr>`).join('')}
+  <tr class="total-row"><td colspan="5" style="padding:10px 8px;font-size:13px">TOTAL</td><td style="text-align:right;font-size:16px;color:#B8962E">RD$${Math.round(totalNom).toLocaleString()}</td></tr>
+  </tbody></table>
+  <div style="margin-top:24px;display:flex;justify-content:space-between;align-items:flex-end">
+  <div class="sig">_____________________<br>Angelo<br>Administrador</div>
+  <div style="font-size:8px;color:#bbb">Generado: ${new Date().toLocaleString('es-DO')}</div></div>
+  </body></html>`;
+  const win=window.open('','_blank');if(!win){notif2('Permite ventanas emergentes','err');return;}
+  win.document.write(htmlDoc);win.document.close();setTimeout(()=>win.print(),600);
 }
 
-function lsLoad() {
-  try {
-    const raw = localStorage.getItem(LS_KEY);
-    if (!raw) return false;
-    const data = JSON.parse(raw);
-    if (!data) return false;
-    if (data.marcas    && data.marcas.length)    { MARCAS = data.marcas; }
-    if (data.vitolas   && data.vitolas.length)   { vitolas = data.vitolas; }
-    if (data.operarios && data.operarios.length) { OPS = data.operarios; }
-    if (data.metas     && typeof data.metas === 'object') { Object.assign(METAS, data.metas); }
-    if (data.blends    && data.blends.length)    { BLENDS = data.blends; nextBlendId = Math.max(nextBlendId, ...data.blends.map(b=>b.id||0))+1; }
-    if (data.pedidos   && data.pedidos.length)   { PEDIDOS = data.pedidos; nextPedId = Math.max(nextPedId, ...data.pedidos.map(p=>parseInt(p.id)||0))+1; }
-    if (data.reportes  && data.reportes.length)  { savedReports = data.reportes; }
-    // Restore inventory lb
-    if (data.inv_lb && data.inv_lb.length) {
-      data.inv_lb.forEach(fi => {
-        const local = INV.find(i=>i.id===fi.id);
-        if (local) {
-          if (fi.name)       local.name       = fi.name;
-          if (fi.box)        local.box        = fi.box;
-          if (fi.cat)        local.cat        = fi.cat;
-          if (fi.tipo)       local.tipo       = fi.tipo;
-          if (fi.grade!==undefined) local.grade = fi.grade;
-          if (fi.origin!==undefined) local.origin = fi.origin;
-          if (fi.minLb)      local.minLb      = fi.minLb;
-          local.lb          = fi.lb !== undefined ? fi.lb : local.lb;
-          local.proveedor   = fi.proveedor   || local.proveedor   || '';
-          local.precio      = fi.precio      || local.precio      || 0;
-          local.fechaCompra = fi.fechaCompra || local.fechaCompra || '';
-          local.notas       = fi.notas       || local.notas       || '';
-        }
-      });
-    }
-    console.log('✓ lsLoad OK: marcas='+(data.marcas?.length||0)+' vitolas='+(data.vitolas?.length||0));
-    // Re-save immediately to refresh the timestamp and reinforce data
-    try { localStorage.setItem(LS_KEY+'_bak', raw); } catch(e) {}
-    return true;
-  } catch(e) { console.warn('lsLoad error:', e); return false; }
+function addNomTasa(tipo) {
+  const nombre=prompt('Nombre del tabaquero:');if(!nombre)return;
+  const rol=prompt('Rol (ej: Empuñera, Recapador):','Tabaquero/a')||'Tabaquero/a';
+  const rd=parseFloat(prompt('RD$ por cigarro bueno (ej: 4):','4')||'4');
+  NOM_TASAS.cigarro.push({nombre,rol,rd_por_cig:rd});
+  saveNomConfig();calcNominas();
+  notif2(`${nombre} agregado ✓`,'suc');
 }
 
-// Call lsSave after every important action
-function saveAll() {
-  lsSave();
-  // Also sync to Firebase in background
-  if (window.fbReady && window.fbSaveArr) {
-    window.fbSaveArr('marcas',    MARCAS);
-    window.fbSaveArr('vitolas',   vitolas);
-    window.fbSaveArr('operarios', OPS);
-    window.fbSaveArr('metas',     METAS);
-    window.fbSaveArr('blends_v2', BLENDS);
-    window.fbSaveArr('pedidos_v2',PEDIDOS);
-  }
+function delNomTasa(tipo,idx) {
+  NOM_TASAS[tipo].splice(idx,1);
+  saveNomConfig();calcNominas();
 }
-
-
-// Guardar datos base al cargar
-setTimeout(() => {
-  if (typeof lsSave === 'function' && !localStorage.getItem('esencia_data_v1')) {
-    lsSave();
-    console.log('✓ Datos iniciales guardados');
-  }
-}, 1000);
-
 
 // ══════════ WHATSAPP RESUMEN ══════════
 function compartirWhatsApp(rep) {
