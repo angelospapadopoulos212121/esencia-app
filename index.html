@@ -13,7 +13,7 @@
 <script type="module">
 // ══ FIREBASE ══
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js';
-import { getFirestore, collection, addDoc, getDocs, onSnapshot, doc, setDoc, deleteDoc, query, orderBy } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js';
+import { getFirestore, collection, addDoc, getDocs, getDoc, onSnapshot, doc, setDoc, deleteDoc, query, orderBy } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js';
 
 const firebaseConfig = {
   apiKey: "AIzaSyBXyI4kKIp-WmLAVXpTX3abbWXfbcWEHFA",
@@ -109,10 +109,9 @@ window.fbSaveArr = async function(key, data) {
 
 window.fbLoadArr = async function(key) {
   try {
-    const d2 = await getDocs(query(collection(db, 'config')));
-    const found = d2.docs.find(d => d.id === key);
-    if (!found) return null;
-    const val = found.data().value;
+    const snap = await getDoc(doc(db, 'config', key));
+    if (!snap.exists()) return null;
+    const val = snap.data().value;
     return val ? JSON.parse(val) : null;
   } catch(e) { console.error('fbLoadArr:', key, e); return null; }
 };
