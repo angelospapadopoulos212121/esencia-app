@@ -3772,24 +3772,26 @@ function exportarPDFHoy() {
 <script>
 window.openEditInv=function(id){
   var INV2=typeof INV!="undefined"?INV:[];
-  var i=INV2.find(function(x){return x.id===id;});
-  if(!i)return;
+  var item=INV2.find(function(x){return x.id===id;});
+  if(!item){alert("Tabaco no encontrado");return;}
   var f=document.getElementById("addInvForm");
-  if(!f)return;
-  if(!document.getElementById("af-editId")){
-    var h=document.createElement("input");
-    h.type="hidden";h.id="af-editId";f.appendChild(h);
-  }
-  document.getElementById("af-editId").value=id;
-  var sv=function(k,v){var el=document.getElementById(k);if(el)el.value=(v==null)?"":v;};
-  sv("af-box",i.box);sv("af-name",i.name);sv("af-prov",i.prov);
-  sv("af-precio",i.precio);sv("af-fechac",i.fechac);sv("af-notas",i.notas);
-  sv("af-lb",i.lb);sv("af-grade",i.grade);sv("af-origin",i.origin);sv("af-min",i.min);
-  var c=document.getElementById("af-cat");if(c)c.value=i.cat||"Tripa";
-  var t=document.getElementById("af-tipo");if(t)t.value=i.typ||i.tipo||"Seco";
+  if(!f){alert("Formulario no encontrado");return;}
+  var eid=document.getElementById("af-editId");
+  if(!eid){eid=document.createElement("input");eid.type="hidden";eid.id="af-editId";eid.value="";f.appendChild(eid);}
+  eid.value=id;
+  var campos=["box","name","prov","precio","fechac","notas","lb","grade","origin","min"];
+  campos.forEach(function(k){var el=document.getElementById("af-"+k);if(el)el.value=(item[k]!=null)?item[k]:"";});
+  var cat=document.getElementById("af-cat");if(cat)cat.value=item.cat||"Tripa";
+  var tipo=document.getElementById("af-tipo");if(tipo)tipo.value=item.typ||item.tipo||"Seco";
   f.classList.add("show");f.style.display="block";
-  var b=f.querySelector("button");if(b)b.setAttribute("onclick","saveEditInv()");
+  var btns=f.querySelectorAll("button");
+  btns.forEach(function(b){
+    if(b.getAttribute("onclick")&&b.getAttribute("onclick").includes("addInvEntry")){
+      b.setAttribute("onclick","saveEditInv()");b.textContent="Guardar cambios";
+    }
+  });
   f.scrollIntoView({behavior:"smooth",block:"start"});
+  setTimeout(function(){var n=document.getElementById("af-name");if(n)n.focus();},400);
 };
 
 window.saveEditInv=function(){
@@ -3797,21 +3799,28 @@ window.saveEditInv=function(){
   if(!eid||!eid.value){if(typeof addInvEntry==="function")addInvEntry();return;}
   var editId=parseInt(eid.value);
   var gv=function(k){var el=document.getElementById("af-"+k);return el?el.value:"";};
-  var c=document.getElementById("af-cat"),t=document.getElementById("af-tipo");
-  var u={id:editId,box:gv("box"),name:gv("name"),cat:c?c.value:"Tripa",
-    typ:t?t.value:"Seco",tipo:t?t.value:"Seco",prov:gv("prov"),
+  var cat=document.getElementById("af-cat"),tipo=document.getElementById("af-tipo");
+  var updated={id:editId,box:gv("box"),name:gv("name"),cat:cat?cat.value:"Tripa",
+    typ:tipo?tipo.value:"Seco",tipo:tipo?tipo.value:"Seco",prov:gv("prov"),
     precio:parseFloat(gv("precio"))||0,fechac:gv("fechac"),notas:gv("notas"),
     lb:parseFloat(gv("lb"))||0,grade:gv("grade"),origin:gv("origin"),min:parseFloat(gv("min"))||0};
   var INV2=typeof INV!="undefined"?INV:[];
   var idx=INV2.findIndex(function(x){return x.id===editId;});
-  if(idx>=0){u.consumido=INV2[idx].consumido||0;INV2[idx]=u;}else{INV2.push(u);}
+  if(idx>=0){updated.consumido=INV2[idx].consumido||0;INV2[idx]=updated;}else{INV2.push(updated);}
   if(typeof lsSave==="function")lsSave();
-  if(typeof fbSaveInventario==="function")fbSaveInventario(u);
+  if(typeof fbSaveInventario==="function")fbSaveInventario(updated);
   var f=document.getElementById("addInvForm");
-  if(f){f.classList.remove("show");f.style.display="";}
+  if(f){
+    f.classList.remove("show");f.style.display="";
+    var btns=f.querySelectorAll("button");
+    btns.forEach(function(b){
+      if(b.textContent.includes("Guardar")){b.setAttribute("onclick","addInvEntry()");b.textContent="Agregar al inventario";}
+    });
+  }
   eid.value="";
   if(typeof renderInventario==="function")renderInventario();
-  alert("Actualizado: "+u.name);
+  if(typeof showNotif==="function")showNotif("Actualizado: "+updated.name,"suc");
+  else alert("Actualizado: "+updated.name);
 };
 
 window.genPDF=function(rid){
@@ -3842,26 +3851,83 @@ window.sendWhatsApp=function(rid){
 window.editReport=function(id){
   if(typeof CUR_USER==="undefined"||CUR_USER.rol!=="admin"){alert("Solo admin puede editar reportes");return;}
   var R=typeof REPORTES!="undefined"?REPORTES:[];
+  var r=R.find(function(x){return x.id===id;});
+  if(!r){alert("Reporte no encontrado");return;}
+  var old=document.getElementById("__editReportModal__");if(old)old.remove();
+  var parejas=r.parejas||[];
+  var pRows=parejas.map(function(p,i){
+    return "<div style='background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:8px;padding:10px;margin-bottom:8px'>"+
+      "<div style='font-size:11px;color:#C9A84C;margin-bottom:6px;font-weight:500'>Pareja "+(i+1)+" - "+(p.empNom||"")+(p.pegNom?" & "+p.pegNom:"")+"</div>"+
+      "<div style='display:grid;grid-template-columns:1fr 1fr;gap:8px'>"+
+        "<div><label style='font-size:8px;color:#777;text-transform:uppercase;letter-spacing:.1em'>Buenos</label>"+
+          "<input id='ep-buenos-"+i+"' type='number' value='"+(p.buenos||0)+"' style='width:100%;background:#2A2A28;border:1px solid rgba(255,255,255,.1);color:#F8F4EC;border-radius:6px;padding:8px;font-size:14px;margin-top:3px'></div>"+
+        "<div><label style='font-size:8px;color:#777;text-transform:uppercase;letter-spacing:.1em'>Malos</label>"+
+          "<input id='ep-malos-"+i+"' type='number' value='"+(p.malos||0)+"' style='width:100%;background:#2A2A28;border:1px solid rgba(255,255,255,.1);color:#F8F4EC;border-radius:6px;padding:8px;font-size:14px;margin-top:3px'></div>"+
+      "</div></div>";
+  }).join("");
+  var modal=document.createElement("div");
+  modal.id="__editReportModal__";
+  modal.style.cssText="position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,.92);display:flex;align-items:center;justify-content:center;padding:16px";
+  modal.innerHTML="<div style='background:#181816;border:1px solid rgba(201,168,76,.3);border-radius:14px;padding:24px;max-width:480px;width:100%;max-height:90vh;overflow-y:auto'>"+
+    "<div style='font-family:Cormorant Garamond,serif;font-size:20px;color:#C9A84C;margin-bottom:4px'>Editar Reporte</div>"+
+    "<div style='font-size:10px;color:#666;margin-bottom:18px'>"+r.fecha+" - Supervisor: "+(r.supervisor||"-")+"</div>"+
+    "<div style='display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px'>"+
+      "<div><label style='font-size:8px;color:#777;text-transform:uppercase;letter-spacing:.1em'>Buenos total</label>"+
+        "<input id='ep-total-buenos' type='number' value='"+(r.buenos||0)+"' style='width:100%;background:#2A2A28;border:1px solid rgba(255,255,255,.1);color:#F8F4EC;border-radius:6px;padding:9px;font-size:15px;margin-top:3px'></div>"+
+      "<div><label style='font-size:8px;color:#777;text-transform:uppercase;letter-spacing:.1em'>Malos total</label>"+
+        "<input id='ep-total-malos' type='number' value='"+(r.malos||0)+"' style='width:100%;background:#2A2A28;border:1px solid rgba(255,255,255,.1);color:#F8F4EC;border-radius:6px;padding:9px;font-size:15px;margin-top:3px'></div>"+
+    "</div>"+
+    (parejas.length>0?"<div style='font-size:9px;color:#777;text-transform:uppercase;letter-spacing:.1em;margin-bottom:10px'>Editar por pareja</div>"+pRows:"")+
+    "<div style='display:flex;gap:10px;margin-top:16px'>"+
+      "<button onclick='saveReportEdit("+id+")' style='flex:1;background:#C9A84C;color:#06060A;border:none;cursor:pointer;padding:12px;border-radius:8px;font-size:13px;font-weight:700;letter-spacing:.1em'>GUARDAR</button>"+
+      "<button onclick=\"document.getElementById('__editReportModal__').remove()\" style='flex:1;background:transparent;border:1px solid rgba(201,168,76,.3);color:#C9A84C;cursor:pointer;padding:12px;border-radius:8px;font-size:13px'>CANCELAR</button>"+
+    "</div></div>";
+  document.body.appendChild(modal);
+};
+
+window.saveReportEdit=function(id){
+  var R=typeof REPORTES!="undefined"?REPORTES:[];
   var r=R.find(function(x){return x.id===id;});if(!r)return;
-  var b=prompt("Cigarros buenos:",r.buenos||0);if(b===null)return;
-  var m=prompt("Cigarros malos:",r.malos||0);if(m===null)return;
-  r.buenos=parseInt(b)||0;r.malos=parseInt(m)||0;
+  var b=parseInt(document.getElementById("ep-total-buenos").value)||0;
+  var m=parseInt(document.getElementById("ep-total-malos").value)||0;
+  var parejas=r.parejas||[];
+  if(parejas.length>0){
+    parejas.forEach(function(p,i){
+      var bEl=document.getElementById("ep-buenos-"+i);
+      var mEl=document.getElementById("ep-malos-"+i);
+      if(bEl)p.buenos=parseInt(bEl.value)||0;
+      if(mEl)p.malos=parseInt(mEl.value)||0;
+      p.eficiencia=(p.buenos+p.malos)>0?Math.round(p.buenos/(p.buenos+p.malos)*100):0;
+    });
+    r.buenos=parejas.reduce(function(a,p){return a+(p.buenos||0);},0);
+    r.malos=parejas.reduce(function(a,p){return a+(p.malos||0);},0);
+  } else {
+    r.buenos=b;r.malos=m;
+  }
   r.eficiencia=(r.buenos+r.malos)>0?Math.round(r.buenos/(r.buenos+r.malos)*100):0;
   if(typeof lsSave==="function")lsSave();
   if(typeof fbSaveReport==="function")fbSaveReport(r);
+  var modal=document.getElementById("__editReportModal__");if(modal)modal.remove();
   if(typeof renderHistorial==="function")renderHistorial();
-  alert("Reporte actualizado");
+  if(typeof renderDashboard==="function")renderDashboard();
+  if(typeof showNotif==="function")showNotif("Reporte actualizado","suc");
+  else alert("Reporte actualizado correctamente");
 };
 
 window.deleteReport=function(id){
   if(typeof CUR_USER==="undefined"||CUR_USER.rol!=="admin"){alert("Solo admin puede borrar reportes");return;}
-  if(!confirm("Borrar este reporte?"))return;
   var R=typeof REPORTES!="undefined"?REPORTES:[];
-  var i=R.findIndex(function(x){return x.id===id;});
-  if(i>=0)R.splice(i,1);
+  var r=R.find(function(x){return x.id===id;});
+  var fecha=r?r.fecha:"este reporte";
+  if(!confirm("Borrar el reporte del "+fecha+"?\nEsta accion NO se puede deshacer."))return;
+  var idx=R.findIndex(function(x){return x.id===id;});
+  if(idx>=0)R.splice(idx,1);
   if(typeof lsSave==="function")lsSave();
   if(typeof renderHistorial==="function")renderHistorial();
+  if(typeof renderDashboard==="function")renderDashboard();
   var mo=document.getElementById("histModal");if(mo)mo.style.display="none";
+  if(typeof showNotif==="function")showNotif("Reporte eliminado","suc");
+  else alert("Reporte eliminado");
 };
 
 window.editPed=function(id){
@@ -3929,6 +3995,6 @@ window.saveNomAjuste=function(){
   if(typeof renderNominas==="function")renderNominas();
 };
 
-console.log("Esencia Fix OK - funciones cargadas correctamente");
+console.log("Esencia Fix v2 - OK");
 </script>
 </body></html>
