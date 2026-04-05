@@ -168,19 +168,19 @@ function updVitInfo(i){
 </script>
 <style>
 :root{
-  --gold:#C9A84C;--gold2:#E0BE6A;--gold3:#F0D080;--gold4:#9A7020;
-  --bg:#111110;--bg1:#191916;--bg2:#201F1C;--bg3:#272622;
-  --bord:rgba(210,178,76,.28);--bord2:rgba(210,178,76,.14);--bords:rgba(255,255,255,.1);--bordd:rgba(255,255,255,.06);
-  --txt:#F5F0E8;--txt2:#C8BEA8;--txt3:#908870;--txt4:#5A5448;
-  --red:#C03838;--red2:rgba(192,56,56,.18);--redb:rgba(192,56,56,.4);
-  --grn:#1E8044;--grn2:rgba(30,128,68,.18);--grnb:rgba(30,128,68,.4);
-  --amber:#C8960E;--amber2:rgba(200,150,14,.2);--amberb:rgba(200,150,14,.4);
-  --blue:#2060A0;--blue2:rgba(32,96,160,.18);--blueb:rgba(32,96,160,.4);
-  --purple:#5A22A0;--purple2:rgba(90,34,160,.18);--purpleb:rgba(90,34,160,.4);
-  --teal:#1A8080;--teal2:rgba(26,128,128,.18);--tealb:rgba(26,128,128,.4);
+  --gold:#C9A84C;--gold2:#E0C870;--gold3:#F0D880;--gold4:#9A7820;
+  --bg:#0F0F0D;--bg1:#181816;--bg2:#202020;--bg3:#2A2A28;
+  --bord:rgba(201,168,76,.22);--bord2:rgba(201,168,76,.11);--bords:rgba(255,255,255,.13);--bordd:rgba(255,255,255,.07);
+  --txt:#F8F4EC;--txt2:#D0C8B0;--txt3:#988870;--txt4:#605848;
+  --red:#D05545;--red2:rgba(208,85,69,.15);--redb:rgba(208,85,69,.4);
+  --grn:#3A9C5C;--grn2:rgba(58,156,92,.15);--grnb:rgba(58,156,92,.4);
+  --amber:#C08C2A;--amber2:rgba(192,140,42,.15);--amberb:rgba(192,140,42,.4);
+  --blue:#3870B8;--blue2:rgba(56,112,184,.15);--blueb:rgba(56,112,184,.4);
+  --purple:#7842B0;--purple2:rgba(120,66,176,.15);--purpleb:rgba(120,66,176,.4);
+  --teal:#2A9C90;--teal2:rgba(42,156,144,.15);--tealb:rgba(42,156,144,.4);
 }
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
-html,body{background:var(--bg);color:var(--txt);font-family:'Montserrat',sans-serif;font-size:13px;min-height:100vh;overflow-x:hidden}
+html,body{background:var(--bg);color:var(--txt);font-family:'Montserrat',sans-serif;font-size:15px;min-height:100vh;overflow-x:hidden}
 input,select,textarea,button{font-family:'Montserrat',sans-serif}
 ::-webkit-scrollbar{width:4px;height:4px}
 ::-webkit-scrollbar-thumb{background:rgba(184,150,46,.3);border-radius:2px}
@@ -198,7 +198,7 @@ input,select,textarea,button{font-family:'Montserrat',sans-serif}
 .login-sub{font-size:10px;color:var(--txt3);text-align:center;margin:8px 0 22px}
 .lfld{display:flex;flex-direction:column;gap:5px;margin-bottom:12px}
 .lfld label{font-size:8px;letter-spacing:.16em;text-transform:uppercase;color:var(--txt3);font-weight:500}
-.lfld input{background:var(--bg3);border:1px solid rgba(255,255,255,.08);color:var(--txt);border-radius:8px;padding:12px 14px;font-size:13px;width:100%;outline:none;-webkit-appearance:none;transition:border-color .2s}
+.lfld input{background:var(--bg3);border:1px solid rgba(255,255,255,.08);color:var(--txt);border-radius:8px;padding:12px 14px;font-size:15px;width:100%;outline:none;-webkit-appearance:none;transition:border-color .2s}
 .lfld input:focus{border-color:var(--gold2)}
 .pw-wrap{position:relative}
 .pw-wrap input{padding-right:48px}
@@ -207,8 +207,8 @@ input,select,textarea,button{font-family:'Montserrat',sans-serif}
 .login-err{background:var(--red2);border:1px solid rgba(155,44,44,.3);border-radius:8px;padding:9px 13px;font-size:10px;color:#E57373;margin-bottom:11px;display:none;text-align:center}
 .login-err.show{display:block}
 .login-att{text-align:center;font-size:9px;color:#E57373;margin-top:7px;display:none}
-.login-blocked{background:var(--red2);border:1px solid rgba(155,44,44,.3);border-radius:8px;padding:14px;text-align:center;font-size:11px;color:#E57373;display:none}
-.btn-login{width:100%;background:var(--gold);color:#06060A;border:none;cursor:pointer;padding:14px;border-radius:8px;font-size:11px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;transition:background .2s,transform .1s;margin-top:4px}
+.login-blocked{background:var(--red2);border:1px solid rgba(155,44,44,.3);border-radius:8px;padding:14px;text-align:center;font-size:15px;color:#E57373;display:none}
+.btn-login{width:100%;background:var(--gold);color:#06060A;border:none;cursor:pointer;padding:14px;border-radius:8px;font-size:15px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;transition:background .2s,transform .1s;margin-top:4px}
 .btn-login:hover{background:var(--gold3)}
 .btn-login:active{transform:scale(.98)}
 .login-foot{text-align:center;margin-top:16px;font-size:8px;color:var(--txt3)}
@@ -217,7 +217,7 @@ input,select,textarea,button{font-family:'Montserrat',sans-serif}
 #appScreen{display:none}
 .app{display:flex;flex-direction:column;min-height:100vh}
 .app-body{display:flex;flex:1;position:relative}
-.sidebar{width:220px;background:var(--bg1);border-right:1px solid var(--bord2);display:flex;flex-direction:column;flex-shrink:0;z-index:50;transition:transform .25s}
+.sidebar{width:220px;background:var(--bg1);border-right:1px solid rgba(201,168,76,.2);display:flex;flex-direction:column;flex-shrink:0;z-index:50;transition:transform .25s}
 .content{flex:1;min-width:0;overflow-x:hidden}
 @media(max-width:768px){
   .sidebar{position:fixed;top:56px;left:0;bottom:0;transform:translateX(-100%);box-shadow:4px 0 24px rgba(0,0,0,.6)}
@@ -227,7 +227,7 @@ input,select,textarea,button{font-family:'Montserrat',sans-serif}
 }
 
 /* TOPBAR */
-.topbar{background:var(--bg1);border-bottom:1px solid var(--bord);display:flex;align-items:center;padding:0 16px;height:56px;gap:12px;flex-shrink:0;position:sticky;top:0;z-index:100}
+.topbar{background:var(--bg1);background:var(--bg1);border-bottom:1px solid var(--bord);display:flex;align-items:center;padding:0 16px;height:56px;gap:12px;flex-shrink:0;position:sticky;top:0;z-index:100}
 .hbg{display:none;flex-direction:column;gap:4px;cursor:pointer;padding:4px}
 .hbg span{width:20px;height:1.5px;background:var(--txt2);border-radius:2px}
 @media(max-width:768px){.hbg{display:flex}}
@@ -239,7 +239,7 @@ input,select,textarea,button{font-family:'Montserrat',sans-serif}
 .tb-r{display:flex;align-items:center;gap:8px;flex-shrink:0}
 .tb-date{font-size:7px;color:var(--txt3);border:1px solid var(--bord2);padding:3px 10px;border-radius:20px;white-space:nowrap}
 @media(max-width:500px){.tb-date{display:none}}
-.tb-user{display:flex;align-items:center;gap:7px;background:var(--bg2);border:1px solid var(--bord2);padding:5px 10px 5px 6px;border-radius:20px;cursor:pointer;position:relative}
+.tb-user{display:flex;align-items:center;gap:7px;background:var(--bg3);border:1px solid var(--bord2);padding:5px 10px 5px 6px;border-radius:20px;cursor:pointer;position:relative}
 .tb-av{width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:8px;font-weight:600;color:#fff;flex-shrink:0}
 .tb-un{font-size:9px;color:var(--txt2);max-width:65px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .tb-rb{font-size:6px;padding:1px 6px;border-radius:6px;letter-spacing:.1em;text-transform:uppercase;font-weight:500}
@@ -249,9 +249,9 @@ input,select,textarea,button{font-family:'Montserrat',sans-serif}
 .um{position:absolute;top:calc(100% + 8px);right:0;background:var(--bg1);border:1px solid var(--bord);border-radius:10px;padding:8px;min-width:180px;z-index:200;display:none;box-shadow:0 8px 28px rgba(0,0,0,.5)}
 .um.show{display:block}
 .um-hdr{padding:7px 10px 9px;border-bottom:1px solid var(--bord2);margin-bottom:5px}
-.um-name{font-size:12px;color:var(--txt);font-weight:500}
+.um-name{font-size:14px;color:var(--txt);font-weight:500}
 .um-role{font-size:8px;color:var(--txt3);margin-top:2px;letter-spacing:.08em;text-transform:uppercase}
-.um-item{display:flex;align-items:center;gap:8px;padding:8px 10px;border-radius:7px;cursor:pointer;font-size:11px;color:var(--txt2);transition:.15s}
+.um-item{display:flex;align-items:center;gap:8px;padding:8px 10px;border-radius:7px;cursor:pointer;font-size:15px;color:var(--txt2);transition:.15s}
 .um-item:hover{background:rgba(255,255,255,.05);color:var(--txt)}
 .um-item svg{width:13px;height:13px;stroke:var(--txt3);fill:none;stroke-width:1.5;flex-shrink:0}
 .um-item.out{color:#E57373}.um-item.out svg{stroke:#E57373}.um-item.out:hover{background:var(--red2)}
@@ -333,7 +333,7 @@ input,select,textarea,button{font-family:'Montserrat',sans-serif}
 /* FIELDS */
 .fld{display:flex;flex-direction:column;gap:5px}
 .fld label{font-size:8px;letter-spacing:.15em;text-transform:uppercase;color:var(--txt3);font-weight:500}
-.fld input,.fld select,.fld textarea{background:var(--bg3);border:1px solid rgba(255,255,255,.08);color:var(--txt);border-radius:7px;padding:9px 11px;font-size:12px;width:100%;-webkit-appearance:none;appearance:none;transition:border-color .2s;outline:none}
+.fld input,.fld select,.fld textarea{background:var(--bg3);border:1px solid rgba(255,255,255,.08);color:var(--txt);border-radius:7px;padding:11px 13px;font-size:14px;width:100%;-webkit-appearance:none;appearance:none;transition:border-color .2s;outline:none}
 .fld input:focus,.fld select:focus,.fld textarea:focus{border-color:var(--gold2)}
 .fld textarea{resize:vertical;min-height:52px;line-height:1.5}
 .fld input[type=date]::-webkit-calendar-picker-indicator,.fld input[type=time]::-webkit-calendar-picker-indicator{filter:invert(.45)}
@@ -344,7 +344,7 @@ input,select,textarea,button{font-family:'Montserrat',sans-serif}
 .btn-p:hover{background:var(--gold3)}
 .btn-s{background:transparent;border:1px solid var(--bord);color:var(--gold2);cursor:pointer;padding:10px 18px;border-radius:7px;font-size:10px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;transition:.15s}
 .btn-s:hover{background:rgba(184,150,46,.08)}
-.btn-save{background:var(--gold);color:#06060A;border:none;cursor:pointer;padding:13px 46px;border-radius:8px;font-size:11px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;transition:background .2s,transform .1s;width:100%;max-width:340px}
+.btn-save{background:var(--gold);color:#06060A;border:none;cursor:pointer;padding:13px 46px;border-radius:8px;font-size:15px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;transition:background .2s,transform .1s;width:100%;max-width:340px}
 .btn-save:hover{background:var(--gold3)}
 .btn-save:active{transform:scale(.98)}
 .btn-sm{background:transparent;border:1px solid var(--bord2);color:var(--txt2);cursor:pointer;padding:5px 11px;border-radius:6px;font-size:8px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;transition:.15s}
@@ -361,11 +361,11 @@ input,select,textarea,button{font-family:'Montserrat',sans-serif}
 .pc-val{flex:1;text-align:center;background:var(--bg3);border:1px solid rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:20px;color:var(--gold3);min-width:42px}
 
 /* LIVE BAR */
-.live-bar{background:var(--bg2);border-bottom:1px solid var(--bord2);padding:8px 16px;display:flex;align-items:center;gap:4px;flex-wrap:wrap}
+.live-bar{background:var(--bg3);border-bottom:1px solid var(--bord2);padding:8px 16px;display:flex;align-items:center;gap:4px;flex-wrap:wrap}
 .live-dot{width:5px;height:5px;border-radius:50%;background:var(--grn);animation:pulse 2s infinite;flex-shrink:0}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.2}}
 .live-lbl{font-size:7px;letter-spacing:.15em;color:var(--txt3);text-transform:uppercase;font-weight:500;margin-right:8px}
-.lstat{display:flex;flex-direction:column;align-items:center;padding:0 10px;border-right:1px solid var(--bord2)}
+.lstat{display:flex;flex-direction:column;align-items:center;padding:0 10px;border-right:1px solid rgba(201,168,76,.2)}
 .lstat:last-of-type{border-right:none}
 .lstat-v{font-family:'Cormorant Garamond',serif;font-size:17px;font-weight:600;color:var(--gold3);line-height:1}
 .lstat-l{font-size:7px;color:var(--txt3);letter-spacing:.09em;text-transform:uppercase;margin-top:1px}
@@ -384,13 +384,13 @@ input,select,textarea,button{font-family:'Montserrat',sans-serif}
 .as-pill{margin-left:auto;font-size:7px;color:#5DBF8A;background:var(--grn2);padding:3px 10px;border-radius:10px;letter-spacing:.1em;text-transform:uppercase;font-weight:500;border:1px solid rgba(26,110,58,.25);white-space:nowrap}
 
 /* PAREJA */
-.pjc{background:var(--bg2);border:1px solid var(--bords);border-radius:11px;margin-bottom:11px;overflow:hidden;transition:border-color .3s}
+.pjc{background:var(--bg3);border:1px solid var(--bords);border-radius:11px;margin-bottom:11px;overflow:hidden;transition:border-color .3s}
 .pjc.al{border-color:rgba(155,44,44,.6)}
 .pjc.bok{border-color:rgba(26,110,58,.32)}
 .pjh{display:flex;align-items:center;padding:11px 14px;background:rgba(0,0,0,.25);border-bottom:1px solid rgba(255,255,255,.04);cursor:pointer;gap:9px;user-select:none}
 .pjnum{width:30px;height:30px;border-radius:50%;border:1px solid var(--bord);display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:15px;font-weight:600;color:var(--gold3);flex-shrink:0}
 .pjinfo{flex:1;min-width:0}
-.pjnames{font-size:11px;color:var(--txt2);font-weight:300;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pjnames{font-size:15px;color:var(--txt2);font-weight:300;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .pjmeta{font-size:8px;color:var(--txt3);margin-top:2px}
 .pjhr{display:flex;align-items:center;gap:8px}
 .pjbadge{font-size:7px;padding:2px 8px;border-radius:9px;letter-spacing:.1em;text-transform:uppercase;font-weight:500;white-space:nowrap}
@@ -452,7 +452,7 @@ input,select,textarea,button{font-family:'Montserrat',sans-serif}
 .meta-pct-label{font-size:9px;margin-top:4px;font-weight:500;text-align:right}
 
 /* Pareja Meta Card */
-.pareja-meta-card{background:var(--bg2);border:1px solid var(--bords);border-radius:12px;padding:16px;margin-bottom:12px;position:relative;overflow:hidden;transition:border-color .3s}
+.pareja-meta-card{background:var(--bg3);border:1px solid var(--bords);border-radius:12px;padding:16px;margin-bottom:12px;position:relative;overflow:hidden;transition:border-color .3s}
 .pareja-meta-card.on-track{border-color:rgba(26,110,58,.4)}
 .pareja-meta-card.warning{border-color:rgba(184,134,11,.4)}
 .pareja-meta-card.behind{border-color:rgba(155,44,44,.4)}
@@ -465,7 +465,7 @@ input,select,textarea,button{font-family:'Montserrat',sans-serif}
 .pmc-header{display:flex;align-items:center;gap:12px;margin-bottom:14px}
 .pmc-num{width:38px;height:38px;border-radius:50%;border:2px solid var(--bord);display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:600;color:var(--gold3);flex-shrink:0}
 .pmc-info{flex:1}
-.pmc-names{font-size:12px;color:var(--txt);font-weight:500}
+.pmc-names{font-size:14px;color:var(--txt);font-weight:500}
 .pmc-vitola{font-size:9px;color:var(--txt3);margin-top:2px}
 .pmc-status{font-size:8px;padding:4px 12px;border-radius:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;white-space:nowrap}
 .pmc-status.on-track{background:var(--grn2);color:#5DBF8A;border:1px solid rgba(26,110,58,.25)}
@@ -493,8 +493,8 @@ input,select,textarea,button{font-family:'Montserrat',sans-serif}
 .rank-pos.silver-pos{color:#A0A0B0}
 .rank-pos.bronze-pos{color:#CD7F32}
 .rank-medal{font-size:16px;display:block;text-align:center}
-.rank-av{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;color:#fff;flex-shrink:0;border:2px solid rgba(255,255,255,.1)}
-.rank-name{font-size:12px;color:var(--txt);font-weight:500}
+.rank-av{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:600;color:#fff;flex-shrink:0;border:2px solid rgba(255,255,255,.1)}
+.rank-name{font-size:14px;color:var(--txt);font-weight:500}
 .rank-role{font-size:8px;color:var(--txt3);margin-top:2px;letter-spacing:.06em;text-transform:uppercase}
 .rank-eff-bar{height:5px;background:rgba(255,255,255,.07);border-radius:3px;overflow:hidden;margin-top:5px;width:100%;max-width:120px}
 .rank-eff-fill{height:100%;border-radius:3px;background:var(--grn)}
@@ -508,11 +508,11 @@ input,select,textarea,button{font-family:'Montserrat',sans-serif}
 .meta-config-card{background:var(--bg1);border:1px solid var(--bord);border-radius:12px;padding:16px;margin-bottom:14px}
 .meta-config-ttl{font-family:'Cormorant Garamond',serif;font-size:15px;color:var(--gold2);margin-bottom:14px;padding-bottom:10px;border-bottom:1px solid var(--bord2);display:flex;align-items:center;justify-content:space-between}
 .meta-pareja-config{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px}
-.mpc-item{background:var(--bg2);border:1px solid var(--bords);border-radius:9px;padding:12px}
+.mpc-item{background:var(--bg3);border:1px solid var(--bords);border-radius:9px;padding:12px}
 .mpc-label{font-size:9px;color:var(--txt2);margin-bottom:8px;letter-spacing:.04em}
 .mpc-label b{color:var(--txt);font-weight:500}
 .mpc-input-row{display:flex;align-items:center;gap:6px}
-.mpc-input-row input{background:var(--bg3);border:1px solid rgba(255,255,255,.08);color:var(--txt);border-radius:6px;padding:7px 10px;font-size:13px;width:80px;outline:none;text-align:center;-webkit-appearance:none;transition:border-color .2s}
+.mpc-input-row input{background:var(--bg3);border:1px solid rgba(255,255,255,.08);color:var(--txt);border-radius:6px;padding:7px 10px;font-size:15px;width:80px;outline:none;text-align:center;-webkit-appearance:none;transition:border-color .2s}
 .mpc-input-row input:focus{border-color:var(--gold2)}
 .mpc-unit{font-size:9px;color:var(--txt3)}
 
@@ -524,7 +524,7 @@ input,select,textarea,button{font-family:'Montserrat',sans-serif}
 .global-meta-date{font-size:9px;color:var(--txt3);margin-top:3px}
 .global-meta-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:16px}
 @media(max-width:480px){.global-meta-stats{grid-template-columns:1fr 1fr}}
-.gms{background:var(--bg2);border-radius:9px;padding:12px;text-align:center;border:1px solid var(--bords)}
+.gms{background:var(--bg3);border-radius:9px;padding:12px;text-align:center;border:1px solid var(--bords)}
 .gms-v{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:600;line-height:1}
 .gms-l{font-size:7px;color:var(--txt3);letter-spacing:.12em;text-transform:uppercase;margin-top:3px}
 .global-progress{margin-top:4px}
@@ -535,8 +535,8 @@ input,select,textarea,button{font-family:'Montserrat',sans-serif}
 /* OPERARIOS SCREEN */
 .ops-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(155px,1fr));gap:10px;margin-bottom:16px}
 .op-card{background:var(--bg1);border:1px solid var(--bord2);border-radius:11px;padding:14px;display:flex;flex-direction:column;align-items:center;gap:7px;text-align:center}
-.op-av{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:600;color:#fff;border:2px solid var(--bord);flex-shrink:0}
-.op-name{font-size:12px;color:var(--txt);font-weight:500;line-height:1.3}
+.op-av{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:600;color:#fff;border:2px solid var(--bord);flex-shrink:0}
+.op-name{font-size:14px;color:var(--txt);font-weight:500;line-height:1.3}
 .op-tipo{font-size:7px;letter-spacing:.14em;text-transform:uppercase;padding:3px 11px;border-radius:10px;font-weight:500}
 .op-tipo.e{background:rgba(184,150,46,.1);color:var(--gold2);border:1px solid rgba(184,150,46,.2)}
 .op-tipo.p{background:rgba(26,74,122,.16);color:#74B3E8;border:1px solid rgba(26,74,122,.25)}
@@ -551,20 +551,20 @@ input,select,textarea,button{font-family:'Montserrat',sans-serif}
 .add-form-ttl{font-family:'Cormorant Garamond',serif;font-size:14px;color:var(--gold2);margin-bottom:12px;padding-bottom:9px;border-bottom:1px solid var(--bord2)}
 
 /* VITOLAS */
-.vt{width:100%;border-collapse:collapse;font-size:11px}
+.vt{width:100%;border-collapse:collapse;font-size:15px}
 .vt th{font-size:7px;letter-spacing:.13em;text-transform:uppercase;color:var(--txt3);font-weight:500;padding:0 0 8px;text-align:left;border-bottom:1px solid var(--bord2)}
 .vt td{padding:8px 4px;border-bottom:1px solid rgba(255,255,255,.035);color:var(--txt2);vertical-align:middle}
 .vt tr:last-child td{border:none}
 .vt td:first-child{color:var(--txt)}
 
 /* MARCAS */
-.brand-card{background:var(--bg2);border:1px solid var(--bords);border-radius:10px;padding:13px;display:flex;align-items:center;gap:12px;margin-bottom:8px}
+.brand-card{background:var(--bg3);border:1px solid var(--bords);border-radius:10px;padding:13px;display:flex;align-items:center;gap:12px;margin-bottom:8px}
 .brand-dot{width:14px;height:14px;border-radius:50%;flex-shrink:0;border:1px solid rgba(255,255,255,.15)}
 
 /* INV TABLE */
-.inv-table{width:100%;border-collapse:collapse;font-size:11px;min-width:580px}
-.inv-table th{font-size:7px;letter-spacing:.13em;text-transform:uppercase;color:var(--txt3);font-weight:500;padding:9px 10px;text-align:left;border-bottom:1px solid var(--bord2);background:rgba(0,0,0,.15)}
-.inv-table td{padding:9px 10px;border-bottom:1px solid rgba(255,255,255,.035);color:var(--txt2);vertical-align:middle}
+.inv-table{width:100%;border-collapse:collapse;font-size:15px;min-width:580px}
+.inv-table th{font-size:7px;letter-spacing:.13em;text-transform:uppercase;color:var(--txt3);font-weight:500;padding:11px 12px;text-align:left;border-bottom:1px solid var(--bord2);background:rgba(0,0,0,.15)}
+.inv-table td{padding:11px 12px;border-bottom:1px solid rgba(255,255,255,.035);color:var(--txt2);vertical-align:middle}
 .inv-table tr:last-child td{border:none}
 .inv-table td.nm{color:var(--txt);font-weight:400}
 .tipo-badge{font-size:7px;padding:2px 8px;border-radius:6px;font-weight:500;letter-spacing:.08em;white-space:nowrap;display:inline-block}
@@ -599,7 +599,7 @@ input,select,textarea,button{font-family:'Montserrat',sans-serif}
 .adj-box{background:var(--bg1);border:1px solid var(--bord);border-radius:13px;padding:22px;max-width:400px;width:100%}
 .adj-ttl{font-family:'Cormorant Garamond',serif;font-size:16px;color:var(--gold2);margin-bottom:4px}
 .adj-sub{font-size:10px;color:var(--txt3);margin-bottom:14px}
-.adj-curr{background:var(--bg2);border-radius:8px;padding:11px;margin-bottom:13px;display:flex;align-items:center;justify-content:space-between}
+.adj-curr{background:var(--bg3);border-radius:8px;padding:11px;margin-bottom:13px;display:flex;align-items:center;justify-content:space-between}
 .adj-curr-lbl{font-size:8px;color:var(--txt3);text-transform:uppercase;letter-spacing:.1em}
 .adj-curr-val{font-family:'Cormorant Garamond',serif;font-size:22px;color:var(--gold3);font-weight:600}
 .adj-presets{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:13px}
@@ -615,7 +615,7 @@ input,select,textarea,button{font-family:'Montserrat',sans-serif}
 .m-ao{font-size:7px;letter-spacing:.28em;color:var(--gold4);text-transform:uppercase;margin-top:2px;text-align:center}
 .m-orn{width:80px;height:1px;background:linear-gradient(90deg,transparent,var(--gold2),transparent);margin:11px auto 15px}
 .mstats{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-bottom:13px}
-.mstat{background:var(--bg2);border-radius:8px;padding:12px;text-align:center;border:1px solid var(--bord2)}
+.mstat{background:var(--bg3);border-radius:8px;padding:12px;text-align:center;border:1px solid var(--bord2)}
 .mstat-v{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:600;line-height:1}
 .mstat-l{font-size:7px;color:var(--txt3);letter-spacing:.14em;text-transform:uppercase;margin-top:3px}
 .mplist{max-height:160px;overflow-y:auto;margin-bottom:13px}
@@ -647,7 +647,7 @@ input,select,textarea,button{font-family:'Montserrat',sans-serif}
 .hv-btn:hover{border-color:rgba(184,150,46,.4);color:var(--gold2)}
 .hv-btn.hv-on{background:rgba(184,150,46,.15);border-color:var(--gold2);color:var(--gold2)}
 .hist-row{display:flex;align-items:center;padding:11px 14px;border-radius:10px;border:1px solid rgba(255,255,255,.07);background:var(--bg1);margin-bottom:7px;gap:10px;cursor:pointer;transition:.15s}
-.hist-row:hover{border-color:rgba(184,150,46,.3);background:var(--bg2)}
+.hist-row:hover{border-color:rgba(184,150,46,.3);background:var(--bg3)}
 
 </style>
 </head>
@@ -779,11 +779,11 @@ input,select,textarea,button{font-family:'Montserrat',sans-serif}
   <div class="g2" style="margin-bottom:14px">
     <div class="card">
       <div class="card-ttl">Últimos reportes <span class="card-badge">Esta semana</span></div>
-      <div id="dashReports" style="text-align:center;padding:18px 0;color:var(--txt3);font-size:11px">Sin reportes aún.<br><span style="color:var(--gold2);cursor:pointer" onclick="goTo('produccion',null)">Crear primer reporte →</span></div>
+      <div id="dashReports" style="text-align:center;padding:18px 0;color:var(--txt3);font-size:15px">Sin reportes aún.<br><span style="color:var(--gold2);cursor:pointer" onclick="goTo('produccion',null)">Crear primer reporte →</span></div>
     </div>
     <div class="card">
       <div class="card-ttl">Top operarios <span class="card-badge">Esta semana</span></div>
-      <div id="dashTopOp" style="font-size:11px"></div>
+      <div id="dashTopOp" style="font-size:15px"></div>
     </div>
   </div>
 
@@ -792,22 +792,22 @@ input,select,textarea,button{font-family:'Montserrat',sans-serif}
     <div class="g4">
       <button style="background:rgba(184,150,46,.08);border:1px solid var(--bord);border-radius:9px;padding:14px;cursor:pointer;transition:.15s;text-align:left" onclick="goTo('produccion',null)" onmouseover="this.style.background='rgba(184,150,46,.14)'" onmouseout="this.style.background='rgba(184,150,46,.08)'">
         <svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="#D4AE4A" stroke-width="1.5" style="margin-bottom:7px;display:block"><path d="M8 2v12M2 8h12"/><circle cx="8" cy="8" r="6"/></svg>
-        <div style="font-size:11px;color:var(--txt);font-weight:500">Nuevo reporte</div>
+        <div style="font-size:15px;color:var(--txt);font-weight:500">Nuevo reporte</div>
         <div style="font-size:8px;color:var(--txt3);margin-top:2px">Producción de hoy</div>
       </button>
       <button style="background:rgba(74,26,122,.1);border:1px solid rgba(74,26,122,.25);border-radius:9px;padding:14px;cursor:pointer;transition:.15s;text-align:left" onclick="goTo('metas',null)" onmouseover="this.style.background='rgba(74,26,122,.18)'" onmouseout="this.style.background='rgba(74,26,122,.1)'">
         <svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="#BB8FCE" stroke-width="1.5" style="margin-bottom:7px;display:block"><circle cx="8" cy="8" r="6"/><circle cx="8" cy="8" r="3"/></svg>
-        <div style="font-size:11px;color:var(--txt);font-weight:500">Metas del día</div>
+        <div style="font-size:15px;color:var(--txt);font-weight:500">Metas del día</div>
         <div style="font-size:8px;color:var(--txt3);margin-top:2px">Ver progreso</div>
       </button>
       <button style="background:rgba(26,74,122,.1);border:1px solid rgba(26,74,122,.25);border-radius:9px;padding:14px;cursor:pointer;transition:.15s;text-align:left" onclick="goTo('ranking',null)" onmouseover="this.style.background='rgba(26,74,122,.18)'" onmouseout="this.style.background='rgba(26,74,122,.1)'">
         <svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="#74B3E8" stroke-width="1.5" style="margin-bottom:7px;display:block"><path d="M8 2l1.8 3.6L14 6.3l-3 2.9.7 4.1L8 11.4l-3.7 1.9.7-4.1-3-2.9 4.2-.7z"/></svg>
-        <div style="font-size:11px;color:var(--txt);font-weight:500">Ranking</div>
+        <div style="font-size:15px;color:var(--txt);font-weight:500">Ranking</div>
         <div style="font-size:8px;color:var(--txt3);margin-top:2px">Eficiencia operarios</div>
       </button>
       <button style="background:rgba(26,110,58,.1);border:1px solid rgba(26,110,58,.25);border-radius:9px;padding:14px;cursor:pointer;transition:.15s;text-align:left" onclick="goTo('inventario',null)" onmouseover="this.style.background='rgba(26,110,58,.18)'" onmouseout="this.style.background='rgba(26,110,58,.1)'">
         <svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="#5DBF8A" stroke-width="1.5" style="margin-bottom:7px;display:block"><path d="M2 4l6-2 6 2v8l-6 2-6-2V4z"/></svg>
-        <div style="font-size:11px;color:var(--txt);font-weight:500">Inventario</div>
+        <div style="font-size:15px;color:var(--txt);font-weight:500">Inventario</div>
         <div style="font-size:8px;color:var(--txt3);margin-top:2px">Stock de tabaco</div>
       </button>
     </div>
@@ -826,7 +826,7 @@ input,select,textarea,button{font-family:'Montserrat',sans-serif}
         <div class="global-meta-ttl">Meta global de producción</div>
         <div class="global-meta-date" id="metaGlobalFecha">—</div>
       </div>
-      <div id="metaGlobalStatus" style="font-size:12px;font-weight:600;color:#5DBF8A"></div>
+      <div id="metaGlobalStatus" style="font-size:14px;font-weight:600;color:#5DBF8A"></div>
     </div>
     <div class="global-meta-stats">
       <div class="gms"><div class="gms-v" id="mg-logrado" style="color:var(--gold3);font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:600">0</div><div class="gms-l">Cigarros logrados</div></div>
@@ -842,7 +842,7 @@ input,select,textarea,button{font-family:'Montserrat',sans-serif}
   <!-- PAREJAS METAS -->
   <div id="metasParejas"></div>
 
-  <div id="metasEmpty" style="text-align:center;padding:40px 0;color:var(--txt3);font-size:12px;display:none">
+  <div id="metasEmpty" style="text-align:center;padding:40px 0;color:var(--txt3);font-size:14px;display:none">
     No hay reporte activo para hoy.<br>
     <span style="color:var(--gold2);cursor:pointer" onclick="goTo('produccion',null)">Abrir reporte diario →</span>
   </div>
@@ -884,7 +884,7 @@ input,select,textarea,button{font-family:'Montserrat',sans-serif}
     <div class="chart-wrap tall"><canvas id="chartOpProd"></canvas></div>
   </div>
 
-  <div id="rankingEmpty" style="text-align:center;padding:40px 0;color:var(--txt3);font-size:12px;display:none">
+  <div id="rankingEmpty" style="text-align:center;padding:40px 0;color:var(--txt3);font-size:14px;display:none">
     Guarda reportes de producción para ver el ranking.<br>
     <span style="color:var(--gold2);cursor:pointer" onclick="goTo('produccion',null)">Crear primer reporte →</span>
   </div>
@@ -908,7 +908,7 @@ input,select,textarea,button{font-family:'Montserrat',sans-serif}
           <option value="">Sin referencia</option>
         </select></div>
     </div>
-    <div class="add-form-ttl" style="font-size:13px;margin-bottom:12px">Meta por pareja individual</div>
+    <div class="add-form-ttl" style="font-size:15px;margin-bottom:12px">Meta por pareja individual</div>
     <div class="meta-pareja-config" id="metaConfig"></div>
   </div>
 
@@ -972,7 +972,7 @@ input,select,textarea,button{font-family:'Montserrat',sans-serif}
   </div>
   <div class="g2"><div class="card"><div class="card-ttl">Producción histórica</div><div class="chart-wrap tall"><canvas id="chartHist"></canvas></div></div>
   <div class="card"><div class="card-ttl">Eficiencia por supervisor</div><div class="chart-wrap"><canvas id="chartSup"></canvas></div></div></div>
-  <div id="statsEmpty2" style="text-align:center;padding:40px 0;color:var(--txt3);font-size:12px;display:none">Sin datos aún. <span style="color:var(--gold2);cursor:pointer" onclick="goTo('produccion',null)">Crear reporte →</span></div>
+  <div id="statsEmpty2" style="text-align:center;padding:40px 0;color:var(--txt3);font-size:14px;display:none">Sin datos aún. <span style="color:var(--gold2);cursor:pointer" onclick="goTo('produccion',null)">Crear reporte →</span></div>
 </div>
 
 <!-- HISTORIAL -->
@@ -1009,7 +1009,7 @@ input,select,textarea,button{font-family:'Montserrat',sans-serif}
     <button class="btn-p" onclick="openPedForm()">+ Nuevo pedido</button>
   </div>
   <div id="pedList"></div>
-  <div id="pedEmpty" style="text-align:center;padding:40px 0;color:var(--txt3);font-size:12px">Sin pedidos. <span style="color:var(--gold2);cursor:pointer" onclick="openPedForm()">Agregar →</span></div>
+  <div id="pedEmpty" style="text-align:center;padding:40px 0;color:var(--txt3);font-size:14px">Sin pedidos. <span style="color:var(--gold2);cursor:pointer" onclick="openPedForm()">Agregar →</span></div>
 </div>
 
 
@@ -1030,8 +1030,8 @@ input,select,textarea,button{font-family:'Montserrat',sans-serif}
       <div style="margin-top:12px;padding-top:10px;border-top:1px solid rgba(32,96,160,.2)">
         <div style="font-size:8px;letter-spacing:.14em;text-transform:uppercase;color:#E8C050;font-weight:600;margin-bottom:7px">⭐ Tabaco completivo</div>
         <div style="display:grid;grid-template-columns:1.5fr 1fr;gap:8px">
-          <div class="fld"><label>Variedad completiva</label><select id="bl-comp-tab" style="background:var(--bg3);border:1px solid rgba(200,150,14,.3);color:var(--txt);border-radius:7px;padding:9px 10px;font-size:11px;width:100%;-webkit-appearance:none;outline:none"><option value="">— Sin completivo —</option></select></div>
-          <div class="fld"><label>Cant. máx. a agregar</label><select id="bl-comp-cant" style="background:var(--bg3);border:1px solid rgba(200,150,14,.3);color:var(--txt);border-radius:7px;padding:9px 10px;font-size:11px;width:100%;-webkit-appearance:none;outline:none"><option value="1/4">¼ de hoja</option><option value="1/2">½ hoja</option><option value="3/4">¾ de hoja</option><option value="1" selected>1 hoja entera</option><option value="1+1/2">1 y ½ hojas</option><option value="2">2 hojas</option></select></div>
+          <div class="fld"><label>Variedad completiva</label><select id="bl-comp-tab" style="background:var(--bg3);border:1px solid rgba(200,150,14,.3);color:var(--txt);border-radius:7px;padding:11px 12px;font-size:15px;width:100%;-webkit-appearance:none;outline:none"><option value="">— Sin completivo —</option></select></div>
+          <div class="fld"><label>Cant. máx. a agregar</label><select id="bl-comp-cant" style="background:var(--bg3);border:1px solid rgba(200,150,14,.3);color:var(--txt);border-radius:7px;padding:11px 12px;font-size:15px;width:100%;-webkit-appearance:none;outline:none"><option value="1/4">¼ de hoja</option><option value="1/2">½ hoja</option><option value="3/4">¾ de hoja</option><option value="1" selected>1 hoja entera</option><option value="1+1/2">1 y ½ hojas</option><option value="2">2 hojas</option></select></div>
         </div>
         <div style="font-size:9px;color:var(--txt3);margin-top:6px;font-style:italic">El tabaco completivo se usa para completar el peso cuando falta otro tabaco en la liga</div>
       </div>
@@ -1064,7 +1064,7 @@ input,select,textarea,button{font-family:'Montserrat',sans-serif}
   </div>
   <div style="display:flex;gap:7px;margin-bottom:14px;flex-wrap:wrap" id="blFiltros"></div>
   <div id="blendsList"></div>
-  <div id="blendsEmpty" style="text-align:center;padding:40px 0;color:var(--txt3);font-size:12px">Sin blends. <span style="color:var(--gold2);cursor:pointer" onclick="openBlendForm()">Registrar primer blend →</span></div>
+  <div id="blendsEmpty" style="text-align:center;padding:40px 0;color:var(--txt3);font-size:14px">Sin blends. <span style="color:var(--gold2);cursor:pointer" onclick="openBlendForm()">Registrar primer blend →</span></div>
 </div>
 
 <div class="screen" id="s-historial">
@@ -1079,10 +1079,10 @@ input,select,textarea,button{font-family:'Montserrat',sans-serif}
     <button onclick="setHistVista('mensual')" id="hv-mensual" class="hv-btn">Mensual</button>
     <button onclick="setHistVista('global')" id="hv-global" class="hv-btn">Global</button>
     <div style="flex:1"></div>
-    <select id="hist-filtro-op" onchange="renderHistorial()" style="background:var(--bg2);border:1px solid rgba(255,255,255,.12);color:var(--txt);border-radius:7px;padding:6px 10px;font-size:10px;outline:none;-webkit-appearance:none">
+    <select id="hist-filtro-op" onchange="renderHistorial()" style="background:var(--bg3);border:1px solid rgba(255,255,255,.12);color:var(--txt);border-radius:7px;padding:6px 10px;font-size:10px;outline:none;-webkit-appearance:none">
       <option value="">Todos los supervisores</option>
     </select>
-    <select id="hist-filtro-mes" onchange="renderHistorial()" style="background:var(--bg2);border:1px solid rgba(255,255,255,.12);color:var(--txt);border-radius:7px;padding:6px 10px;font-size:10px;outline:none;-webkit-appearance:none">
+    <select id="hist-filtro-mes" onchange="renderHistorial()" style="background:var(--bg3);border:1px solid rgba(255,255,255,.12);color:var(--txt);border-radius:7px;padding:6px 10px;font-size:10px;outline:none;-webkit-appearance:none">
       <option value="">Todos los meses</option>
     </select>
   </div>
@@ -1121,13 +1121,13 @@ input,select,textarea,button{font-family:'Montserrat',sans-serif}
   <!-- TASAS DE PAGO -->
   <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:16px">
     <!-- Por cigarro -->
-    <div style="background:var(--bg2);border:1px solid rgba(255,255,255,.09);border-radius:12px;padding:15px">
+    <div style="background:var(--bg3);border:1px solid rgba(255,255,255,.09);border-radius:12px;padding:15px">
       <div style="font-size:8px;letter-spacing:.14em;text-transform:uppercase;color:#74B3E8;font-weight:600;margin-bottom:10px">💰 Pago por cigarro (semanal)</div>
       <div id="nomCigarroList"></div>
       <button onclick="addNomTasa('cigarro')" style="margin-top:8px;background:transparent;border:1px solid rgba(32,96,160,.3);color:#74B3E8;cursor:pointer;padding:5px 12px;border-radius:6px;font-size:8px;font-family:Montserrat,sans-serif;font-weight:500;letter-spacing:.1em;text-transform:uppercase">+ Operario</button>
     </div>
     <!-- Por la casa -->
-    <div style="background:var(--bg2);border:1px solid rgba(255,255,255,.09);border-radius:12px;padding:15px">
+    <div style="background:var(--bg3);border:1px solid rgba(255,255,255,.09);border-radius:12px;padding:15px">
       <div style="font-size:8px;letter-spacing:.14em;text-transform:uppercase;color:#5DBFA0;font-weight:600;margin-bottom:10px">🏠 Pago por la casa (quincenal)</div>
       <div id="nomCasaList"></div>
       <button onclick="addNomTasa('casa')" style="margin-top:8px;background:transparent;border:1px solid rgba(30,128,68,.3);color:#5DBFA0;cursor:pointer;padding:5px 12px;border-radius:6px;font-size:8px;font-family:Montserrat,sans-serif;font-weight:500;letter-spacing:.1em;text-transform:uppercase">+ Operario</button>
@@ -1137,11 +1137,11 @@ input,select,textarea,button{font-family:'Montserrat',sans-serif}
   <!-- SELECTOR DE PERIODO -->
   <div style="display:flex;gap:8px;align-items:center;margin-bottom:14px;flex-wrap:wrap">
     <div style="font-size:8px;letter-spacing:.13em;text-transform:uppercase;color:var(--txt3);font-weight:500">Período:</div>
-    <select id="nom-periodo" onchange="calcNominas()" style="background:var(--bg2);border:1px solid rgba(255,255,255,.12);color:var(--txt);border-radius:7px;padding:6px 10px;font-size:10px;outline:none;-webkit-appearance:none">
+    <select id="nom-periodo" onchange="calcNominas()" style="background:var(--bg3);border:1px solid rgba(255,255,255,.12);color:var(--txt);border-radius:7px;padding:6px 10px;font-size:10px;outline:none;-webkit-appearance:none">
       <option value="semanal">Semanal (empuñeros)</option>
       <option value="quincenal">Quincenal (por la casa)</option>
     </select>
-    <select id="nom-semana" onchange="calcNominas()" style="background:var(--bg2);border:1px solid rgba(255,255,255,.12);color:var(--txt);border-radius:7px;padding:6px 10px;font-size:10px;outline:none;-webkit-appearance:none">
+    <select id="nom-semana" onchange="calcNominas()" style="background:var(--bg3);border:1px solid rgba(255,255,255,.12);color:var(--txt);border-radius:7px;padding:6px 10px;font-size:10px;outline:none;-webkit-appearance:none">
       <option value="">Seleccionar semana</option>
     </select>
     <button onclick="calcNominas()" style="background:rgba(184,150,46,.15);border:1px solid rgba(184,150,46,.35);color:var(--gold2);cursor:pointer;padding:6px 14px;border-radius:7px;font-size:9px;font-family:Montserrat,sans-serif;font-weight:500;letter-spacing:.1em;text-transform:uppercase">Calcular</button>
@@ -1167,10 +1167,10 @@ input,select,textarea,button{font-family:'Montserrat',sans-serif}
     <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.09);border-radius:9px;padding:11px;margin-bottom:10px">
       <div style="font-size:8px;letter-spacing:.13em;text-transform:uppercase;color:var(--txt3);margin-bottom:8px;font-weight:500">También puede trabajar como:</div>
       <div style="display:flex;gap:16px;flex-wrap:wrap">
-        <label style="display:flex;align-items:center;gap:6px;cursor:pointer;font-size:11px;color:var(--txt2)"><input type="checkbox" class="op-rol-check" value="empunero" style="accent-color:#C9A84C"/> Empuñero/a</label>
-        <label style="display:flex;align-items:center;gap:6px;cursor:pointer;font-size:11px;color:var(--txt2)"><input type="checkbox" class="op-rol-check" value="pegador" style="accent-color:#C9A84C"/> Pegador/a</label>
-        <label style="display:flex;align-items:center;gap:6px;cursor:pointer;font-size:11px;color:var(--txt2)"><input type="checkbox" class="op-rol-check" value="recapador" style="accent-color:#C9A84C"/> Recapador/a</label>
-        <label style="display:flex;align-items:center;gap=6px;cursor:pointer;font-size:11px;color:var(--txt2)"><input type="checkbox" class="op-rol-check" value="bonchero" style="accent-color:#C9A84C"/> Bonchero/a</label>
+        <label style="display:flex;align-items:center;gap:6px;cursor:pointer;font-size:15px;color:var(--txt2)"><input type="checkbox" class="op-rol-check" value="empunero" style="accent-color:#C9A84C"/> Empuñero/a</label>
+        <label style="display:flex;align-items:center;gap:6px;cursor:pointer;font-size:15px;color:var(--txt2)"><input type="checkbox" class="op-rol-check" value="pegador" style="accent-color:#C9A84C"/> Pegador/a</label>
+        <label style="display:flex;align-items:center;gap:6px;cursor:pointer;font-size:15px;color:var(--txt2)"><input type="checkbox" class="op-rol-check" value="recapador" style="accent-color:#C9A84C"/> Recapador/a</label>
+        <label style="display:flex;align-items:center;gap=6px;cursor:pointer;font-size:15px;color:var(--txt2)"><input type="checkbox" class="op-rol-check" value="bonchero" style="accent-color:#C9A84C"/> Bonchero/a</label>
       </div>
     </div>
     <div style="display:flex;gap:8px"><button class="btn-p" onclick="addOp()">Guardar</button><button class="btn-s" onclick="document.getElementById('addOpForm').classList.remove('show')">Cancelar</button></div>
@@ -1230,7 +1230,7 @@ input,select,textarea,button{font-family:'Montserrat',sans-serif}
   <!-- SEARCH -->
   <div class="inv-search-result card" id="invSearchResult" style="display:none">
     <div style="font-family:'Cormorant Garamond',serif;font-size:15px;color:var(--gold2);margin-bottom:8px" id="isrTitle">—</div>
-    <div style="font-size:12px;color:var(--txt2);margin-bottom:10px" id="isrTotal">—</div>
+    <div style="font-size:14px;color:var(--txt2);margin-bottom:10px" id="isrTotal">—</div>
     <div id="isrRows"></div>
   </div>
   <!-- FILTERS -->
@@ -1319,7 +1319,7 @@ input,select,textarea,button{font-family:'Montserrat',sans-serif}
   <div class="adj-box">
     <div class="adj-ttl" id="adjTitle">Ajustar stock</div>
     <div class="adj-sub" id="adjSub">—</div>
-    <div class="adj-curr"><div><div class="adj-curr-lbl">Stock actual</div><div class="adj-curr-val" id="adjCurr">0.00 lb</div></div><div><div class="adj-curr-lbl">Caja/Paca</div><div style="font-size:13px;color:var(--txt2);font-weight:500" id="adjBoxLbl">—</div></div></div>
+    <div class="adj-curr"><div><div class="adj-curr-lbl">Stock actual</div><div class="adj-curr-val" id="adjCurr">0.00 lb</div></div><div><div class="adj-curr-lbl">Caja/Paca</div><div style="font-size:15px;color:var(--txt2);font-weight:500" id="adjBoxLbl">—</div></div></div>
     <div class="fld" style="margin-bottom:10px"><label>Ajuste en libras (+ agregar / − restar)</label><input type="number" id="adjAmt" placeholder="Ej: 50 o -20" step="0.5"/></div>
     <div class="adj-presets">
       <button class="adj-pre" onclick="document.getElementById('adjAmt').value=25">+25</button>
@@ -1663,8 +1663,8 @@ function renderRanking(){
       <div class="eff-val">${s.avgEff}%</div>
       <div class="rank-eff-bar"><div class="rank-eff-fill" style="width:${s.avgEff}%;background:${s.avgEff>=85?'var(--grn)':s.avgEff>=70?'var(--amber)':'var(--red)'}"></div></div>
     </td>
-    <td style="color:#5DBF8A;font-weight:500;font-size:13px">${s.buenos.toLocaleString()}</td>
-    <td style="color:var(--txt3);font-size:11px">${s.reportes}</td>
+    <td style="color:#5DBF8A;font-weight:500;font-size:15px">${s.buenos.toLocaleString()}</td>
+    <td style="color:var(--txt3);font-size:15px">${s.reportes}</td>
   </tr>`).join('');
 
   // Gráfica eficiencia
@@ -1695,20 +1695,20 @@ function renderRanking(){
     <div style="display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid rgba(255,255,255,.04)">
       <span style="font-size:16px">${medals[idx]||idx+1}</span>
       <div style="width:30px;height:30px;border-radius:50%;background:${s.col};display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:600;color:#fff;flex-shrink:0">${s.ini}</div>
-      <div style="flex:1"><div style="font-size:11px;color:var(--txt);font-weight:500">${s.n}</div><div style="font-size:8px;color:var(--txt3);margin-top:1px">${s.buenos} buenos · ${s.avgEff}% eficiencia</div></div>
+      <div style="flex:1"><div style="font-size:15px;color:var(--txt);font-weight:500">${s.n}</div><div style="font-size:8px;color:var(--txt3);margin-top:1px">${s.buenos} buenos · ${s.avgEff}% eficiencia</div></div>
       <span style="font-size:10px;font-weight:600;color:${s.avgEff>=85?'#5DBF8A':s.avgEff>=70?'#E8A840':'#E57373'}">${s.avgEff}%</span>
-    </div>`).join('')||'<div style="text-align:center;padding:16px 0;color:var(--txt3);font-size:11px">Sin datos aún</div>';
+    </div>`).join('')||'<div style="text-align:center;padding:16px 0;color:var(--txt3);font-size:15px">Sin datos aún</div>';
 }
 
 // ══════════════════════════════════════════════════════════════
 // DATOS DE PRODUCCIÓN
 // ══════════════════════════════════════════════════════════════
-let MARCAS=[{id:1,nombre:'Esencia Cigars',desc:'Línea principal premium',color:'#B8962E'},{id:2,nombre:'Esencia Dominicana',desc:'Línea artesanal dominicana',color:'#8B6914'}];
-let vitolas=[{n:'Robusto',r:'50',l:'5"',m:'Esencia Cigars'},{n:'Toro',r:'52',l:'6"',m:'Esencia Cigars'},{n:'Toro Grande',r:'54',l:'6"',m:'Esencia Cigars'},{n:'Magnum',r:'60',l:'6"',m:'Esencia Dominicana'},{n:'Churchill',r:'48',l:'7"',m:'Esencia Cigars'},{n:'Corona',r:'42',l:'5¾"',m:'Esencia Dominicana'},{n:'Torpedo',r:'52',l:'6.25"',m:'Esencia Cigars'},{n:'Salomón',r:'57',l:'7.5"',m:'Esencia Cigars'},{n:'Pico de Pato',r:'64',l:'6"',m:'Esencia Dominicana'},{n:'Figurado',r:'52',l:'6"',m:'Ambas'},{n:'Belicoso',r:'52',l:'5½"',m:'Ambas'}];
+let MARCAS=[{id:1,nombre:'Esencia',desc:'Marca principal de la casa',color:'#B8962E'},{id:2,nombre:'Hierba Santa',desc:'Marca de la casa',color:'#2E6A3E'}];
+let vitolas=[{n:'Robusto',r:'50',l:'5"',m:'Esencia'},{n:'Toro',r:'52',l:'6"',m:'Esencia'},{n:'Toro Grande',r:'54',l:'6"',m:'Esencia'},{n:'Magnum',r:'60',l:'6"',m:'Esencia'},{n:'Churchill',r:'48',l:'7"',m:'Esencia'},{n:'Corona',r:'42',l:'5¾"',m:'Esencia'},{n:'Torpedo',r:'52',l:'6.25"',m:'Esencia'},{n:'Salomón',r:'57',l:'7.5"',m:'Esencia'},{n:'Pico de Pato',r:'64',l:'6"',m:'Esencia'},{n:'Figurado',r:'52',l:'6"',m:'Ambas'},{n:'Belicoso',r:'52',l:'5½"',m:'Ambas'}];
 let OPS=[{id:1,n:'Marleny',ini:'MA',tipo:'e',col:'#5A2E6A',pareja:1},{id:2,n:'Maria',ini:'MR',tipo:'e',col:'#6A2E2E',pareja:2},{id:3,n:'Iris',ini:'IR',tipo:'p',col:'#1A5A4A',pareja:1},{id:4,n:'Pegadora 2',ini:'P2',tipo:'p',col:'#1A3A6A',pareja:2}];
-const TRIPAS=['Criollo 98','San Vicente','Olor Dominicano','Penn Sylvenia','Piloto Cubano','Broadleaf','Habano 2000','Corojo Original','Corojo 99','Nicaragua'];
+const TRIPAS=['Criollo 98','San Vicente','Olor Dominicano','Pennsylvania','Piloto Cubano','Broadleaf','Habano 2000','Corojo Original','Corojo 99','Nicaragua Jalapa','Sumatra','Boriken','Connecticut','San Andres','Habano Nicaragua','Habano Ligero'];
 const CAPOTES=['Criollo 98','Sumatra','Olor Dominicano','Habano','Corojo','San Vicente'];
-const CAPAS=['Habano 2000','Habano Maduro','San Andrés','Arapiraca','Camerún Ecuador','Penn Sylvenia','Camerún Camerún'];
+const CAPAS=['Habano 2000','Habano Maduro','San Andrés','Arapiraca','Camerún Ecuador','Pennsylvania','Camerún Camerún'];
 const TIPOS=['Seco','Viso','Ligero'];
 const RINGS=['38','42','44','46','48','50','52','54','56','58','60'];
 const AV_COLS=['#5A2E6A','#6A2E2E','#1A5A4A','#1A3A6A','#5A4A1A','#2E5A2E','#6A3A1A','#1A4A5A','#4A1A5A','#3A5A1A'];
@@ -1724,9 +1724,9 @@ const getTodayStr=()=>{const h=new Date();return `${h.getFullYear()}-${String(h.
 // INVENTARIO (datos reales)
 // ══════════════════════════════════════════════════════════════
 let INV=[
-  {id:1,box:'107',name:'Criollo 98',cat:'Tripa',tipo:'Ligero',lb:31,minLb:15,grade:'NO QUEMA BUENO',origin:''},{id:2,box:'108',name:'Criollo 98',cat:'Tripa',tipo:'Ligero',lb:84,minLb:15,grade:'NO QUEMA BUENO',origin:''},{id:3,box:'109',name:'Criollo 98',cat:'Tripa',tipo:'Ligero',lb:60,minLb:15,grade:'NO QUEMA XXX',origin:''},{id:4,box:'111',name:'Criollo 98',cat:'Tripa',tipo:'Ligero',lb:85,minLb:15,grade:'NO QUEMA XXX',origin:''},{id:5,box:'113',name:'Criollo 98',cat:'Tripa',tipo:'Ligero',lb:84,minLb:15,grade:'NO QUEMA BUENO',origin:''},{id:6,box:'114',name:'Criollo 98',cat:'Tripa',tipo:'Ligero',lb:85,minLb:15,grade:'NO QUEMA BUENO',origin:''},{id:7,box:'115',name:'Criollo 98',cat:'Tripa',tipo:'Ligero',lb:51,minLb:15,grade:'NO QUEMA XXX',origin:''},{id:8,box:'116',name:'Criollo 98',cat:'Tripa',tipo:'Ligero',lb:85,minLb:15,grade:'NO QUEMA XXX',origin:''},{id:9,box:'129',name:'Cubano 17',cat:'Tripa',tipo:'Ligero',lb:81,minLb:15,grade:'AAA BUENO',origin:'Cuba'},{id:10,box:'130',name:'Cubano 17',cat:'Tripa',tipo:'Ligero',lb:27,minLb:15,grade:'AAA BUENO',origin:'Cuba'},{id:11,box:'102',name:'Olor',cat:'Tripa',tipo:'Ligero',lb:70,minLb:20,grade:'NO QUEMA BUENO',origin:''},{id:12,box:'103',name:'Olor',cat:'Tripa',tipo:'Ligero',lb:60,minLb:20,grade:'BUENO',origin:''},{id:13,box:'104',name:'Olor San Victor',cat:'Tripa',tipo:'Ligero',lb:75,minLb:20,grade:'',origin:''},{id:14,box:'117',name:'Olor',cat:'Tripa',tipo:'—',lb:21,minLb:10,grade:'',origin:''},{id:15,box:'124',name:'Olor Slip',cat:'Tripa',tipo:'Ligero',lb:25,minLb:10,grade:'BUENO',origin:''},{id:16,box:'131',name:'Olor Slip',cat:'Tripa',tipo:'Ligero',lb:35,minLb:10,grade:'BUENO',origin:''},{id:17,box:'133',name:'Olor Dom',cat:'Tripa',tipo:'Ligero',lb:64,minLb:20,grade:'NO QUEMA BUENO',origin:'Dom.'},{id:18,box:'134',name:'Olor Dom',cat:'Tripa',tipo:'Ligero',lb:61,minLb:20,grade:'BUENO',origin:'Dom.'},{id:19,box:'137',name:'Olor Sup',cat:'Tripa',tipo:'Ligero',lb:33,minLb:10,grade:'BUENO',origin:''},{id:20,box:'138',name:'Olor Slip',cat:'Tripa',tipo:'Ligero',lb:41,minLb:10,grade:'BUENO',origin:''},{id:21,box:'139',name:'Olor Slip',cat:'Tripa',tipo:'Ligero',lb:40,minLb:10,grade:'BUENO',origin:''},{id:22,box:'140',name:'Olor Slip',cat:'Tripa',tipo:'Ligero',lb:15,minLb:10,grade:'BUENO',origin:''},{id:23,box:'141',name:'Olor Sup',cat:'Tripa',tipo:'Seco',lb:40,minLb:10,grade:'BUENO',origin:''},{id:24,box:'142',name:'Olor Inf',cat:'Tripa',tipo:'—',lb:34,minLb:10,grade:'Seco BB',origin:''},{id:25,box:'143',name:'Tripa Refuerso',cat:'Tripa',tipo:'—',lb:42,minLb:10,grade:'',origin:''},{id:26,box:'144',name:'Piloto Ligero',cat:'Tripa',tipo:'Ligero',lb:35,minLb:15,grade:'Rand',origin:''},{id:27,box:'145',name:'San Vicente',cat:'Tripa',tipo:'Seco',lb:97,minLb:20,grade:'Rand',origin:''},{id:28,box:'146',name:'Hva Ligero',cat:'Tripa',tipo:'Ligero',lb:37,minLb:10,grade:'Rand',origin:''},{id:29,box:'144B',name:'Piloto Cubano',cat:'Tripa',tipo:'—',lb:0,minLb:10,grade:'',origin:''},{id:30,box:'147',name:'Piloto Cubano',cat:'Tripa',tipo:'—',lb:0,minLb:10,grade:'',origin:''},{id:31,box:'148',name:'Olor San Victor',cat:'Tripa',tipo:'—',lb:0,minLb:10,grade:'',origin:''},{id:32,box:'149',name:'Habano 2000',cat:'Tripa',tipo:'—',lb:0,minLb:10,grade:'',origin:''},{id:33,box:'150',name:'Olor',cat:'Tripa',tipo:'Seco',lb:0,minLb:10,grade:'',origin:''},{id:34,box:'155',name:'C98',cat:'Tripa',tipo:'—',lb:0,minLb:10,grade:'NO QUEMA',origin:''},{id:35,box:'156',name:'Muestra',cat:'Tripa',tipo:'—',lb:0,minLb:5,grade:'',origin:''},{id:36,box:'157',name:'San Vicente',cat:'Tripa',tipo:'—',lb:0,minLb:10,grade:'',origin:''},{id:37,box:'158',name:'Habano 2000',cat:'Tripa',tipo:'—',lb:0,minLb:10,grade:'',origin:''},{id:38,box:'159',name:'Olor',cat:'Tripa',tipo:'—',lb:0,minLb:10,grade:'',origin:''},{id:39,box:'160',name:'Muestra',cat:'Tripa',tipo:'—',lb:0,minLb:5,grade:'',origin:''},{id:40,box:'161',name:'HBA',cat:'Tripa',tipo:'—',lb:0,minLb:10,grade:'',origin:''},{id:41,box:'162',name:'Criollo 98',cat:'Tripa',tipo:'—',lb:0,minLb:10,grade:'BUENO',origin:''},{id:42,box:'Paca 210',name:'San Victor',cat:'Tripa',tipo:'—',lb:55,minLb:15,grade:'',origin:''},{id:43,box:'Paca 201',name:'Piloto Leo',cat:'Tripa',tipo:'—',lb:64,minLb:15,grade:'',origin:''},{id:44,box:'Paca 202',name:'Pennsylvania',cat:'Tripa',tipo:'—',lb:118,minLb:20,grade:'Fuerte',origin:''},{id:45,box:'Paca 203',name:'Piloto Leo',cat:'Tripa',tipo:'—',lb:59,minLb:15,grade:'',origin:''},{id:46,box:'Paca 204',name:'C98',cat:'Tripa',tipo:'—',lb:114,minLb:20,grade:'',origin:''},{id:47,box:'Paca 206',name:'C98',cat:'Tripa',tipo:'—',lb:81,minLb:15,grade:'',origin:''},{id:48,box:'Paca 207',name:'C98',cat:'Tripa',tipo:'—',lb:80,minLb:15,grade:'',origin:''},{id:49,box:'Paca 208',name:'C98',cat:'Tripa',tipo:'—',lb:107,minLb:20,grade:'',origin:''},{id:50,box:'Paca 209',name:'C98',cat:'Tripa',tipo:'—',lb:87,minLb:15,grade:'',origin:''},
-  {id:51,box:'Caja 1',name:'Capote Habano',cat:'Capote',tipo:'—',lb:22,minLb:10,grade:'A',origin:''},{id:52,box:'Caja 2',name:'Habano Nicaragua',cat:'Capote',tipo:'—',lb:46,minLb:10,grade:'A',origin:'Nicaragua'},{id:53,box:'Caja 3',name:'SA',cat:'Capote',tipo:'—',lb:46,minLb:10,grade:'A',origin:'San Andrés'},{id:54,box:'Caja 4',name:'SA',cat:'Capote',tipo:'—',lb:34,minLb:10,grade:'A',origin:'San Andrés'},{id:55,box:'Caja 5',name:'Indonesia',cat:'Capote',tipo:'—',lb:104,minLb:20,grade:'A+',origin:'Indonesia'},{id:56,box:'Caja 6',name:'Indonesia',cat:'Capote',tipo:'—',lb:54,minLb:10,grade:'A+',origin:'Indonesia'},{id:57,box:'Caja 7',name:'Indonesia',cat:'Capote',tipo:'—',lb:65,minLb:10,grade:'A+',origin:'Indonesia'},{id:58,box:'Caja 8',name:'Indonesia',cat:'Capote',tipo:'—',lb:99,minLb:20,grade:'A+',origin:'Indonesia'},{id:59,box:'Caja 9',name:'Olor',cat:'Capote',tipo:'—',lb:15,minLb:8,grade:'A+',origin:''},{id:60,box:'Caja 10',name:'Indonesia',cat:'Capote',tipo:'—',lb:85,minLb:20,grade:'A+',origin:'Indonesia'},{id:61,box:'Caja 11',name:'Olor',cat:'Capote',tipo:'—',lb:0,minLb:8,grade:'B',origin:''},{id:62,box:'Caja 12',name:'SA',cat:'Capote',tipo:'—',lb:16,minLb:8,grade:'A',origin:'San Andrés'},{id:63,box:'Caja 14',name:'SA',cat:'Capote',tipo:'—',lb:0,minLb:8,grade:'B',origin:'San Andrés'},{id:64,box:'Caja 16',name:'Olor Dom',cat:'Capote',tipo:'—',lb:0,minLb:8,grade:'A',origin:'Dom.'},{id:65,box:'Caja 17',name:'Olor Dom',cat:'Capote',tipo:'—',lb:0,minLb:8,grade:'A',origin:'Dom.'},{id:66,box:'Caja 18',name:'Havano',cat:'Capote',tipo:'—',lb:0,minLb:8,grade:'A',origin:''},
-  {id:67,box:'Caja 1',name:'Capa Habano Troja',cat:'Capa',tipo:'—',lb:61,minLb:15,grade:'Chek',origin:''},{id:68,box:'Caja 2',name:'Capa Habano Troja',cat:'Capa',tipo:'—',lb:34.4,minLb:15,grade:'Chek',origin:''},{id:69,box:'Caja 3',name:'Capa Habano Troja',cat:'Capa',tipo:'—',lb:20.7,minLb:10,grade:'Chek',origin:''},{id:70,box:'Caja 4',name:'Capa Habano Oscura',cat:'Capa',tipo:'—',lb:38.3,minLb:10,grade:'Troja',origin:''},{id:71,box:'Caja 5',name:'Capa Habano Oscura',cat:'Capa',tipo:'—',lb:69.2,minLb:15,grade:'Troja',origin:''},{id:72,box:'Caja 6',name:'Capa Habano Oscura',cat:'Capa',tipo:'—',lb:57.1,minLb:15,grade:'Troja',origin:''},{id:73,box:'Caja 7',name:'Capa Habano Claro',cat:'Capa',tipo:'—',lb:63.4,minLb:15,grade:'Troja',origin:''},{id:74,box:'Caja 8',name:'Capa Habano Oscura',cat:'Capa',tipo:'—',lb:78.1,minLb:15,grade:'Troja',origin:''},{id:75,box:'Caja 9',name:'Capa Grande Oscura Planchada',cat:'Capa',tipo:'—',lb:47,minLb:10,grade:'Hva',origin:''},{id:76,box:'Caja 10',name:'Capa Habano Oscura',cat:'Capa',tipo:'—',lb:68.4,minLb:15,grade:'Troja',origin:''},{id:77,box:'Caja 11',name:'Banda Hva Capa',cat:'Capa',tipo:'—',lb:49.2,minLb:10,grade:'',origin:''},{id:78,box:'Caja 12',name:'Capa Banda Hva',cat:'Capa',tipo:'—',lb:33,minLb:10,grade:'',origin:''},{id:79,box:'Caja 13',name:'Capa Habano Oscura La Confianza',cat:'Capa',tipo:'—',lb:73,minLb:15,grade:'',origin:''},{id:80,box:'Caja 14',name:'Capa Habano Oscura La Confianza',cat:'Capa',tipo:'—',lb:57,minLb:15,grade:'',origin:''},{id:81,box:'Caja 15',name:'Capa Habano Claro La Confianza',cat:'Capa',tipo:'—',lb:50,minLb:10,grade:'',origin:''},{id:82,box:'Caja 16',name:'Capa Habano Moi',cat:'Capa',tipo:'—',lb:63.6,minLb:10,grade:'',origin:''},{id:83,box:'Caja 17',name:'Capa Habano Moi',cat:'Capa',tipo:'—',lb:80,minLb:15,grade:'',origin:''},{id:84,box:'Caja 18',name:'Capa Habano Moi',cat:'Capa',tipo:'—',lb:80,minLb:15,grade:'',origin:''},{id:85,box:'Caja 19',name:'Capa Habano Moi',cat:'Capa',tipo:'—',lb:80,minLb:15,grade:'',origin:''},{id:86,box:'Caja 20',name:'Hva Nicaragua Esteli Lenin',cat:'Capa',tipo:'—',lb:66.5,minLb:15,grade:'',origin:'Nicaragua'},{id:87,box:'Caja 23',name:'Hva Nicaragua Esteli Lenin',cat:'Capa',tipo:'—',lb:32.1,minLb:10,grade:'',origin:'Nicaragua'},{id:88,box:'Caja 24',name:'Capa Verde Nicaragua',cat:'Capa',tipo:'—',lb:73,minLb:15,grade:'',origin:'Nicaragua'},{id:89,box:'Caja 25',name:'Capa Verde Nicaragua',cat:'Capa',tipo:'—',lb:71,minLb:15,grade:'',origin:'Nicaragua'},{id:90,box:'Caja 26',name:'Capa Nicaragua Rojo',cat:'Capa',tipo:'—',lb:47,minLb:10,grade:'',origin:'Nicaragua'},{id:91,box:'Caja 27',name:'Capa Connecticut',cat:'Capa',tipo:'—',lb:65,minLb:15,grade:'',origin:'Connecticut'},{id:92,box:'Caja 28',name:'Capa Pennsylvania',cat:'Capa',tipo:'—',lb:24,minLb:10,grade:'',origin:'Pennsylvania'},{id:93,box:'Caja 29',name:'Capa Mexico San Andres',cat:'Capa',tipo:'—',lb:82,minLb:15,grade:'MSO',origin:'México'},{id:94,box:'Caja 30',name:'Capa Mexico San Andres',cat:'Capa',tipo:'—',lb:52,minLb:10,grade:'MSO',origin:'México'},{id:95,box:'Caja 31',name:'Capa Antilla Habano Oscuro',cat:'Capa',tipo:'—',lb:99.8,minLb:15,grade:'',origin:''},
+  {id:1,box:'107',name:'Criollo 98',cat:'Tripa',tipo:'Ligero',lb:31,minLb:15,grade:'NO QUEMA BUENO',origin:''},{id:2,box:'108',name:'Criollo 98',cat:'Tripa',tipo:'Ligero',lb:84,minLb:15,grade:'NO QUEMA BUENO',origin:''},{id:3,box:'109',name:'Criollo 98',cat:'Tripa',tipo:'Ligero',lb:60,minLb:15,grade:'NO QUEMA XXX',origin:''},{id:4,box:'111',name:'Criollo 98',cat:'Tripa',tipo:'Ligero',lb:85,minLb:15,grade:'NO QUEMA XXX',origin:''},{id:5,box:'113',name:'Criollo 98',cat:'Tripa',tipo:'Ligero',lb:84,minLb:15,grade:'NO QUEMA BUENO',origin:''},{id:6,box:'114',name:'Criollo 98',cat:'Tripa',tipo:'Ligero',lb:85,minLb:15,grade:'NO QUEMA BUENO',origin:''},{id:7,box:'115',name:'Criollo 98',cat:'Tripa',tipo:'Ligero',lb:51,minLb:15,grade:'NO QUEMA XXX',origin:''},{id:8,box:'116',name:'Criollo 98',cat:'Tripa',tipo:'Ligero',lb:85,minLb:15,grade:'NO QUEMA XXX',origin:''},{id:9,box:'129',name:'Cubano 17',cat:'Tripa',tipo:'Ligero',lb:81,minLb:15,grade:'AAA BUENO',origin:'Cuba'},{id:10,box:'130',name:'Cubano 17',cat:'Tripa',tipo:'Ligero',lb:27,minLb:15,grade:'AAA BUENO',origin:'Cuba'},{id:11,box:'102',name:'Olor Dominicano',cat:'Tripa',tipo:'Ligero',lb:70,minLb:20,grade:'NO QUEMA BUENO',origin:''},{id:12,box:'103',name:'Olor Dominicano',cat:'Tripa',tipo:'Ligero',lb:60,minLb:20,grade:'BUENO',origin:''},{id:13,box:'104',name:'Olor San Victor',cat:'Tripa',tipo:'Ligero',lb:75,minLb:20,grade:'',origin:''},{id:14,box:'117',name:'Olor Dominicano',cat:'Tripa',tipo:'—',lb:21,minLb:10,grade:'',origin:''},{id:15,box:'124',name:'Olor Dominicano Slip',cat:'Tripa',tipo:'Ligero',lb:25,minLb:10,grade:'BUENO',origin:''},{id:16,box:'131',name:'Olor Dominicano Slip',cat:'Tripa',tipo:'Ligero',lb:35,minLb:10,grade:'BUENO',origin:''},{id:17,box:'133',name:'Olor Dominicano',cat:'Tripa',tipo:'Ligero',lb:64,minLb:20,grade:'NO QUEMA BUENO',origin:'Dom.'},{id:18,box:'134',name:'Olor Dominicano',cat:'Tripa',tipo:'Ligero',lb:61,minLb:20,grade:'BUENO',origin:'Dom.'},{id:19,box:'137',name:'Olor Dominicano Superior',cat:'Tripa',tipo:'Ligero',lb:33,minLb:10,grade:'BUENO',origin:''},{id:20,box:'138',name:'Olor Dominicano Slip',cat:'Tripa',tipo:'Ligero',lb:41,minLb:10,grade:'BUENO',origin:''},{id:21,box:'139',name:'Olor Dominicano Slip',cat:'Tripa',tipo:'Ligero',lb:40,minLb:10,grade:'BUENO',origin:''},{id:22,box:'140',name:'Olor Dominicano Slip',cat:'Tripa',tipo:'Ligero',lb:15,minLb:10,grade:'BUENO',origin:''},{id:23,box:'141',name:'Olor Dominicano Superior',cat:'Tripa',tipo:'Seco',lb:40,minLb:10,grade:'BUENO',origin:''},{id:24,box:'142',name:'Olor Dominicano Inferior',cat:'Tripa',tipo:'—',lb:34,minLb:10,grade:'Seco BB',origin:''},{id:25,box:'143',name:'Tripa Refuerso',cat:'Tripa',tipo:'—',lb:42,minLb:10,grade:'',origin:''},{id:26,box:'144',name:'Piloto Cubano Ligero',cat:'Tripa',tipo:'Ligero',lb:35,minLb:15,grade:'Rand',origin:''},{id:27,box:'145',name:'San Vicente',cat:'Tripa',tipo:'Seco',lb:97,minLb:20,grade:'Rand',origin:''},{id:28,box:'146',name:'Habano Ligero',cat:'Tripa',tipo:'Ligero',lb:37,minLb:10,grade:'Rand',origin:''},{id:29,box:'144B',name:'Piloto Cubano',cat:'Tripa',tipo:'—',lb:0,minLb:10,grade:'',origin:''},{id:30,box:'147',name:'Piloto Cubano',cat:'Tripa',tipo:'—',lb:0,minLb:10,grade:'',origin:''},{id:31,box:'148',name:'Olor San Victor',cat:'Tripa',tipo:'—',lb:0,minLb:10,grade:'',origin:''},{id:32,box:'149',name:'Habano 2000',cat:'Tripa',tipo:'—',lb:0,minLb:10,grade:'',origin:''},{id:33,box:'150',name:'Olor Dominicano',cat:'Tripa',tipo:'Seco',lb:0,minLb:10,grade:'',origin:''},{id:34,box:'155',name:'Criollo 98',cat:'Tripa',tipo:'—',lb:0,minLb:10,grade:'NO QUEMA',origin:''},{id:35,box:'156',name:'Muestra',cat:'Tripa',tipo:'—',lb:0,minLb:5,grade:'',origin:''},{id:36,box:'157',name:'San Vicente',cat:'Tripa',tipo:'—',lb:0,minLb:10,grade:'',origin:''},{id:37,box:'158',name:'Habano 2000',cat:'Tripa',tipo:'—',lb:0,minLb:10,grade:'',origin:''},{id:38,box:'159',name:'Olor Dominicano',cat:'Tripa',tipo:'—',lb:0,minLb:10,grade:'',origin:''},{id:39,box:'160',name:'Muestra',cat:'Tripa',tipo:'—',lb:0,minLb:5,grade:'',origin:''},{id:40,box:'161',name:'HBA',cat:'Tripa',tipo:'—',lb:0,minLb:10,grade:'',origin:''},{id:41,box:'162',name:'Criollo 98',cat:'Tripa',tipo:'—',lb:0,minLb:10,grade:'BUENO',origin:''},{id:42,box:'Paca 210',name:'San Victor',cat:'Tripa',tipo:'—',lb:55,minLb:15,grade:'',origin:''},{id:43,box:'Paca 201',name:'Piloto Cubano Leo',cat:'Tripa',tipo:'—',lb:64,minLb:15,grade:'',origin:''},{id:44,box:'Paca 202',name:'Pennsylvania',cat:'Tripa',tipo:'—',lb:118,minLb:20,grade:'Fuerte',origin:''},{id:45,box:'Paca 203',name:'Piloto Cubano Leo',cat:'Tripa',tipo:'—',lb:59,minLb:15,grade:'',origin:''},{id:46,box:'Paca 204',name:'Criollo 98',cat:'Tripa',tipo:'—',lb:114,minLb:20,grade:'',origin:''},{id:47,box:'Paca 206',name:'Criollo 98',cat:'Tripa',tipo:'—',lb:81,minLb:15,grade:'',origin:''},{id:48,box:'Paca 207',name:'Criollo 98',cat:'Tripa',tipo:'—',lb:80,minLb:15,grade:'',origin:''},{id:49,box:'Paca 208',name:'Criollo 98',cat:'Tripa',tipo:'—',lb:107,minLb:20,grade:'',origin:''},{id:50,box:'Paca 209',name:'Criollo 98',cat:'Tripa',tipo:'—',lb:87,minLb:15,grade:'',origin:''},
+  {id:51,box:'Caja 1',name:'Capote Habano',cat:'Capote',tipo:'—',lb:22,minLb:10,grade:'A',origin:''},{id:52,box:'Caja 2',name:'Habano Nicaragua',cat:'Capote',tipo:'—',lb:46,minLb:10,grade:'A',origin:'Nicaragua'},{id:53,box:'Caja 3',name:'San Andres',cat:'Capote',tipo:'—',lb:46,minLb:10,grade:'A',origin:'San Andrés'},{id:54,box:'Caja 4',name:'San Andres',cat:'Capote',tipo:'—',lb:34,minLb:10,grade:'A',origin:'San Andrés'},{id:55,box:'Caja 5',name:'Indonesia',cat:'Capote',tipo:'—',lb:104,minLb:20,grade:'A+',origin:'Indonesia'},{id:56,box:'Caja 6',name:'Indonesia',cat:'Capote',tipo:'—',lb:54,minLb:10,grade:'A+',origin:'Indonesia'},{id:57,box:'Caja 7',name:'Indonesia',cat:'Capote',tipo:'—',lb:65,minLb:10,grade:'A+',origin:'Indonesia'},{id:58,box:'Caja 8',name:'Indonesia',cat:'Capote',tipo:'—',lb:99,minLb:20,grade:'A+',origin:'Indonesia'},{id:59,box:'Caja 9',name:'Olor Dominicano',cat:'Capote',tipo:'—',lb:15,minLb:8,grade:'A+',origin:''},{id:60,box:'Caja 10',name:'Indonesia',cat:'Capote',tipo:'—',lb:85,minLb:20,grade:'A+',origin:'Indonesia'},{id:61,box:'Caja 11',name:'Olor Dominicano',cat:'Capote',tipo:'—',lb:0,minLb:8,grade:'B',origin:''},{id:62,box:'Caja 12',name:'San Andres',cat:'Capote',tipo:'—',lb:16,minLb:8,grade:'A',origin:'San Andrés'},{id:63,box:'Caja 14',name:'San Andres',cat:'Capote',tipo:'—',lb:0,minLb:8,grade:'B',origin:'San Andrés'},{id:64,box:'Caja 16',name:'Olor Dominicano',cat:'Capote',tipo:'—',lb:0,minLb:8,grade:'A',origin:'Dom.'},{id:65,box:'Caja 17',name:'Olor Dominicano',cat:'Capote',tipo:'—',lb:0,minLb:8,grade:'A',origin:'Dom.'},{id:66,box:'Caja 18',name:'Habano',cat:'Capote',tipo:'—',lb:0,minLb:8,grade:'A',origin:''},
+  {id:67,box:'Caja 1',name:'Capa Habano Troja',cat:'Capa',tipo:'—',lb:61,minLb:15,grade:'Chek',origin:''},{id:68,box:'Caja 2',name:'Capa Habano Troja',cat:'Capa',tipo:'—',lb:34.4,minLb:15,grade:'Chek',origin:''},{id:69,box:'Caja 3',name:'Capa Habano Troja',cat:'Capa',tipo:'—',lb:20.7,minLb:10,grade:'Chek',origin:''},{id:70,box:'Caja 4',name:'Capa Habano Oscura',cat:'Capa',tipo:'—',lb:38.3,minLb:10,grade:'Troja',origin:''},{id:71,box:'Caja 5',name:'Capa Habano Oscura',cat:'Capa',tipo:'—',lb:69.2,minLb:15,grade:'Troja',origin:''},{id:72,box:'Caja 6',name:'Capa Habano Oscura',cat:'Capa',tipo:'—',lb:57.1,minLb:15,grade:'Troja',origin:''},{id:73,box:'Caja 7',name:'Capa Habano Claro',cat:'Capa',tipo:'—',lb:63.4,minLb:15,grade:'Troja',origin:''},{id:74,box:'Caja 8',name:'Capa Habano Oscura',cat:'Capa',tipo:'—',lb:78.1,minLb:15,grade:'Troja',origin:''},{id:75,box:'Caja 9',name:'Capa Grande Oscura Planchada',cat:'Capa',tipo:'—',lb:47,minLb:10,grade:'Hva',origin:''},{id:76,box:'Caja 10',name:'Capa Habano Oscura',cat:'Capa',tipo:'—',lb:68.4,minLb:15,grade:'Troja',origin:''},{id:77,box:'Caja 11',name:'Banda Hva Capa',cat:'Capa',tipo:'—',lb:49.2,minLb:10,grade:'',origin:''},{id:78,box:'Caja 12',name:'Capa Banda Hva',cat:'Capa',tipo:'—',lb:33,minLb:10,grade:'',origin:''},{id:79,box:'Caja 13',name:'Capa Habano Oscura La Confianza',cat:'Capa',tipo:'—',lb:73,minLb:15,grade:'',origin:''},{id:80,box:'Caja 14',name:'Capa Habano Oscura La Confianza',cat:'Capa',tipo:'—',lb:57,minLb:15,grade:'',origin:''},{id:81,box:'Caja 15',name:'Capa Habano Claro La Confianza',cat:'Capa',tipo:'—',lb:50,minLb:10,grade:'',origin:''},{id:82,box:'Caja 16',name:'Capa Habano Moi',cat:'Capa',tipo:'—',lb:63.6,minLb:10,grade:'',origin:''},{id:83,box:'Caja 17',name:'Capa Habano Moi',cat:'Capa',tipo:'—',lb:80,minLb:15,grade:'',origin:''},{id:84,box:'Caja 18',name:'Capa Habano Moi',cat:'Capa',tipo:'—',lb:80,minLb:15,grade:'',origin:''},{id:85,box:'Caja 19',name:'Capa Habano Moi',cat:'Capa',tipo:'—',lb:80,minLb:15,grade:'',origin:''},{id:86,box:'Caja 20',name:'Habano Nicaragua Esteli',cat:'Capa',tipo:'—',lb:66.5,minLb:15,grade:'',origin:'Nicaragua'},{id:87,box:'Caja 23',name:'Habano Nicaragua Esteli',cat:'Capa',tipo:'—',lb:32.1,minLb:10,grade:'',origin:'Nicaragua'},{id:88,box:'Caja 24',name:'Capa Verde Nicaragua',cat:'Capa',tipo:'—',lb:73,minLb:15,grade:'',origin:'Nicaragua'},{id:89,box:'Caja 25',name:'Capa Verde Nicaragua',cat:'Capa',tipo:'—',lb:71,minLb:15,grade:'',origin:'Nicaragua'},{id:90,box:'Caja 26',name:'Capa Nicaragua Rojo',cat:'Capa',tipo:'—',lb:47,minLb:10,grade:'',origin:'Nicaragua'},{id:91,box:'Caja 27',name:'Capa Connecticut',cat:'Capa',tipo:'—',lb:65,minLb:15,grade:'',origin:'Connecticut'},{id:92,box:'Caja 28',name:'Capa Pennsylvania',cat:'Capa',tipo:'—',lb:24,minLb:10,grade:'',origin:'Pennsylvania'},{id:93,box:'Caja 29',name:'Capa Mexico San Andres',cat:'Capa',tipo:'—',lb:82,minLb:15,grade:'MSO',origin:'México'},{id:94,box:'Caja 30',name:'Capa Mexico San Andres',cat:'Capa',tipo:'—',lb:52,minLb:10,grade:'MSO',origin:'México'},{id:95,box:'Caja 31',name:'Capa Antilla Habano Oscuro',cat:'Capa',tipo:'—',lb:99.8,minLb:15,grade:'',origin:''},
 ];
 let nextInvId=96,adjTargetId=null,invFilters={cat:'',tipo:'',search:'',stock:''};
 
@@ -1812,7 +1812,7 @@ document.addEventListener('click',e=>{if(!$('tbUser')?.contains(e.target)) close
 // MARCAS / VITOLAS
 // ══════════════════════════════════════════════════════════════
 function populateMarcaSel(){const o=MARCAS.map(m=>`<option value="${m.id}">${m.nombre}</option>`).join('');if($('marcaProd')) $('marcaProd').innerHTML=o;if($('vit-m')) $('vit-m').innerHTML=o+'<option value="Ambas">Ambas</option>'}
-function renderBrands(){$('brandList').innerHTML=MARCAS.map(m=>`<div class="brand-card"><div class="brand-dot" style="background:${m.color}"></div><div style="flex:1"><div style="font-size:13px;color:var(--txt);font-weight:500">${m.nombre}</div><div style="font-size:9px;color:var(--txt3);margin-top:2px">${m.desc||'Sin descripción'}</div></div>${m.id>2?`<button class="btn-danger" onclick="delMarca(${m.id})">Eliminar</button>`:'<span style="font-size:8px;color:var(--txt3)">Principal</span>'}</div>`).join('')}
+function renderBrands(){$('brandList').innerHTML=MARCAS.map(m=>`<div class="brand-card"><div class="brand-dot" style="background:${m.color}"></div><div style="flex:1"><div style="font-size:15px;color:var(--txt);font-weight:500">${m.nombre}</div><div style="font-size:9px;color:var(--txt3);margin-top:2px">${m.desc||'Sin descripción'}</div></div>${m.id>2?`<button class="btn-danger" onclick="delMarca(${m.id})">Eliminar</button>`:'<span style="font-size:8px;color:var(--txt3)">Principal</span>'}</div>`).join('')}
 function addMarca(){const n=$('marca-n').value.trim(),d=$('marca-d').value.trim(),c=$('marca-c').value;if(!n){notif2('El nombre es obligatorio','err');return}MARCAS.push({id:Date.now(),nombre:n,desc:d,color:c});$('marca-n').value='';$('marca-d').value='';$('addMarcaForm').classList.remove('show');populateMarcaSel();renderBrands();notif2(`Marca "${n}" creada`,'suc');if(window.fbSaveArr)window.fbSaveArr('marcas',MARCAS);lsSave();}
 function delMarca(id){MARCAS=MARCAS.filter(m=>m.id!==id);populateMarcaSel();renderBrands()}
 function renderVitolas(){
@@ -1863,7 +1863,7 @@ function renderOps(){
   };
   ['e','p','r','b'].forEach(t=>{
     const el=$(`opGrid-${t}`);if(!el)return;
-    el.innerHTML=OPS.filter(o=>(o.tipo||'e')===t).map(opCard).join('')||`<div style="color:var(--txt3);font-size:11px;padding:10px">Sin operarios de este tipo.</div>`;
+    el.innerHTML=OPS.filter(o=>(o.tipo||'e')===t).map(opCard).join('')||`<div style="color:var(--txt3);font-size:15px;padding:10px">Sin operarios de este tipo.</div>`;
   });
   // Show ALL ops in one grid if opGrid-e doesn't exist (fallback)
   const mainGrid=$('opGrid-e');
@@ -1913,7 +1913,7 @@ function applyInvFilters(){
     if(m.length){const tot=m.reduce((a,i)=>a+i.lb,0);const byT={};m.forEach(e=>{const k=e.tipo;if(!byT[k]) byT[k]={lb:0,count:0,boxes:[]};byT[k].lb+=e.lb;byT[k].count++;byT[k].boxes.push(e.box)});
     $('isrTitle').textContent=`"${invFilters.search}" — Total: ${tot.toFixed(2)} lb en ${m.length} caja${m.length!==1?'s/pacas':'/paca'}`;
     $('isrTotal').textContent='';
-    $('isrRows').innerHTML=Object.entries(byT).map(([k,v])=>`<div style="display:flex;align-items:center;justify-content:space-between;padding:7px 10px;background:var(--bg2);border-radius:7px;margin-bottom:5px;gap:8px;flex-wrap:wrap"><span style="font-size:10px;color:var(--txt2)">${tipoBadge(k)} ${k}</span><span style="font-size:12px;color:var(--txt);font-weight:500">${v.lb.toFixed(2)} lb</span><span style="font-size:9px;color:var(--txt3)">${v.count} caja${v.count!==1?'s':''} · (${v.boxes.slice(0,5).join(', ')}${v.boxes.length>5?'…':''})</span></div>`).join('');
+    $('isrRows').innerHTML=Object.entries(byT).map(([k,v])=>`<div style="display:flex;align-items:center;justify-content:space-between;padding:7px 10px;background:var(--bg3);border-radius:7px;margin-bottom:5px;gap:8px;flex-wrap:wrap"><span style="font-size:10px;color:var(--txt2)">${tipoBadge(k)} ${k}</span><span style="font-size:14px;color:var(--txt);font-weight:500">${v.lb.toFixed(2)} lb</span><span style="font-size:9px;color:var(--txt3)">${v.count} caja${v.count!==1?'s':''} · (${v.boxes.slice(0,5).join(', ')}${v.boxes.length>5?'…':''})</span></div>`).join('');
     $('invSearchResult').style.display='block'}else $('invSearchResult').style.display='none';
   }else $('invSearchResult').style.display='none';
   renderInvTable()
@@ -1932,12 +1932,12 @@ function renderInvTable(){
           <th>Proveedor</th><th>Precio</th><th>Libras</th><th>Estado</th><th>Acciones</th>
         </tr></thead>
         <tbody>${items.map(e=>`<tr>
-          <td style="font-size:11px;font-weight:600;color:${e.cat==='Tripa'?'#E8A840':e.cat==='Capote'?'#5DBF8A':'#F0EEE8'}">${e.box}</td>
+          <td style="font-size:15px;font-weight:600;color:${e.cat==='Tripa'?'#E8A840':e.cat==='Capote'?'#5DBF8A':'#F0EEE8'}">${e.box}</td>
           <td class="nm">${e.name}<br><span style="font-size:8px;color:var(--txt3)">${e.grade||''}</span></td>
           ${cat==='Tripa'?`<td>${tipoBadge(e.tipo)}</td>`:''}
           <td style="font-size:10px;color:${e.proveedor?'#5DBF8A':'var(--txt3)'}">${e.proveedor||'<span style="color:var(--txt4);font-style:italic">Sin proveedor</span>'}</td>
           <td style="font-size:10px;color:${e.precio>0?'#E8C050':'var(--txt3)'}">${e.precio>0?'RD$'+e.precio.toLocaleString():'—'}</td>
-          <td><span style="font-size:12px;font-weight:500;color:var(--txt)">${e.lb.toFixed(2)}</span> <span style="font-size:9px;color:var(--txt3)">lb</span>
+          <td><span style="font-size:14px;font-weight:500;color:var(--txt)">${e.lb.toFixed(2)}</span> <span style="font-size:9px;color:var(--txt3)">lb</span>
             <div class="stock-bar-w"><div class="stock-bar ${sBar(e)}" style="width:${sPct(e).toFixed(0)}%"></div></div>
           </td>
           <td>${stagBadge(e)}</td>
@@ -1950,7 +1950,7 @@ function renderInvTable(){
       </table></div>
     </div>`;
   });
-  if(!h) h=`<div style="text-align:center;padding:40px;color:var(--txt3);font-size:12px">Sin resultados. <span style="color:var(--gold2);cursor:pointer" onclick="clearInvFilters()">Limpiar filtros →</span></div>`;
+  if(!h) h=`<div style="text-align:center;padding:40px;color:var(--txt3);font-size:14px">Sin resultados. <span style="color:var(--gold2);cursor:pointer" onclick="clearInvFilters()">Limpiar filtros →</span></div>`;
   $('invTableContainer').innerHTML=h;
   $('invResultsInfo').textContent=`Mostrando ${filtered.length} entradas · ${tot.toFixed(2)} lb totales filtrados`;
 }
@@ -1978,7 +1978,7 @@ function trBlk(pi,ti,n){
     <div class="fld"><label>Cantidad de hoja</label><select id="tcant-${pi}-${ti}">${cantOpts}</select></div>
     <div class="fld"><label>Libras</label><input type="number" min="0" step="0.01" value="0" id="tlb-${pi}-${ti}" oninput="calc()"/></div>
   </div>
-  <div class="fld" style="margin-top:6px"><label style="color:#E8C050;font-size:8px;letter-spacing:.12em;text-transform:uppercase;font-weight:600">📦 Caja / Paca que se usa</label><select id="tcaja-${pi}-${ti}" style="border-color:rgba(200,150,14,.35);background:var(--bg3);color:var(--txt);border-radius:7px;padding:8px 10px;font-size:11px;width:100%;-webkit-appearance:none;outline:none;border:1px solid rgba(200,150,14,.35)">${cajaOpts}</select></div>
+  <div class="fld" style="margin-top:6px"><label style="color:#E8C050;font-size:8px;letter-spacing:.12em;text-transform:uppercase;font-weight:600">📦 Caja / Paca que se usa</label><select id="tcaja-${pi}-${ti}" style="border-color:rgba(200,150,14,.35);background:var(--bg3);color:var(--txt);border-radius:7px;padding:8px 10px;font-size:15px;width:100%;-webkit-appearance:none;outline:none;border:1px solid rgba(200,150,14,.35)">${cajaOpts}</select></div>
   </div>`
 }
 
@@ -2035,7 +2035,7 @@ function pjHtml(i){
       <div class="fld"><label>Marca (pareja ${i})</label><select id="mpj-${i}" onchange="onMarcaChange(${i})">${MARCAS.map(m=>`<option value="${m.nombre}">${m.nombre}</option>`).join('')}</select></div>
       <div class="fld"><label>Blend / Liga</label><select id="blnd-${i}" onchange="onBlendChange(${i})" style="border-color:rgba(200,168,76,.35)"><option value="">— Seleccionar blend —</option></select></div>
       <div class="fld"><label>Tipo de producción</label>
-        <select id="tprod-${i}" style="border:1px solid rgba(200,168,76,.35);background:var(--bg3);color:var(--txt);border-radius:7px;padding:9px 11px;font-size:12px;width:100%;-webkit-appearance:none;outline:none">
+        <select id="tprod-${i}" style="border:1px solid rgba(200,168,76,.35);background:var(--bg3);color:var(--txt);border-radius:7px;padding:11px 13px;font-size:14px;width:100%;-webkit-appearance:none;outline:none">
           <option value="nuevo">🆕 Cigarros nuevos</option>
           <option value="recape">🔄 Recape</option>
         </select>
@@ -2043,7 +2043,7 @@ function pjHtml(i){
       <div id="comp-box-${i}" style="display:none;align-items:center;gap:8px;padding:7px 12px;background:rgba(200,150,14,.12);border:1px solid rgba(200,150,14,.35);border-radius:8px;margin-top:4px">
         <svg width="14" height="14" viewBox="0 0 16 16" fill="#E8C050"><path d="M8 1l1.8 3.6L14 5.5l-3 2.9.7 4.1L8 10.4l-3.7 2.1.7-4.1-3-2.9 4.2-.9z"/></svg>
         <span style="font-size:8px;letter-spacing:.12em;text-transform:uppercase;color:#E8C050;font-weight:600">Completivo:</span>
-        <span id="comp-lbl-${i}" style="font-size:11px;color:var(--txt);font-weight:500"></span>
+        <span id="comp-lbl-${i}" style="font-size:15px;color:var(--txt);font-weight:500"></span>
       </div>
       <div class="fld sp2"><label>Vitola · Ring×Largo</label><select id="vit-${i}" onchange="updVitInfo(${i})">${vitolas.map(v=>`<option value="${v.n}">${v.n} (${v.r}×${v.l}")</option>`).join('')}</select></div>
       <div class="fld"><label>Buenos</label><input type="number" min="0" id="bn-${i}" value="0" oninput="calc()"/></div>
@@ -2060,7 +2060,7 @@ function pjHtml(i){
       <div class="ss-hdr"><div class="ss-ln blue"></div><span class="ss-lbl blue">Capote · Empuñera/o</span><div class="ss-ln blue"></div></div>
       <div class="g3">
         <div class="fld"><label>Tabaco capote</label><select id="ctab-${i}" onchange="updCajasCap(${i})"><option value="">—</option>${so(CAPOTES,'Olor Dominicano')}</select></div>
-        <div class="fld sp2"><label style="color:#5DBFA0;font-size:8px;letter-spacing:.12em;text-transform:uppercase;font-weight:600">📦 Caja capote</label><select id="cbox-${i}" style="border:1px solid rgba(30,128,68,.3);background:var(--bg3);color:var(--txt);border-radius:7px;padding:8px 10px;font-size:11px;width:100%;-webkit-appearance:none;outline:none"><option value="">— Sin especificar —</option>${INV.filter(x=>x.cat==='Capote').map(x=>`<option value="${x.id}">Caja ${x.box} · ${x.name} (${x.lb.toFixed(1)}lb)${x.proveedor?' · '+x.proveedor:''}</option>`).join('')}</select></div>
+        <div class="fld sp2"><label style="color:#5DBFA0;font-size:8px;letter-spacing:.12em;text-transform:uppercase;font-weight:600">📦 Caja capote</label><select id="cbox-${i}" style="border:1px solid rgba(30,128,68,.3);background:var(--bg3);color:var(--txt);border-radius:7px;padding:8px 10px;font-size:15px;width:100%;-webkit-appearance:none;outline:none"><option value="">— Sin especificar —</option>${INV.filter(x=>x.cat==='Capote').map(x=>`<option value="${x.id}">Caja ${x.box} · ${x.name} (${x.lb.toFixed(1)}lb)${x.proveedor?' · '+x.proveedor:''}</option>`).join('')}</select></div>
         <div class="fld"><label>Tamaño hoja</label><select id="ctam-${i}"><option value="Grande">Grande</option><option value="Mediana" selected>Mediana</option><option value="Pequeña">Pequeña</option></select></div>
         <div class="fld"><label>Libras</label><input type="number" min="0" step="0.01" id="clb-${i}" value="0" oninput="calc()"/></div>
       </div>
@@ -2071,7 +2071,7 @@ function pjHtml(i){
       <div class="g3">
         <div class="fld"><label>Tabaco capa</label><select id="catab-${i}" onchange="updCajasCapa(${i})"><option value="">—</option>${so(CAPAS,'Habano 2000')}</select></div>
         <div class="fld"><label>Tamaño hoja</label><select id="catam-${i}"><option value="Grande">Grande</option><option value="Mediana" selected>Mediana</option><option value="Pequeña">Pequeña</option></select></div>
-        <div class="fld sp2"><label style="color:#E8C050;font-size:8px;letter-spacing:.12em;text-transform:uppercase;font-weight:600">📦 Caja / Paca de capa</label><select id="cabox-${i}" style="border:1px solid rgba(200,150,14,.3);background:var(--bg3);color:var(--txt);border-radius:7px;padding:8px 10px;font-size:11px;width:100%;-webkit-appearance:none;outline:none"><option value="">— Sin especificar —</option>${INV.filter(x=>x.cat==='Capa').map(x=>`<option value="${x.id}">Caja ${x.box} · ${x.name} (${x.lb.toFixed(1)}lb)${x.proveedor?' · '+x.proveedor:''}</option>`).join('')}</select></div>
+        <div class="fld sp2"><label style="color:#E8C050;font-size:8px;letter-spacing:.12em;text-transform:uppercase;font-weight:600">📦 Caja / Paca de capa</label><select id="cabox-${i}" style="border:1px solid rgba(200,150,14,.3);background:var(--bg3);color:var(--txt);border-radius:7px;padding:8px 10px;font-size:15px;width:100%;-webkit-appearance:none;outline:none"><option value="">— Sin especificar —</option>${INV.filter(x=>x.cat==='Capa').map(x=>`<option value="${x.id}">Caja ${x.box} · ${x.name} (${x.lb.toFixed(1)}lb)${x.proveedor?' · '+x.proveedor:''}</option>`).join('')}</select></div>
         <div class="fld"><label>Libras</label><input type="number" min="0" step="0.01" id="calb-${i}" value="0" oninput="calc()"/></div>
         <div class="fld"><label>Bandas</label><input type="number" min="0" id="cabd-${i}" value="0"/></div>
       </div>
@@ -2299,14 +2299,14 @@ function renderHistorial(){
     ['🔄 Recapados', totalRecape.toLocaleString(), '#E8C050'],
     ['Libras tabaco', totalLb.toFixed(1)+'lb', '#74B3E8'],
     ['Meta promedio', avgMeta+'%', '#E8A840'],
-  ].map(([l,v,c])=>`<div style="background:var(--bg2);border:1px solid rgba(255,255,255,.08);border-radius:10px;padding:12px">
+  ].map(([l,v,c])=>`<div style="background:var(--bg3);border:1px solid rgba(255,255,255,.08);border-radius:10px;padding:12px">
     <div style="font-size:8px;letter-spacing:.12em;text-transform:uppercase;color:var(--txt3);margin-bottom:5px">${l}</div>
     <div style="font-size:20px;font-weight:600;color:${c}">${v}</div>
   </div>`).join('');
 
   const list = document.getElementById('histList');
   if (!list) return;
-  if (!reps.length) { list.innerHTML='<div style="text-align:center;padding:40px 0;color:var(--txt3);font-size:11px">Sin reportes para este filtro.</div>'; return; }
+  if (!reps.length) { list.innerHTML='<div style="text-align:center;padding:40px 0;color:var(--txt3);font-size:15px">Sin reportes para este filtro.</div>'; return; }
 
   const sorted = reps.slice().sort((a,b)=>(b.fecha>a.fecha?1:b.fecha<a.fecha?-1:0)||(b.ts-a.ts));
 
@@ -2318,13 +2318,13 @@ function renderHistorial(){
       return `<div class="hist-row" onclick="openHistReport(${savedReports.indexOf(r)})">
         <div style="font-family:'Cormorant Garamond',serif;font-size:16px;font-weight:600;color:var(--gold2);min-width:52px">${r.fecha?.slice(5).replace('-','/')}</div>
         <div style="flex:1;min-width:0">
-          <div style="font-size:11px;color:var(--txt);font-weight:500">${r.sup||'—'} · ${r.pa||0} pareja${(r.pa||0)!==1?'s':''}</div>
+          <div style="font-size:15px;color:var(--txt);font-weight:500">${r.sup||'—'} · ${r.pa||0} pareja${(r.pa||0)!==1?'s':''}</div>
           <div style="font-size:8px;color:var(--txt3);margin-top:2px">${r.tipoProd?.some(t=>t==='recape')?'<span style="color:#E8C050">🔄 Recape</span> · ':''}${r.fecha} · ${new Date(r.ts||0).toLocaleTimeString('es-DO',{hour:'2-digit',minute:'2-digit'})}</div>
         </div>
         <div style="display:flex;gap:12px;flex-shrink:0;align-items:center">
-          <div style="text-align:center"><div style="font-size:13px;font-weight:600;color:#5DBF8A">${r.b||0}</div><div style="font-size:7px;color:var(--txt3);text-transform:uppercase;letter-spacing:.08em">Buenos</div></div>
-          <div style="text-align:center"><div style="font-size:13px;font-weight:600;color:#E57373">${r.m||0}</div><div style="font-size:7px;color:var(--txt3);text-transform:uppercase;letter-spacing:.08em">Malos</div></div>
-          <div style="text-align:center"><div style="font-size:13px;font-weight:600;color:${metaC}">${r.metaPct||0}%</div><div style="font-size:7px;color:var(--txt3);text-transform:uppercase;letter-spacing:.08em">Meta</div></div>
+          <div style="text-align:center"><div style="font-size:15px;font-weight:600;color:#5DBF8A">${r.b||0}</div><div style="font-size:7px;color:var(--txt3);text-transform:uppercase;letter-spacing:.08em">Buenos</div></div>
+          <div style="text-align:center"><div style="font-size:15px;font-weight:600;color:#E57373">${r.m||0}</div><div style="font-size:7px;color:var(--txt3);text-transform:uppercase;letter-spacing:.08em">Malos</div></div>
+          <div style="text-align:center"><div style="font-size:15px;font-weight:600;color:${metaC}">${r.metaPct||0}%</div><div style="font-size:7px;color:var(--txt3);text-transform:uppercase;letter-spacing:.08em">Meta</div></div>
           <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="var(--txt3)" stroke-width="1.5"><path d="M6 4l4 4-4 4"/></svg>
         </div>
       </div>`;
@@ -2353,7 +2353,7 @@ function renderHistorial(){
       const gLb=rs.reduce((a,r)=>a+(r.lb||0),0).toFixed(1);
       const gMeta=(rs.reduce((a,r)=>a+(r.metaPct||0),0)/rs.length).toFixed(0);
       const lbl = vista==='mensual' ? key : `Semana del ${key}`;
-      return `<div style="background:var(--bg2);border:1px solid rgba(255,255,255,.09);border-radius:12px;padding:14px;margin-bottom:10px">
+      return `<div style="background:var(--bg3);border:1px solid rgba(255,255,255,.09);border-radius:12px;padding:14px;margin-bottom:10px">
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;flex-wrap:wrap;gap:8px">
           <div style="font-family:'Cormorant Garamond',serif;font-size:16px;color:var(--gold2)">${lbl}</div>
           <div style="font-size:8px;color:var(--txt3);background:rgba(255,255,255,.05);padding:2px 10px;border-radius:9px">${rs.length} reporte${rs.length!==1?'s':''}</div>
@@ -2365,11 +2365,11 @@ function renderHistorial(){
           <div style="text-align:center;background:rgba(232,192,80,.08);border-radius:8px;padding:8px"><div style="font-size:16px;font-weight:600;color:#E8C050">${gMeta}%</div><div style="font-size:7px;color:var(--txt3);text-transform:uppercase;letter-spacing:.08em">Meta prom.</div></div>
         </div>
         ${rs.map(r=>`<div class="hist-row" onclick="openHistReport(${savedReports.indexOf(r)})" style="margin-bottom:5px">
-          <div style="font-size:11px;color:var(--txt3);min-width:52px">${r.fecha?.slice(5).replace('-','/')}</div>
-          <div style="flex:1;font-size:11px;color:var(--txt)">${r.sup||'—'} · ${r.pa||0} par.</div>
-          <div style="font-size:11px;color:#5DBF8A;font-weight:500">${r.b||0} ✓</div>
-          <div style="font-size:11px;color:#E57373;margin-left:8px">${r.m||0} ✗</div>
-          <div style="font-size:11px;color:#E8C050;margin-left:8px">${r.metaPct||0}%</div>
+          <div style="font-size:15px;color:var(--txt3);min-width:52px">${r.fecha?.slice(5).replace('-','/')}</div>
+          <div style="flex:1;font-size:15px;color:var(--txt)">${r.sup||'—'} · ${r.pa||0} par.</div>
+          <div style="font-size:15px;color:#5DBF8A;font-weight:500">${r.b||0} ✓</div>
+          <div style="font-size:15px;color:#E57373;margin-left:8px">${r.m||0} ✗</div>
+          <div style="font-size:15px;color:#E8C050;margin-left:8px">${r.metaPct||0}%</div>
           <svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="var(--txt3)" stroke-width="1.5" style="margin-left:6px"><path d="M6 4l4 4-4 4"/></svg>
         </div>`).join('')}
       </div>`;
@@ -2390,11 +2390,11 @@ function renderHistorial(){
     list.innerHTML = `<div style="margin-bottom:14px">
       <div style="font-size:8px;letter-spacing:.14em;text-transform:uppercase;color:var(--txt3);margin-bottom:10px;font-weight:500">Resumen por supervisor</div>
       ${Object.entries(byOp).sort((a,b)=>b[1].buenos-a[1].buenos).map(([op,s])=>`
-        <div style="background:var(--bg2);border:1px solid rgba(255,255,255,.09);border-radius:12px;padding:14px;margin-bottom:8px">
+        <div style="background:var(--bg3);border:1px solid rgba(255,255,255,.09);border-radius:12px;padding:14px;margin-bottom:8px">
           <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px">
             <div style="width:34px;height:34px;border-radius:50%;background:rgba(184,150,46,.15);border:1px solid rgba(184,150,46,.3);display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:15px;color:var(--gold2);font-weight:600">${op[0]?.toUpperCase()}</div>
             <div>
-              <div style="font-size:13px;color:var(--txt);font-weight:500">${op}</div>
+              <div style="font-size:15px;color:var(--txt);font-weight:500">${op}</div>
               <div style="font-size:9px;color:var(--txt3)">${s.reportes} reportes · Meta prom: ${(s.meta/s.reportes).toFixed(0)}%</div>
             </div>
           </div>
@@ -2450,12 +2450,12 @@ function openHistReport(idx) {
     </div>
     ${r.rows && r.rows.length ? `
     <div style="font-size:8px;letter-spacing:.13em;text-transform:uppercase;color:var(--txt3);margin-bottom:8px;font-weight:500">Detalle por pareja</div>
-    ${r.rows.map((row,i)=>`<div style="background:var(--bg2);border:1px solid rgba(255,255,255,.08);border-radius:10px;padding:12px;margin-bottom:8px">
+    ${r.rows.map((row,i)=>`<div style="background:var(--bg3);border:1px solid rgba(255,255,255,.08);border-radius:10px;padding:12px;margin-bottom:8px">
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
-        <div style="font-size:11px;color:var(--txt);font-weight:500">Pareja ${row.i||i+1} ${row.vit?'· '+row.vit:''}</div>
+        <div style="font-size:15px;color:var(--txt);font-weight:500">Pareja ${row.i||i+1} ${row.vit?'· '+row.vit:''}</div>
         <div style="display:flex;gap:10px">
-          <span style="font-size:11px;color:#5DBF8A;font-weight:500">${row.bn||0} ✓</span>
-          <span style="font-size:11px;color:#E57373">${row.ml||0} ✗</span>
+          <span style="font-size:15px;color:#5DBF8A;font-weight:500">${row.bn||0} ✓</span>
+          <span style="font-size:15px;color:#E57373">${row.ml||0} ✗</span>
         </div>
       </div>
       ${row.marca?`<div style="font-size:9px;color:var(--txt3);margin-bottom:5px">Marca: <span style="color:var(--gold2)">${row.marca}</span></div>`:''}
@@ -2500,8 +2500,8 @@ function updateDashStats(){
   renderDashReports()
 }
 function renderDashReports(){
-  const list=$('dashReports');if(!savedReports.length){list.innerHTML='<div style="text-align:center;padding:18px 0;color:var(--txt3);font-size:11px">Sin reportes aún.<br><span style="color:var(--gold2);cursor:pointer" onclick="goTo(\'produccion\',null)">Crear primer reporte →</span></div>';return}
-  list.innerHTML=savedReports.slice().reverse().slice(0,5).map(r=>`<div style="display:flex;align-items:center;padding:7px 0;border-bottom:1px solid rgba(255,255,255,.04);gap:10px;font-size:11px"><div style="font-family:'Cormorant Garamond',serif;font-size:14px;font-weight:600;color:var(--gold2);min-width:50px">${r.fecha.split('-').slice(1).join('/')}</div><div style="flex:1;color:var(--txt2)">${r.sup} · ${r.pa} pareja${r.pa!==1?'s':''}</div><span style="color:#5DBF8A;font-weight:500">${r.b}</span><span style="color:var(--txt3);font-size:9px">bue.</span>${r.metaPct!=null?`<span style="font-size:9px;padding:2px 7px;border-radius:7px;background:${r.metaPct>=100?'rgba(184,150,46,.12)':r.metaPct>=METAS.alertPct?'rgba(26,110,58,.12)':'rgba(155,44,44,.12)'};color:${r.metaPct>=100?'var(--gold2)':r.metaPct>=METAS.alertPct?'#5DBF8A':'#E57373'}">${r.metaPct}%</span>`:''}</div>`).join('')
+  const list=$('dashReports');if(!savedReports.length){list.innerHTML='<div style="text-align:center;padding:18px 0;color:var(--txt3);font-size:15px">Sin reportes aún.<br><span style="color:var(--gold2);cursor:pointer" onclick="goTo(\'produccion\',null)">Crear primer reporte →</span></div>';return}
+  list.innerHTML=savedReports.slice().reverse().slice(0,5).map(r=>`<div style="display:flex;align-items:center;padding:7px 0;border-bottom:1px solid rgba(255,255,255,.04);gap:10px;font-size:15px"><div style="font-family:'Cormorant Garamond',serif;font-size:14px;font-weight:600;color:var(--gold2);min-width:50px">${r.fecha.split('-').slice(1).join('/')}</div><div style="flex:1;color:var(--txt2)">${r.sup} · ${r.pa} pareja${r.pa!==1?'s':''}</div><span style="color:#5DBF8A;font-weight:500">${r.b}</span><span style="color:var(--txt3);font-size:9px">bue.</span>${r.metaPct!=null?`<span style="font-size:9px;padding:2px 7px;border-radius:7px;background:${r.metaPct>=100?'rgba(184,150,46,.12)':r.metaPct>=METAS.alertPct?'rgba(26,110,58,.12)':'rgba(155,44,44,.12)'};color:${r.metaPct>=100?'var(--gold2)':r.metaPct>=METAS.alertPct?'#5DBF8A':'#E57373'}">${r.metaPct}%</span>`:''}</div>`).join('')
 }
 
 function renderEstadisticas(){
@@ -2522,10 +2522,10 @@ function renderEstadisticas(){
 }
 
 function cambiarClave(){const a=$('pwA').value,n=$('pwN').value,c=$('pwC').value;if(!a||!n||!c){notif2('Completa todos los campos','err');return}if(sH(a)!==currentUser.passHash){notif2('Contraseña actual incorrecta','err');return}if(n.length<6){notif2('Mínimo 6 caracteres','err');return}if(n!==c){notif2('Las contraseñas no coinciden','err');return}const u=USUARIOS.find(x=>x.id===currentUser.id);if(u){u.passHash=sH(n);currentUser.passHash=u.passHash}$('pwA').value='';$('pwN').value='';$('pwC').value='';logAct('Contraseña actualizada');notif2('Contraseña actualizada','suc')}
-function renderUsers(){const list=$('userList');if(!list) return;const rL={admin:'Administrador',supervisor:'Supervisor',consulta:'Consulta'};const rC={admin:'rb-a',supervisor:'rb-s',consulta:'rb-c'};$('userCount').textContent=`${USUARIOS.filter(u=>u.activo).length} activos`;list.innerHTML=USUARIOS.map(u=>`<div class="user-row"><div style="width:34px;height:34px;border-radius:50%;background:${u.color};display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:600;color:#fff;flex-shrink:0">${u.ini}</div><div style="flex:1;min-width:0"><div style="font-size:12px;color:var(--txt);font-weight:500">${u.nombre}</div><div style="font-size:9px;color:var(--txt3)">@${u.username}</div></div><span class="tb-rb ${rC[u.rol]}">${rL[u.rol]}</span>${u.id!==currentUser?.id?`<button class="btn-danger" onclick="toggleUser(${u.id})">${u.activo?'Desactivar':'Activar'}</button>`:'<span style="font-size:8px;color:var(--txt3)">(tú)</span>'}</div>`).join('')}
+function renderUsers(){const list=$('userList');if(!list) return;const rL={admin:'Administrador',supervisor:'Supervisor',consulta:'Consulta'};const rC={admin:'rb-a',supervisor:'rb-s',consulta:'rb-c'};$('userCount').textContent=`${USUARIOS.filter(u=>u.activo).length} activos`;list.innerHTML=USUARIOS.map(u=>`<div class="user-row"><div style="width:34px;height:34px;border-radius:50%;background:${u.color};display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:600;color:#fff;flex-shrink:0">${u.ini}</div><div style="flex:1;min-width:0"><div style="font-size:14px;color:var(--txt);font-weight:500">${u.nombre}</div><div style="font-size:9px;color:var(--txt3)">@${u.username}</div></div><span class="tb-rb ${rC[u.rol]}">${rL[u.rol]}</span>${u.id!==currentUser?.id?`<button class="btn-danger" onclick="toggleUser(${u.id})">${u.activo?'Desactivar':'Activar'}</button>`:'<span style="font-size:8px;color:var(--txt3)">(tú)</span>'}</div>`).join('')}
 function toggleUser(id){const u=USUARIOS.find(x=>x.id===id);if(u){u.activo=!u.activo;renderUsers();notif2(`${u.nombre} ${u.activo?'activado':'desactivado'}`,'suc')}}
 function addUser(){const n=$('nu-n').value.trim(),u=$('nu-u').value.trim().toLowerCase(),p=$('nu-p').value,r=$('nu-r').value;if(!n||!u||!p){notif2('Completa todos los campos','err');return}if(p.length<6){notif2('Contraseña mínimo 6 caracteres','err');return}if(USUARIOS.find(x=>x.username===u)){notif2('Ese usuario ya existe','err');return}const ini=n.split(' ').filter(Boolean).slice(0,2).map(w=>w[0]).join('').toUpperCase();USUARIOS.push({id:Date.now(),nombre:n,username:u,passHash:sH(p),rol:r,color:AV_COLS[USUARIOS.length%AV_COLS.length],ini,lastLogin:null,activo:true});$('nu-n').value='';$('nu-u').value='';$('nu-p').value='';$('addUserForm').classList.remove('show');renderUsers();notif2(`Usuario ${n} creado`,'suc')}
-function renderLog(){const list=$('logList');if(!list) return;$('logCount').textContent=`${actLog.length} eventos`;if(!actLog.length){list.innerHTML='<div style="text-align:center;padding:18px 0;color:var(--txt3);font-size:11px">Sin actividad.</div>';return}const dc={login:'#5DBF8A',logout:'#E57373',error:'#E57373',info:'var(--gold2)'};list.innerHTML=actLog.map(e=>`<div style="display:flex;align-items:flex-start;gap:10px;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.04)"><div style="width:7px;height:7px;border-radius:50%;background:${dc[e.tipo]||'var(--gold2)'};flex-shrink:0;margin-top:3px"></div><div style="flex:1;font-size:10px;color:var(--txt2)"><b style="color:var(--txt)">${e.user}</b> — ${e.accion}</div><div style="font-size:8px;color:var(--txt3);white-space:nowrap">${new Date(e.ts).toLocaleTimeString('es-DO',{hour:'2-digit',minute:'2-digit'})}</div></div>`).join('')}
+function renderLog(){const list=$('logList');if(!list) return;$('logCount').textContent=`${actLog.length} eventos`;if(!actLog.length){list.innerHTML='<div style="text-align:center;padding:18px 0;color:var(--txt3);font-size:15px">Sin actividad.</div>';return}const dc={login:'#5DBF8A',logout:'#E57373',error:'#E57373',info:'var(--gold2)'};list.innerHTML=actLog.map(e=>`<div style="display:flex;align-items:flex-start;gap:10px;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.04)"><div style="width:7px;height:7px;border-radius:50%;background:${dc[e.tipo]||'var(--gold2)'};flex-shrink:0;margin-top:3px"></div><div style="flex:1;font-size:10px;color:var(--txt2)"><b style="color:var(--txt)">${e.user}</b> — ${e.accion}</div><div style="font-size:8px;color:var(--txt3);white-space:nowrap">${new Date(e.ts).toLocaleTimeString('es-DO',{hour:'2-digit',minute:'2-digit'})}</div></div>`).join('')}
 
 function notif2(msg,tipo){const a=$('nArea');const n=document.createElement('div');n.className=`notif ${tipo}`;n.textContent=msg;a.appendChild(n);setTimeout(()=>n.remove(),4500)}
 
@@ -2604,7 +2604,7 @@ function addPedItem(prefill) {
   const vOpts = vitolas.map(v=>`<option value="${v.n}">${v.n} (${v.r}×${v.l}")</option>`).join('');
   const mOpts = MARCAS.map(m=>`<option value="${m.nombre}">${m.nombre}</option>`).join('');
   const blOpts = '<option value="">— Sin especificar —</option>'+BLENDS.map(b=>`<option value="${b.nombre}">[${b.marca}] ${b.nombre}</option>`).join('');
-  const IS = 'style="background:var(--bg3);border:1px solid rgba(255,255,255,.12);color:var(--txt);border-radius:7px;padding:9px 10px;font-size:12px;width:100%;-webkit-appearance:none;outline:none"';
+  const IS = 'style="background:var(--bg3);border:1px solid rgba(255,255,255,.12);color:var(--txt);border-radius:7px;padding:11px 12px;font-size:14px;width:100%;-webkit-appearance:none;outline:none"';
   const row = document.createElement('div');
   row.id = `pr-${id}`;
   row.style.cssText = 'background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:9px;padding:11px;margin-bottom:8px';
@@ -2617,7 +2617,7 @@ function addPedItem(prefill) {
     <div style="display:grid;grid-template-columns:2fr 1fr auto;gap:8px;align-items:end">
       <div class="fld"><label>Blend / Liga (opcional)</label><select id="pr-bld-${id}" ${IS}>${blOpts}</select></div>
       <div class="fld"><label>Producido hasta ahora</label><input type="number" id="pr-prod-${id}" min="0" value="${prefill?.producido||0}" ${IS}/></div>
-      <button onclick="document.getElementById('pr-${id}').remove()" style="background:transparent;border:1px solid rgba(192,56,56,.35);color:#E86060;cursor:pointer;padding:10px 11px;border-radius:6px;font-size:11px;margin-bottom:0">✕</button>
+      <button onclick="document.getElementById('pr-${id}').remove()" style="background:transparent;border:1px solid rgba(192,56,56,.35);color:#E86060;cursor:pointer;padding:10px 11px;border-radius:6px;font-size:15px;margin-bottom:0">✕</button>
     </div>`;
   c.appendChild(row);
   if (prefill) {
@@ -2690,7 +2690,7 @@ function renderPedidos() {
     const sbd=STS_BRD[p.sts]||'rgba(200,150,14,.35)';
     const dias=p.fecha?Math.ceil((new Date(p.fecha)-new Date())/86400000):null;
     const diasStr=dias===null?'':dias<0?`<span style="font-size:8px;color:#E86060;font-weight:600">⚠ ${Math.abs(dias)}d atrasado</span>`:dias===0?`<span style="font-size:8px;color:#E8C050;font-weight:600">⚡ HOY</span>`:dias<=3?`<span style="font-size:8px;color:#E8C050;font-weight:600">⏰ ${dias} días</span>`:`<span style="font-size:8px;color:var(--txt3)">${dias} días</span>`;
-    return `<div style="background:var(--bg2);border:1px solid rgba(255,255,255,.1);border-left:4px solid ${clr};border-radius:12px;padding:15px;margin-bottom:10px">
+    return `<div style="background:var(--bg3);border:1px solid rgba(255,255,255,.1);border-left:4px solid ${clr};border-radius:12px;padding:15px;margin-bottom:10px">
       <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin-bottom:12px;flex-wrap:wrap">
         <div>
           <div style="font-size:14px;color:var(--txt);font-weight:600">${p.cliente}</div>
@@ -2714,7 +2714,7 @@ function renderPedidos() {
           <td style="padding:7px 8px;color:var(--txt);font-weight:500">${it.vit}</td>
           <td style="padding:7px 8px;color:var(--txt2);font-size:9px">${it.mar||'—'}${it.bld?`<br><span style='color:var(--gold2);font-size:8px'>${it.bld}</span>`:''}</td>
           <td style="padding:7px 8px;text-align:center;color:var(--txt);font-weight:500">${it.total.toLocaleString()}</td>
-          <td style="padding:7px 8px;text-align:center"><input type="number" min="0" max="${it.total}" value="${it.producido}" onchange="updPedItem(${p.id},'${it.vit}',this.value)" style="background:var(--bg3);border:1px solid rgba(255,255,255,.12);color:var(--txt);border-radius:5px;padding:4px 7px;font-size:11px;width:70px;text-align:center;outline:none"/></td>
+          <td style="padding:7px 8px;text-align:center"><input type="number" min="0" max="${it.total}" value="${it.producido}" onchange="updPedItem(${p.id},'${it.vit}',this.value)" style="background:var(--bg3);border:1px solid rgba(255,255,255,.12);color:var(--txt);border-radius:5px;padding:4px 7px;font-size:15px;width:70px;text-align:center;outline:none"/></td>
           <td style="padding:7px 8px;text-align:center;font-weight:600;color:${ip>=100?'#5DBFA0':ip>=50?'#E8C050':'#E86060'}">${ip.toFixed(0)}%</td>
         </tr>`;}).join('')}</tbody>
       </table>
@@ -2803,7 +2803,7 @@ function addBLTripa(prefill) {
   blTripaN++;
   const c=document.getElementById('blTripas'); if(!c) return;
   const id=blTripaN;
-  const IS='style="background:var(--bg3);border:1px solid rgba(255,255,255,.12);color:var(--txt);border-radius:7px;padding:9px 10px;font-size:11px;width:100%;-webkit-appearance:none;outline:none"';
+  const IS='style="background:var(--bg3);border:1px solid rgba(255,255,255,.12);color:var(--txt);border-radius:7px;padding:11px 12px;font-size:15px;width:100%;-webkit-appearance:none;outline:none"';
   const tOpts=TRIPAS.map(t=>`<option value="${t}">${t}</option>`).join('');
   const tiOpts=['Seco','Viso','Ligero'].map(t=>`<option value="${t}">${t}</option>`).join('');
   const cOpts=[['1/4','¼ de hoja'],['1/2','½ hoja'],['3/4','¾ de hoja'],['1','1 hoja entera'],['1+1/4','1 y ¼'],['1+1/2','1 y ½'],['2','2 hojas']].map(([v,l])=>`<option value="${v}"${v==='1'?' selected':''}>${l}</option>`).join('');
@@ -2814,8 +2814,8 @@ function addBLTripa(prefill) {
     <div class="fld"><label>Variedad</label><select id="blt-var-${id}" ${IS}>${tOpts}</select></div>
     <div class="fld"><label>Tipo hoja</label><select id="blt-tip-${id}" ${IS}>${tiOpts}</select></div>
     <div class="fld"><label>Cant. hoja</label><select id="blt-can-${id}" ${IS}>${cOpts}</select></div>
-    <div class="fld"><label>% liga</label><input type="number" id="blt-pct-${id}" min="0" max="100" value="${prefill?prefill.pct:20}" style="background:var(--bg3);border:1px solid rgba(255,255,255,.12);color:var(--txt);border-radius:7px;padding:9px 10px;font-size:11px;width:100%;outline:none"/></div>
-    <button onclick="document.getElementById('blt-${id}').remove()" style="background:transparent;border:1px solid rgba(192,56,56,.35);color:#E86060;cursor:pointer;padding:10px 11px;border-radius:6px;font-size:11px;margin-bottom:0">✕</button>`;
+    <div class="fld"><label>% liga</label><input type="number" id="blt-pct-${id}" min="0" max="100" value="${prefill?prefill.pct:20}" style="background:var(--bg3);border:1px solid rgba(255,255,255,.12);color:var(--txt);border-radius:7px;padding:11px 12px;font-size:15px;width:100%;outline:none"/></div>
+    <button onclick="document.getElementById('blt-${id}').remove()" style="background:transparent;border:1px solid rgba(192,56,56,.35);color:#E86060;cursor:pointer;padding:10px 11px;border-radius:6px;font-size:15px;margin-bottom:0">✕</button>`;
   c.appendChild(d);
   if (prefill) {
     setTimeout(()=>{
@@ -2887,7 +2887,7 @@ function renderBlends() {
     return '<div style="margin-bottom:20px"><div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;padding-bottom:8px;border-bottom:1px solid rgba(255,255,255,.08)"><div style="width:10px;height:10px;border-radius:50%;background:'+(m?m.color:'var(--gold)')+'"></div><span style="font-family:\'Cormorant Garamond\',serif;font-size:16px;color:var(--gold2)">'+marca+'</span><span style="font-size:8px;color:var(--txt3);background:rgba(255,255,255,.05);padding:2px 9px;border-radius:9px;letter-spacing:.1em;text-transform:uppercase">'+blends.length+' blend'+(blends.length!==1?'s':'')+'</span></div>'+
       blends.map(b=>{
         const tot=b.tripas.reduce((a,t)=>a+t.pct,0)+(b.capTab?b.capPct:0)+(b.capaTab?b.capaPct:0);
-        return '<div style="background:var(--bg2);border:1px solid rgba(255,255,255,.09);border-radius:12px;padding:15px;margin-bottom:10px">'+
+        return '<div style="background:var(--bg3);border:1px solid rgba(255,255,255,.09);border-radius:12px;padding:15px;margin-bottom:10px">'+
           '<div style="display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin-bottom:13px;flex-wrap:wrap">'+
           '<div><div style="font-size:14px;color:var(--txt);font-weight:600">'+b.nombre+'</div>'+
           '<div style="font-size:9px;color:var(--txt3);margin-top:3px">'+(b.vitola?'Vitola: '+b.vitola+' · ':'')+
@@ -3193,17 +3193,17 @@ function renderNomTasas() {
   const ca = document.getElementById('nomCasaList');
   if (cl) cl.innerHTML = NOM_TASAS.cigarro.map((t,i)=>`
     <div style="display:flex;align-items:center;gap:8px;margin-bottom:7px">
-      <div style="flex:1;font-size:11px;color:var(--txt)">${t.nombre}</div>
+      <div style="flex:1;font-size:15px;color:var(--txt)">${t.nombre}</div>
       <div style="font-size:9px;color:var(--txt3)">${t.rol||''}</div>
-      <div style="font-size:11px;color:#74B3E8;font-weight:500;min-width:60px;text-align:right">RD$${t.rd_por_cig}/cig</div>
-      <button onclick="delNomTasa('cigarro',${i})" style="background:transparent;border:none;color:#E86060;cursor:pointer;font-size:11px;padding:0">✕</button>
+      <div style="font-size:15px;color:#74B3E8;font-weight:500;min-width:60px;text-align:right">RD$${t.rd_por_cig}/cig</div>
+      <button onclick="delNomTasa('cigarro',${i})" style="background:transparent;border:none;color:#E86060;cursor:pointer;font-size:15px;padding:0">✕</button>
     </div>`).join('') || '<div style="font-size:10px;color:var(--txt3)">Sin operarios</div>';
   if (ca) ca.innerHTML = NOM_TASAS.casa.map((t,i)=>`
     <div style="display:flex;align-items:center;gap:8px;margin-bottom:7px">
-      <div style="flex:1;font-size:11px;color:var(--txt)">${t.nombre}</div>
+      <div style="flex:1;font-size:15px;color:var(--txt)">${t.nombre}</div>
       <div style="font-size:9px;color:var(--txt3)">${t.rol||''}</div>
-      <div style="font-size:11px;color:#5DBFA0;font-weight:500;min-width:70px;text-align:right">RD$${t.rd_semanal.toLocaleString()}/sem</div>
-      <button onclick="delNomTasa('casa',${i})" style="background:transparent;border:none;color:#E86060;cursor:pointer;font-size:11px;padding:0">✕</button>
+      <div style="font-size:15px;color:#5DBFA0;font-weight:500;min-width:70px;text-align:right">RD$${t.rd_semanal.toLocaleString()}/sem</div>
+      <button onclick="delNomTasa('casa',${i})" style="background:transparent;border:none;color:#E86060;cursor:pointer;font-size:15px;padding:0">✕</button>
     </div>`).join('') || '<div style="font-size:10px;color:var(--txt3)">Sin operarios</div>';
 }
 
@@ -3281,7 +3281,7 @@ function calcNominas() {
     ['Total nómina', 'RD$'+totalNom.toLocaleString(), '#E8C050'],
     ['Costo/cigarro nom.', 'RD$'+nomCostPerCig.toFixed(2), '#74B3E8'],
     ['Tabaco consumido', totalLb.toFixed(1)+'lb', '#5DBFA0'],
-  ].map(([l,v,c])=>`<div style="background:var(--bg2);border:1px solid rgba(255,255,255,.08);border-radius:10px;padding:12px">
+  ].map(([l,v,c])=>`<div style="background:var(--bg3);border:1px solid rgba(255,255,255,.08);border-radius:10px;padding:12px">
     <div style="font-size:8px;letter-spacing:.12em;text-transform:uppercase;color:var(--txt3);margin-bottom:5px">${l}</div>
     <div style="font-size:18px;font-weight:600;color:${c}">${v}</div>
   </div>`).join('');
@@ -3289,7 +3289,7 @@ function calcNominas() {
   // Table
   if (tabla) {
     if (!allRows.length) {
-      tabla.innerHTML = '<div style="text-align:center;padding:30px;color:var(--txt3);font-size:11px">Agrega operarios en las secciones de arriba para calcular la nómina.</div>';
+      tabla.innerHTML = '<div style="text-align:center;padding:30px;color:var(--txt3);font-size:15px">Agrega operarios en las secciones de arriba para calcular la nómina.</div>';
     } else {
       tabla.innerHTML = `<div style="font-size:8px;letter-spacing:.13em;text-transform:uppercase;color:var(--txt3);margin-bottom:8px;font-weight:500">Detalle de nómina</div>
       <table style="width:100%;border-collapse:collapse">
@@ -3302,17 +3302,17 @@ function calcNominas() {
         <tbody>
           ${allRows.map(r=>`<tr style="border-bottom:1px solid rgba(255,255,255,.05)">
             <td style="padding:10px 8px">
-              <div style="font-size:12px;color:var(--txt);font-weight:500">${r.nombre}</div>
+              <div style="font-size:14px;color:var(--txt);font-weight:500">${r.nombre}</div>
               <div style="font-size:9px;color:var(--txt3)">${r.rol}</div>
             </td>
             <td style="padding:10px 8px">
               <span style="font-size:9px;padding:2px 9px;border-radius:8px;background:${r.tipo==='Por cigarro'?'rgba(32,96,160,.15)':'rgba(30,128,68,.15)'};color:${r.tipo==='Por cigarro'?'#74B3E8':'#5DBFA0'};font-weight:500">${r.tipo}</span>
             </td>
             <td style="padding:10px 8px;font-size:10px;color:var(--txt3)">${r.detalle}</td>
-            <td style="padding:10px 8px;text-align:right;font-size:13px;font-weight:600;color:#E8C050">RD$${r.pago.toLocaleString()}</td>
+            <td style="padding:10px 8px;text-align:right;font-size:15px;font-weight:600;color:#E8C050">RD$${r.pago.toLocaleString()}</td>
           </tr>`).join('')}
           <tr style="border-top:2px solid rgba(184,150,46,.3)">
-            <td colspan="3" style="padding:10px 8px;font-size:11px;color:var(--txt);font-weight:600">TOTAL NÓMINA SEMANA</td>
+            <td colspan="3" style="padding:10px 8px;font-size:15px;color:var(--txt);font-weight:600">TOTAL NÓMINA SEMANA</td>
             <td style="padding:10px 8px;text-align:right;font-size:16px;font-weight:700;color:var(--gold2)">RD$${totalNom.toLocaleString()}</td>
           </tr>
         </tbody>
@@ -3322,7 +3322,7 @@ function calcNominas() {
 
   // Costo por cigarro breakdown
   if (costoDiv && totalCig > 0) {
-    costoDiv.innerHTML = `<div style="background:var(--bg2);border:1px solid rgba(184,150,46,.2);border-radius:12px;padding:15px">
+    costoDiv.innerHTML = `<div style="background:var(--bg3);border:1px solid rgba(184,150,46,.2);border-radius:12px;padding:15px">
       <div style="font-size:8px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold2);font-weight:600;margin-bottom:12px">📊 Análisis de costo por cigarro</div>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
         <div>
@@ -3350,7 +3350,7 @@ function histEditReport(idx) {
   const body = document.getElementById('histModalBody');
   if (!body) return;
 
-  const IS = 'style="background:var(--bg3);border:1px solid rgba(255,255,255,.15);color:var(--txt);border-radius:7px;padding:8px 10px;font-size:12px;width:100%;outline:none"';
+  const IS = 'style="background:var(--bg3);border:1px solid rgba(255,255,255,.15);color:var(--txt);border-radius:7px;padding:8px 10px;font-size:14px;width:100%;outline:none"';
   const SEC = (lbl,col)=>`<div style="font-size:8px;letter-spacing:.13em;text-transform:uppercase;color:${col||'var(--txt3)'};font-weight:600;margin:12px 0 8px">${lbl}</div>`;
 
   // Build rows HTML
@@ -3462,7 +3462,7 @@ function updCajasCapa(i){
 function openEditInv(id) {
   const e = INV.find(x=>x.id===id);
   if (!e) return;
-  const IS = 'style="background:var(--bg3);border:1px solid rgba(255,255,255,.15);color:var(--txt);border-radius:7px;padding:9px 11px;font-size:12px;width:100%;outline:none;-webkit-appearance:none"';
+  const IS = 'style="background:var(--bg3);border:1px solid rgba(255,255,255,.15);color:var(--txt);border-radius:7px;padding:11px 13px;font-size:14px;width:100%;outline:none;-webkit-appearance:none"';
   // Create modal
   const existing = document.getElementById('invEditModal');
   if (existing) existing.remove();
@@ -3555,7 +3555,7 @@ function lsSave() {
       blends:      BLENDS,
       pedidos:     PEDIDOS,
       reportes:    savedReports.slice(-200),
-      inv_lb:      INV.map(i=>({id:i.id,lb:i.lb,proveedor:i.proveedor||'',precio:i.precio||0,fechaCompra:i.fechaCompra||'',notas:i.notas||''})),
+      inv_lb:      INV.map(i=>({id:i.id,box:i.box,name:i.name,cat:i.cat,tipo:i.tipo,grade:i.grade||'',origin:i.origin||'',lb:i.lb,minLb:i.minLb||15,proveedor:i.proveedor||'',precio:i.precio||0,fechaCompra:i.fechaCompra||'',notas:i.notas||''})),
       ts:          Date.now()
     };
     localStorage.setItem(LS_KEY, JSON.stringify(data));
@@ -3581,7 +3581,14 @@ function lsLoad() {
       data.inv_lb.forEach(fi => {
         const local = INV.find(i=>i.id===fi.id);
         if (local) {
-          local.lb = fi.lb !== undefined ? fi.lb : local.lb;
+          if (fi.name)       local.name       = fi.name;
+          if (fi.box)        local.box        = fi.box;
+          if (fi.cat)        local.cat        = fi.cat;
+          if (fi.tipo)       local.tipo       = fi.tipo;
+          if (fi.grade!==undefined) local.grade = fi.grade;
+          if (fi.origin!==undefined) local.origin = fi.origin;
+          if (fi.minLb)      local.minLb      = fi.minLb;
+          local.lb          = fi.lb !== undefined ? fi.lb : local.lb;
           local.proveedor   = fi.proveedor   || local.proveedor   || '';
           local.precio      = fi.precio      || local.precio      || 0;
           local.fechaCompra = fi.fechaCompra || local.fechaCompra || '';
@@ -3622,33 +3629,35 @@ setTimeout(() => {
 
 // ══════════ WHATSAPP RESUMEN ══════════
 function compartirWhatsApp(rep) {
-  if (!rep) {
-    // Use last saved report
-    if (!savedReports.length) { notif2('No hay reportes guardados','err'); return; }
-    rep = savedReports[savedReports.length-1];
-  }
-  const ef = (rep.b+rep.m) > 0 ? ((rep.b/(rep.b+rep.m))*100).toFixed(1) : 0;
+  if (!rep) { if (!savedReports.length) { notif2('No hay reportes guardados','err'); return; } rep = savedReports[savedReports.length-1]; }
+  const ef = (rep.b+rep.m)>0?((rep.b/(rep.b+rep.m))*100).toFixed(1):0;
+  const getOpName = id => OPS.find(o=>o.id===parseInt(id))?.n||`Op.${id}`;
+  const parejaLines = rep.rows&&rep.rows.length ? rep.rows.map((row,i)=>{
+    const pNum=row.i||(i+1);
+    const emp=rep.empIds?.[pNum]?getOpName(rep.empIds[pNum]):'—';
+    const peg=rep.pegIds?.[pNum]?getOpName(rep.pegIds[pNum]):'—';
+    const tipo=rep.tipoProd?.[i]==='recape'?'🔄':'🆕';
+    const ef2=(row.bn||0)+(row.ml||0)>0?((row.bn||0)/((row.bn||0)+(row.ml||0))*100).toFixed(0)+'%':'—';
+    return `   *P${pNum}* ${tipo} ${emp} & ${peg}\n   ${row.vit||'—'} · ✅${row.bn||0} ❌${row.ml||0} · ${ef2}\n   🌿 ${(row.tl||row.lb||0).toFixed(2)}lb tripa · ${(row.mlCap||0).toFixed(2)}lb capote`;
+  }).join('\n') : '   Sin detalle de parejas';
   const lineas = [
     `📋 *REPORTE ESENCIA · ${rep.fecha}*`,
-    `─────────────────────`,
-    `👷 Supervisor: ${rep.sup}`,
-    `🏭 Parejas: ${rep.pa}`,
-    ``,
-    `✅ Cigarros buenos: *${rep.b.toLocaleString()}*`,
-    `❌ Malos/Rechazo: ${rep.m}`,
-    `📊 Eficiencia: *${ef}%*`,
-    `🎯 Meta: *${rep.metaPct||0}%*`,
-    ``,
-    `🌿 Tabaco consumido: ${(rep.lb||0).toFixed(2)} lb`,
-    rep.totalLbTripa>0 ? `   • Tripa: ${(rep.totalLbTripa||0).toFixed(2)} lb` : '',
-    rep.totalLbCap>0   ? `   • Capote: ${(rep.totalLbCap||0).toFixed(2)} lb` : '',
-    rep.totalLbCapa>0  ? `   • Capa: ${(rep.totalLbCapa||0).toFixed(2)} lb` : '',
-    ``,
+    `━━━━━━━━━━━━━━━━━━━━━`,
+    `👷 Supervisor: *${rep.sup}* · ${rep.pa} parejas`,
+    ``,`📊 *PRODUCCIÓN*`,
+    `✅ Buenos: *${rep.b.toLocaleString()}* · ❌ Malos: ${rep.m}`,
+    `🎯 Meta: *${rep.metaPct||0}%* · ⚡ Efic: *${ef}%*`,
+    ``,`🌿 *TABACO CONSUMIDO*`,
+    `Total: ${(rep.lb||0).toFixed(2)} lb`,
+    rep.totalLbTripa>0?`• Tripa: ${(rep.totalLbTripa||0).toFixed(2)} lb`:'',
+    rep.totalLbCap>0?`• Capote: ${(rep.totalLbCap||0).toFixed(2)} lb`:'',
+    rep.totalLbCapa>0?`• Capa: ${(rep.totalLbCapa||0).toFixed(2)} lb`:'',
+    ``,`👥 *DETALLE POR PAREJA*`,
+    parejaLines,
+    ``,`━━━━━━━━━━━━━━━━━━━━━`,
     `_Tabacalera Esencia · Arte & Origen · RD_`
-  ].filter(l => l !== '').join('\n');
-  
-  const url = `https://wa.me/?text=${encodeURIComponent(lineas)}`;
-  window.open(url, '_blank');
+  ].filter(l=>l!==undefined&&l!=='').join('\n');
+  window.open(`https://wa.me/?text=${encodeURIComponent(lineas)}`,'_blank');
 }
 
 function compartirWhatsAppHoy() {
@@ -3664,118 +3673,93 @@ function exportarPDF(rep) {
     if (!savedReports.length) { notif2('No hay reportes guardados','err'); return; }
     rep = savedReports[savedReports.length-1];
   }
-  
-  const ef = (rep.b+rep.m)>0 ? ((rep.b/(rep.b+rep.m))*100).toFixed(1) : 0;
+  const ef = (rep.b+rep.m)>0?((rep.b/(rep.b+rep.m))*100).toFixed(1):0;
   const metaC = rep.metaPct>=100?'#1a7a4a':rep.metaPct>=70?'#7a5a1a':'#7a2a1a';
-  
-  const rowsHTML = rep.rows && rep.rows.length ? rep.rows.map((row,i) => `
-    <tr style="border-bottom:1px solid #e8e0d0">
-      <td style="padding:6px 8px;font-weight:500">Pareja ${row.i||i+1}</td>
-      <td style="padding:6px 8px">${row.vit||'—'}</td>
-      <td style="padding:6px 8px">${row.marca||rep.marca||'—'}</td>
-      <td style="padding:6px 8px;text-align:center;color:#1a7a4a;font-weight:600">${row.bn||0}</td>
+  const getOpName = id => OPS.find(o=>o.id===parseInt(id))?.n||`Op.${id}`;
+
+  // Per-tabaquero summary
+  const tabSum = {};
+  if (rep.rows&&rep.empIds&&rep.pegIds) {
+    rep.rows.forEach((row,i)=>{
+      const pNum=row.i||(i+1);
+      [[rep.empIds[pNum],'Empuñero/a'],[rep.pegIds[pNum],'Pegador/a']].forEach(([id,rol])=>{
+        if(!id)return;
+        const n=getOpName(id);
+        if(!tabSum[n])tabSum[n]={n,rol,b:0,m:0,lb:0};
+        tabSum[n].b+=(row.bn||0);tabSum[n].m+=(row.ml||0);
+        tabSum[n].lb+=(row.tl||row.lb||0)+(row.mlCap||0)+(row.mlCapa||0);
+      });
+    });
+  }
+  const sumRows=Object.values(tabSum).map(t=>{
+    const e2=(t.b+t.m)>0?((t.b/(t.b+t.m))*100).toFixed(0)+'%':'—';
+    return `<tr style="border-bottom:1px solid #e8e0d0">
+      <td style="padding:7px 8px;font-weight:600">${t.n}</td>
+      <td style="padding:7px 8px;font-size:9px;color:#888">${t.rol}</td>
+      <td style="padding:7px 8px;text-align:center;color:#1a7a4a;font-weight:700;font-size:15px">${t.b}</td>
+      <td style="padding:7px 8px;text-align:center;color:#7a2a1a">${t.m}</td>
+      <td style="padding:7px 8px;text-align:center;font-weight:600;color:#2a5a8a">${e2}</td>
+      <td style="padding:7px 8px;text-align:center">${t.lb.toFixed(2)} lb</td>
+    </tr>`;
+  }).join('')||'<tr><td colspan="6" style="text-align:center;padding:12px;color:#888">Sin datos de operarios</td></tr>';
+
+  // Per-pareja rows with operario names
+  const rowsHTML = rep.rows&&rep.rows.length ? rep.rows.map((row,i)=>{
+    const pNum=row.i||(i+1);
+    const emp=rep.empIds?.[pNum]?getOpName(rep.empIds[pNum]):'—';
+    const peg=rep.pegIds?.[pNum]?getOpName(rep.pegIds[pNum]):'—';
+    const tipo=rep.tipoProd?.[i]==='recape'?'🔄 Recape':'🆕 Nuevo';
+    const e3=(row.bn||0)+(row.ml||0)>0?((row.bn||0)/((row.bn||0)+(row.ml||0))*100).toFixed(0)+'%':'—';
+    return `<tr style="border-bottom:1px solid #e8e0d0">
+      <td style="padding:6px 8px;font-weight:600;color:#B8962E">${pNum}</td>
+      <td style="padding:6px 8px"><div style="font-weight:500;font-size:10px">${emp}</div><div style="font-size:8px;color:#aaa">Empuñero</div></td>
+      <td style="padding:6px 8px"><div style="font-weight:500;font-size:10px">${peg}</div><div style="font-size:8px;color:#aaa">Pegador</div></td>
+      <td style="padding:6px 8px;font-size:10px">${row.vit||'—'}</td>
+      <td style="padding:6px 8px;font-size:9px">${tipo}</td>
+      <td style="padding:6px 8px;text-align:center;color:#1a7a4a;font-weight:700;font-size:14px">${row.bn||0}</td>
       <td style="padding:6px 8px;text-align:center;color:#7a2a1a">${row.ml||0}</td>
-      <td style="padding:6px 8px;text-align:center">${(row.tl||row.lb||0).toFixed(2)}lb</td>
-      <td style="padding:6px 8px;text-align:center">${(row.mlCap||0).toFixed(2)}lb</td>
-      <td style="padding:6px 8px;text-align:center">${(row.mlCapa||0).toFixed(2)}lb</td>
-    </tr>`).join('') : '<tr><td colspan="8" style="text-align:center;padding:12px;color:#888">Sin detalle de parejas</td></tr>';
+      <td style="padding:6px 8px;text-align:center;font-weight:600">${e3}</td>
+      <td style="padding:6px 8px;text-align:center;font-size:10px">${(row.tl||row.lb||0).toFixed(2)}</td>
+      <td style="padding:6px 8px;text-align:center;font-size:10px">${(row.mlCap||0).toFixed(2)}</td>
+      <td style="padding:6px 8px;text-align:center;font-size:10px">${(row.mlCapa||0).toFixed(2)}</td>
+    </tr>`;
+  }).join(''):'<tr><td colspan="11" style="text-align:center;padding:12px;color:#888">Sin detalle</td></tr>';
 
-  const html = `<!DOCTYPE html>
-<html lang="es">
-<head>
-<meta charset="UTF-8"/>
+  const html = `<!DOCTYPE html><html lang="es"><head><meta charset="UTF-8"/>
 <title>Reporte Esencia ${rep.fecha}</title>
-<style>
-  * { margin:0; padding:0; box-sizing:border-box; }
-  body { font-family: 'Georgia', serif; color: #1a1208; background: #fff; padding: 30px; }
-  .header { display:flex; align-items:center; justify-content:space-between; border-bottom: 3px solid #B8962E; padding-bottom: 16px; margin-bottom: 20px; }
-  .logo-area { display:flex; align-items:center; gap:14px; }
-  .logo-circle { width:70px; height:70px; border-radius:50%; background:#0A0A08; border:2px solid #B8962E; display:flex; align-items:center; justify-content:center; overflow:hidden; }
-  .brand { font-size:28px; letter-spacing:4px; color:#B8962E; font-weight:bold; }
-  .brand-sub { font-size:9px; letter-spacing:3px; color:#8a6a2a; margin-top:2px; }
-  .report-info { text-align:right; }
-  .report-title { font-size:13px; color:#666; }
-  .report-date { font-size:20px; font-weight:bold; color:#1a1208; }
-  .kpis { display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin:20px 0; }
-  .kpi { background:#f9f5ee; border:1px solid #e8d8b0; border-radius:8px; padding:12px; text-align:center; }
-  .kpi-v { font-size:26px; font-weight:bold; }
-  .kpi-l { font-size:9px; letter-spacing:1px; text-transform:uppercase; color:#888; margin-top:3px; }
-  .section-title { font-size:10px; letter-spacing:2px; text-transform:uppercase; color:#B8962E; font-weight:bold; margin:18px 0 8px; border-left:3px solid #B8962E; padding-left:10px; }
-  table { width:100%; border-collapse:collapse; font-size:11px; }
-  thead tr { background:#1a1208; color:#C9A84C; }
-  th { padding:8px; text-align:left; font-weight:500; letter-spacing:.5px; font-size:9px; text-transform:uppercase; }
-  .footer { margin-top:30px; padding-top:14px; border-top:1px solid #e8d8b0; display:flex; justify-content:space-between; align-items:center; }
-  .sig-line { border-top:1px solid #1a1208; width:180px; text-align:center; padding-top:4px; font-size:9px; color:#666; margin-top:40px; }
-  .gold { color:#B8962E; }
-  @media print { body { padding:15px; } }
-</style>
-</head>
-<body>
-<div class="header">
-  <div class="logo-area">
-    <div class="logo-circle">
-      <span style="color:#C9A84C;font-size:28px;font-weight:bold;font-family:Georgia">E</span>
-    </div>
-    <div>
-      <div class="brand">ESENCIA</div>
-      <div class="brand-sub">ARTE & ORIGEN · REPÚBLICA DOMINICANA</div>
-    </div>
-  </div>
-  <div class="report-info">
-    <div class="report-title">Reporte Diario de Producción</div>
-    <div class="report-date">${rep.fecha}</div>
-    <div style="font-size:11px;color:#888;margin-top:3px">Supervisor: <strong>${rep.sup}</strong> · ${rep.pa} pareja${rep.pa!==1?'s':''}</div>
-  </div>
+<style>*{margin:0;padding:0;box-sizing:border-box}body{font-family:Georgia,serif;color:#1a1208;padding:28px;font-size:15px}.hdr{display:flex;align-items:center;justify-content:space-between;border-bottom:3px solid #B8962E;padding-bottom:14px;margin-bottom:16px}.brand{font-size:24px;letter-spacing:4px;color:#B8962E;font-weight:bold}.brand-sub{font-size:8px;letter-spacing:3px;color:#8a6a2a;margin-top:2px}.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:12px 0}.kpi{background:#f9f5ee;border:1px solid #e8d8b0;border-radius:7px;padding:10px;text-align:center}.kpi-v{font-size:22px;font-weight:bold}.kpi-l{font-size:8px;letter-spacing:1px;text-transform:uppercase;color:#888;margin-top:2px}.sec{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:#B8962E;font-weight:bold;margin:14px 0 7px;border-left:3px solid #B8962E;padding-left:9px}table{width:100%;border-collapse:collapse;font-size:10px}thead tr{background:#1a1208;color:#C9A84C}th{padding:7px 6px;text-align:left;font-size:8px;text-transform:uppercase;letter-spacing:.4px}.footer{margin-top:22px;padding-top:12px;border-top:1px solid #e8d8b0;display:flex;justify-content:space-between}.sig{border-top:1px solid #1a1208;width:160px;text-align:center;padding-top:4px;font-size:8px;color:#666;margin-top:34px}@media print{body{padding:14px}}</style>
+</head><body>
+<div class="hdr">
+  <div><div class="brand">ESENCIA</div><div class="brand-sub">ARTE &amp; ORIGEN · REPÚBLICA DOMINICANA</div></div>
+  <div style="text-align:right"><div style="font-size:15px;color:#666">Reporte Diario de Producción</div><div style="font-size:19px;font-weight:bold">${rep.fecha}</div><div style="font-size:10px;color:#888;margin-top:2px">Supervisor: <strong>${rep.sup}</strong> · ${rep.pa} pareja${rep.pa!==1?'s':''}</div></div>
 </div>
-
 <div class="kpis">
-  <div class="kpi">
-    <div class="kpi-v" style="color:#1a7a4a">${rep.b.toLocaleString()}</div>
-    <div class="kpi-l">Cigarros buenos</div>
-  </div>
-  <div class="kpi">
-    <div class="kpi-v" style="color:#7a2a1a">${rep.m}</div>
-    <div class="kpi-l">Malos / Rechazo</div>
-  </div>
-  <div class="kpi">
-    <div class="kpi-v" style="color:${metaC}">${rep.metaPct||0}%</div>
-    <div class="kpi-l">Meta del día</div>
-  </div>
-  <div class="kpi">
-    <div class="kpi-v" style="color:#2a5a8a">${ef}%</div>
-    <div class="kpi-l">Eficiencia</div>
-  </div>
+  <div class="kpi"><div class="kpi-v" style="color:#1a7a4a">${rep.b.toLocaleString()}</div><div class="kpi-l">Buenos</div></div>
+  <div class="kpi"><div class="kpi-v" style="color:#7a2a1a">${rep.m}</div><div class="kpi-l">Malos</div></div>
+  <div class="kpi"><div class="kpi-v" style="color:${metaC}">${rep.metaPct||0}%</div><div class="kpi-l">Meta</div></div>
+  <div class="kpi"><div class="kpi-v" style="color:#2a5a8a">${ef}%</div><div class="kpi-l">Eficiencia</div></div>
 </div>
-
-<div class="section-title">Tabaco consumido</div>
-<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:18px">
-  <div class="kpi"><div class="kpi-v" style="font-size:18px">${(rep.lb||0).toFixed(2)}<span style="font-size:11px">lb</span></div><div class="kpi-l">Total</div></div>
-  <div class="kpi"><div class="kpi-v" style="font-size:18px">${(rep.totalLbTripa||0).toFixed(2)}<span style="font-size:11px">lb</span></div><div class="kpi-l">Tripa</div></div>
-  <div class="kpi"><div class="kpi-v" style="font-size:18px">${(rep.totalLbCap||0).toFixed(2)}<span style="font-size:11px">lb</span></div><div class="kpi-l">Capote</div></div>
-  <div class="kpi"><div class="kpi-v" style="font-size:18px">${(rep.totalLbCapa||0).toFixed(2)}<span style="font-size:11px">lb</span></div><div class="kpi-l">Capa</div></div>
+<div class="sec">Tabaco consumido</div>
+<div class="kpis">
+  <div class="kpi"><div class="kpi-v" style="font-size:16px">${(rep.lb||0).toFixed(2)}<span style="font-size:9px"> lb</span></div><div class="kpi-l">Total</div></div>
+  <div class="kpi"><div class="kpi-v" style="font-size:16px">${(rep.totalLbTripa||0).toFixed(2)}<span style="font-size:9px"> lb</span></div><div class="kpi-l">Tripa</div></div>
+  <div class="kpi"><div class="kpi-v" style="font-size:16px">${(rep.totalLbCap||0).toFixed(2)}<span style="font-size:9px"> lb</span></div><div class="kpi-l">Capote</div></div>
+  <div class="kpi"><div class="kpi-v" style="font-size:16px">${(rep.totalLbCapa||0).toFixed(2)}<span style="font-size:9px"> lb</span></div><div class="kpi-l">Capa</div></div>
 </div>
-
-<div class="section-title">Detalle por pareja</div>
-<table>
-  <thead><tr>
-    <th>Pareja</th><th>Vitola</th><th>Marca</th>
-    <th style="text-align:center">Buenos</th><th style="text-align:center">Malos</th>
-    <th style="text-align:center">Tripa</th><th style="text-align:center">Capote</th><th style="text-align:center">Capa</th>
-  </tr></thead>
-  <tbody>${rowsHTML}</tbody>
-</table>
-
+<div class="sec">Resumen por tabaquero</div>
+<table style="margin-bottom:12px"><thead><tr>
+  <th>Nombre</th><th>Rol</th><th style="text-align:center">Buenos</th><th style="text-align:center">Malos</th><th style="text-align:center">Eficiencia</th><th style="text-align:center">Tabaco usado</th>
+</tr></thead><tbody>${sumRows}</tbody></table>
+<div class="sec">Detalle por pareja</div>
+<table><thead><tr>
+  <th>Par.</th><th>Empuñero/a</th><th>Pegador/a</th><th>Vitola</th><th>Tipo</th>
+  <th style="text-align:center">Buenos</th><th style="text-align:center">Malos</th><th style="text-align:center">Efic.</th>
+  <th style="text-align:center">Tripa lb</th><th style="text-align:center">Cap. lb</th><th style="text-align:center">Capa lb</th>
+</tr></thead><tbody>${rowsHTML}</tbody></table>
 <div class="footer">
-  <div>
-    <div class="sig-line">${rep.sup}<br>Supervisor</div>
-  </div>
-  <div style="text-align:right;font-size:9px;color:#aaa">
-    <div>Tabacalera Esencia · Sistema de Producción v5</div>
-    <div>Generado: ${new Date().toLocaleString('es-DO')}</div>
-  </div>
-</div>
-</body>
-</html>`;
+  <div class="sig">${rep.sup}<br>Supervisor</div>
+  <div style="text-align:right;font-size:8px;color:#bbb"><div>Tabacalera Esencia · Sistema v5</div><div>Generado: ${new Date().toLocaleString('es-DO')}</div></div>
+</div></body></html>`;
 
   const win = window.open('', '_blank');
   win.document.write(html);
