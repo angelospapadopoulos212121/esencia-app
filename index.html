@@ -1394,7 +1394,7 @@ function saveMetas(){
   }
   METAS.global = Object.values(METAS.parejas).reduce((a,v)=>a+v,0);
   $('metaGlobalInput').value = METAS.global;
-  notif2('Metas guardadas correctamente','suc');if(window.fbSaveArr)window.fbSaveArr('metas',METAS);
+  notif2('Metas guardadas correctamente','suc');if(window.fbSaveArr)window.fbSaveArr('metas',METAS);lsSave();
   renderMetasScreen();updateDashMeta();logAct(`Metas actualizadas: global ${METAS.global} cigarros`)}
 
 function fillEqualMeta(){
@@ -1744,7 +1744,16 @@ function initApp(){
   const hs=getTodayStr();if($('fecha')) $('fecha').value=hs;
   populateMarcaSel();renderBrands();renderOps();renderVitolas();renderInvSummary();renderInvAlerts();updateInvNb();
   renderMetaConfig();updateDashMeta();updateDashStats();render();
-  // Mark app as ready and load from Firebase
+  // Load from localStorage first (instant)
+  const lsLoaded = lsLoad();
+  if (lsLoaded) {
+    try{populateMarcaSel();renderBrands();}catch(e){}
+    try{renderVitolas();}catch(e){}
+    try{renderOps();renderMetaConfig();}catch(e){}
+    try{updateDashMeta();renderDashReports();}catch(e){}
+    notif2('Datos locales cargados ✓','suc');
+  }
+  // Then sync with Firebase in background
   window.appInited = true;
   loadFromFirebase();
 }
@@ -1791,7 +1800,7 @@ document.addEventListener('click',e=>{if(!$('tbUser')?.contains(e.target)) close
 // ══════════════════════════════════════════════════════════════
 function populateMarcaSel(){const o=MARCAS.map(m=>`<option value="${m.id}">${m.nombre}</option>`).join('');if($('marcaProd')) $('marcaProd').innerHTML=o;if($('vit-m')) $('vit-m').innerHTML=o+'<option value="Ambas">Ambas</option>'}
 function renderBrands(){$('brandList').innerHTML=MARCAS.map(m=>`<div class="brand-card"><div class="brand-dot" style="background:${m.color}"></div><div style="flex:1"><div style="font-size:13px;color:var(--txt);font-weight:500">${m.nombre}</div><div style="font-size:9px;color:var(--txt3);margin-top:2px">${m.desc||'Sin descripción'}</div></div>${m.id>2?`<button class="btn-danger" onclick="delMarca(${m.id})">Eliminar</button>`:'<span style="font-size:8px;color:var(--txt3)">Principal</span>'}</div>`).join('')}
-function addMarca(){const n=$('marca-n').value.trim(),d=$('marca-d').value.trim(),c=$('marca-c').value;if(!n){notif2('El nombre es obligatorio','err');return}MARCAS.push({id:Date.now(),nombre:n,desc:d,color:c});$('marca-n').value='';$('marca-d').value='';$('addMarcaForm').classList.remove('show');populateMarcaSel();renderBrands();notif2(`Marca "${n}" creada`,'suc');if(window.fbSaveArr)window.fbSaveArr('marcas',MARCAS);}
+function addMarca(){const n=$('marca-n').value.trim(),d=$('marca-d').value.trim(),c=$('marca-c').value;if(!n){notif2('El nombre es obligatorio','err');return}MARCAS.push({id:Date.now(),nombre:n,desc:d,color:c});$('marca-n').value='';$('marca-d').value='';$('addMarcaForm').classList.remove('show');populateMarcaSel();renderBrands();notif2(`Marca "${n}" creada`,'suc');if(window.fbSaveArr)window.fbSaveArr('marcas',MARCAS);lsSave();}
 function delMarca(id){MARCAS=MARCAS.filter(m=>m.id!==id);populateMarcaSel();renderBrands()}
 function renderVitolas(){
   $('vitBody').innerHTML=vitolas.map(v=>`<tr>
@@ -1820,14 +1829,14 @@ function openEditVit(name){
 function delVit(name){
   if(!confirm(`¿Eliminar la vitola "${name}"?`))return;
   vitolas=vitolas.filter(v=>v.n!==name);
-  renderVitolas();notif2(`Vitola "${name}" eliminada`,'suc');if(window.fbSaveArr)window.fbSaveArr('vitolas',vitolas);
+  renderVitolas();notif2(`Vitola "${name}" eliminada`,'suc');if(window.fbSaveArr)window.fbSaveArr('vitolas',vitolas);lsSave();
 }
 function openAddVit(){populateMarcaSel();$('addVitForm').classList.toggle('show')}
 function addVit(){const n=$('vit-n').value.trim(),r=$('vit-r').value.trim(),l=$('vit-l').value.trim();const mEl=$('vit-m');const m=mEl?mEl.value||mEl.options[mEl.selectedIndex]?.text:'Ambas';if(!n||!r){notif2('Nombre y ring obligatorios','err');return}
   const orig=$('vitEditOrig')?.value;
   if(orig){const idx=vitolas.findIndex(v=>v.n===orig);if(idx>=0)vitolas[idx]={n,r,l,m};notif2(`Vitola "${n}" actualizada`,'suc');if($('vitEditOrig'))$('vitEditOrig').value='';if($('addVitBtn'))$('addVitBtn').textContent='Guardar vitola';}
   else{if(vitolas.find(v=>v.n===n)){notif2('Ya existe esa vitola','err');return}vitolas.push({n,r,l,m});notif2(`Vitola "${n}" agregada`,'suc');}
-  $('vit-n').value='';$('vit-r').value='';$('vit-l').value='';$('addVitForm').classList.remove('show');renderVitolas();if(window.fbSaveArr)window.fbSaveArr('vitolas',vitolas);notif2(`Vitola "${n}" agregada`,'suc')}
+  $('vit-n').value='';$('vit-r').value='';$('vit-l').value='';$('addVitForm').classList.remove('show');renderVitolas();if(window.fbSaveArr)window.fbSaveArr('vitolas',vitolas);lsSave();notif2(`Vitola "${n}" agregada`,'suc')}
 
 // ══════════════════════════════════════════════════════════════
 // OPERARIOS
@@ -1838,7 +1847,7 @@ function renderOps(){
   $(`opGrid-${t}`).innerHTML=OPS.filter(o=>o.tipo===t).map(o=>`<div class="op-card"><div class="op-av" style="background:${o.col}">${o.ini}</div><div class="op-name">${o.n}</div><span class="op-tipo ${o.tipo}">${o.roles?roles.map(r=>r==='empunero'?'Empuñero/a':r==='pegador'?'Pegador/a':r==='recapador'?'Recapador/a':'Bonchero/a').join(' · '):tipo==='e'?'Empuñero/a':'Pegador/a'}</span><div class="op-pareja">${o.pareja?`Pareja ${o.pareja}`:'Sin asignar'}</div>${canEdit?`<div class="op-acts"><button class="op-act del" onclick="delOp(${o.id})">Quitar</button></div>`:''}</div>`).join('')||`<div style="color:var(--txt3);font-size:11px;padding:10px">No hay ${t==='e'?'empuñeras/os':'pegadoras/os'}.</div>`;});
   $('dv-ops').textContent=OPS.length;const e=OPS.filter(o=>o.tipo==='e').length,p2=OPS.filter(o=>o.tipo==='p').length;$('dv-ops-sub').textContent=`${e} empuñeras · ${p2} pegadoras`}
 function delOp(id){OPS=OPS.filter(o=>o.id!==id);renderOps();notif2('Operario removido','suc')}
-function addOp(){const n=$('op-n').value.trim();if(!n){notif2('Ingresa el nombre','err');return}const tipo=$('op-t').value,par=$('op-p').value;const ini=n.split(' ').filter(Boolean).slice(0,2).map(w=>w[0]).join('').toUpperCase();OPS.push({id:Date.now(),n,ini,tipo,col:AV_COLS[OPS.length%AV_COLS.length],pareja:par?parseInt(par):null});$('op-n').value='';$('addOpForm').classList.remove('show');renderOps();renderMetaConfig();notif2(`${n} agregado/a`,'suc');if(window.fbSaveArr)window.fbSaveArr('operarios',OPS);}
+function addOp(){const n=$('op-n').value.trim();if(!n){notif2('Ingresa el nombre','err');return}const tipo=$('op-t').value,par=$('op-p').value;const ini=n.split(' ').filter(Boolean).slice(0,2).map(w=>w[0]).join('').toUpperCase();OPS.push({id:Date.now(),n,ini,tipo,col:AV_COLS[OPS.length%AV_COLS.length],pareja:par?parseInt(par):null});$('op-n').value='';$('addOpForm').classList.remove('show');renderOps();renderMetaConfig();notif2(`${n} agregado/a`,'suc');if(window.fbSaveArr)window.fbSaveArr('operarios',OPS);lsSave();}
 
 // ══════════════════════════════════════════════════════════════
 // INVENTARIO
@@ -2150,7 +2159,7 @@ function guardar(){
   
   $('mWrap').classList.add('show');
   renderInvSummary();renderInvAlerts();updateInvNb();updateDashStats();updateDashMeta();
-  logAct(`Reporte guardado: ${fecha} · ${pa} parejas · ${b} buenos · Meta: ${metaPct.toFixed(0)}%`);
+  lsSave();logAct(`Reporte guardado: ${fecha} · ${pa} parejas · ${b} buenos · Meta: ${metaPct.toFixed(0)}%`);
   try{localStorage.removeItem('esencia_draft')}catch(e){}
   notif2('Reporte guardado · Inventario actualizado','suc');
   if(metaPct>=100) setTimeout(()=>notif2('🏆 ¡Meta del día alcanzada! Excelente trabajo del equipo.','suc'),1500);
@@ -2596,7 +2605,7 @@ function savePedido() {
   }
   closePedForm();
   renderPedidos();
-  logAct('Pedido: '+cli);
+  logAct('Pedido: '+cli);lsSave();
 }
 
 function renderPedidos() {
@@ -2795,7 +2804,7 @@ function saveBlend() {
   }
   document.getElementById('addBlendForm').classList.remove('show');
   renderBlends();
-  logAct('Blend: '+nombre);
+  logAct('Blend: '+nombre);lsSave();
   if(typeof nP!=='undefined') initParejaBlends();
 }
 
@@ -3053,7 +3062,7 @@ async function loadFromFirebase() {
     }
 
     const total = (reps?.length||0)+(peds?.length||0)+(bls?.length||0);
-    notif2(`☁ Todo sincronizado · ${total} registros cargados`,'suc');
+    notif2(`☁ Todo sincronizado · ${total} registros cargados`,'suc');lsSave();
   } catch(err) {
     console.error('loadFromFirebase error:', err);
     notif2('Sin conexión — datos locales activos','err');
@@ -3469,6 +3478,59 @@ function saveEditInv(id) {
   renderInvSummary();
   notif2(`"${e.name}" actualizado ✓`,'suc');
   logAct(`Inventario editado: ${e.name} Caja ${e.box}`);
+}
+
+
+// ══════════════════════════════════════════════════════════════
+// LOCAL STORAGE — guardado inmediato como respaldo
+// ══════════════════════════════════════════════════════════════
+const LS_KEY = 'esencia_data_v1';
+
+function lsSave() {
+  try {
+    const data = {
+      marcas:      MARCAS,
+      vitolas:     vitolas,
+      operarios:   OPS,
+      metas:       METAS,
+      blends:      BLENDS,
+      pedidos:     PEDIDOS,
+      reportes:    savedReports.slice(-200), // last 200 reports
+      ts:          Date.now()
+    };
+    localStorage.setItem(LS_KEY, JSON.stringify(data));
+  } catch(e) { console.warn('lsSave error:', e); }
+}
+
+function lsLoad() {
+  try {
+    const raw = localStorage.getItem(LS_KEY);
+    if (!raw) return false;
+    const data = JSON.parse(raw);
+    if (!data) return false;
+    if (data.marcas    && data.marcas.length)    { MARCAS = data.marcas; }
+    if (data.vitolas   && data.vitolas.length)   { vitolas = data.vitolas; }
+    if (data.operarios && data.operarios.length) { OPS = data.operarios; }
+    if (data.metas     && typeof data.metas === 'object') { Object.assign(METAS, data.metas); }
+    if (data.blends    && data.blends.length)    { BLENDS = data.blends; nextBlendId = Math.max(nextBlendId, ...data.blends.map(b=>b.id||0))+1; }
+    if (data.pedidos   && data.pedidos.length)   { PEDIDOS = data.pedidos; nextPedId = Math.max(nextPedId, ...data.pedidos.map(p=>parseInt(p.id)||0))+1; }
+    if (data.reportes  && data.reportes.length)  { savedReports = data.reportes; }
+    return true;
+  } catch(e) { console.warn('lsLoad error:', e); return false; }
+}
+
+// Call lsSave after every important action
+function saveAll() {
+  lsSave();
+  // Also sync to Firebase in background
+  if (window.fbReady && window.fbSaveArr) {
+    window.fbSaveArr('marcas',    MARCAS);
+    window.fbSaveArr('vitolas',   vitolas);
+    window.fbSaveArr('operarios', OPS);
+    window.fbSaveArr('metas',     METAS);
+    window.fbSaveArr('blends_v2', BLENDS);
+    window.fbSaveArr('pedidos_v2',PEDIDOS);
+  }
 }
 
 </script>
