@@ -666,7 +666,7 @@ input,select,textarea,button{font-family:'Montserrat',sans-serif}
       <div class="login-ao">Arte &amp; Origen · República Dominicana</div>
       <div class="login-orn"></div>
     </div>
-    <div class="login-sub">Sistema de Producción v4 · Metas &amp; Ranking</div>
+    <div class="login-sub">Sistema de Producción v5 · Firebase + LocalStorage</div>
     <div id="loginBlocked" class="login-blocked"><div style="font-size:20px;margin-bottom:6px">⛔</div><div style="font-weight:500;margin-bottom:3px">Acceso bloqueado</div><div style="font-size:9px;opacity:.7">Espera <span id="blockTimer">60</span> segundos.</div></div>
     <div id="loginForm">
       <div class="lfld"><label>Usuario</label><input type="text" id="lUser" placeholder="usuario" autocomplete="username" autocapitalize="none" onkeydown="if(event.key==='Enter')doLogin()"/></div>
@@ -1742,19 +1742,20 @@ function initApp(){
   $('tbDate').textContent=`${d[hoy.getDay()]} ${hoy.getDate()} ${m[hoy.getMonth()]} ${hoy.getFullYear()}`;
   $('dashSub').textContent=`${dL[hoy.getDay()].charAt(0).toUpperCase()+dL[hoy.getDay()].slice(1)}, ${hoy.getDate()} de ${mL[hoy.getMonth()]} de ${hoy.getFullYear()}`;
   const hs=getTodayStr();if($('fecha')) $('fecha').value=hs;
+  // ── LOAD SAVED DATA FIRST (before any render) ──
+  const lsLoaded = lsLoad();
+
+  // Now render with correct data (saved or default)
   populateMarcaSel();renderBrands();renderOps();renderVitolas();renderInvSummary();renderInvAlerts();updateInvNb();
   renderMetaConfig();updateDashMeta();updateDashStats();render();
-  // Load from localStorage first (instant)
-  const lsLoaded = lsLoad();
+
   if (lsLoaded) {
-    try{populateMarcaSel();renderBrands();}catch(e){}
-    try{renderVitolas();}catch(e){}
-    try{renderOps();renderMetaConfig();}catch(e){}
-    try{updateDashMeta();renderDashReports();}catch(e){}
-    notif2('Datos locales cargados ✓','suc');
+    notif2('Datos cargados ✓','suc');
   }
-  // Then sync with Firebase in background
+  // Sync with Firebase in background
   window.appInited = true;
+  // Save current state to localStorage (ensures data persists on first run too)
+  lsSave();
   loadFromFirebase();
 }
 
@@ -3495,10 +3496,11 @@ function lsSave() {
       metas:       METAS,
       blends:      BLENDS,
       pedidos:     PEDIDOS,
-      reportes:    savedReports.slice(-200), // last 200 reports
+      reportes:    savedReports.slice(-200),
       ts:          Date.now()
     };
     localStorage.setItem(LS_KEY, JSON.stringify(data));
+    console.log('✓ lsSave: marcas='+MARCAS.length+' vitolas='+vitolas.length+' blends='+BLENDS.length);
   } catch(e) { console.warn('lsSave error:', e); }
 }
 
@@ -3515,6 +3517,9 @@ function lsLoad() {
     if (data.blends    && data.blends.length)    { BLENDS = data.blends; nextBlendId = Math.max(nextBlendId, ...data.blends.map(b=>b.id||0))+1; }
     if (data.pedidos   && data.pedidos.length)   { PEDIDOS = data.pedidos; nextPedId = Math.max(nextPedId, ...data.pedidos.map(p=>parseInt(p.id)||0))+1; }
     if (data.reportes  && data.reportes.length)  { savedReports = data.reportes; }
+    console.log('✓ lsLoad OK: marcas='+(data.marcas?.length||0)+' vitolas='+(data.vitolas?.length||0));
+    // Re-save immediately to refresh the timestamp and reinforce data
+    try { localStorage.setItem(LS_KEY+'_bak', raw); } catch(e) {}
     return true;
   } catch(e) { console.warn('lsLoad error:', e); return false; }
 }
