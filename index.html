@@ -3538,6 +3538,15 @@ function saveAll() {
   }
 }
 
+
+// Guardar datos base al cargar
+setTimeout(() => {
+  if (typeof lsSave === 'function' && !localStorage.getItem('esencia_data_v1')) {
+    lsSave();
+    console.log('✓ Datos iniciales guardados');
+  }
+}, 1000);
+
 </script>
 </body>
 </html>
