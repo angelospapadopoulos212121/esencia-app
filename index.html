@@ -3769,205 +3769,166 @@ function exportarPDFHoy() {
 </script>
 
 
-<div id="claude-agent-glow-border" style="position: fixed; inset: 0px; pointer-events: none; z-index: 2147483646; opacity: 1; transition: opacity 0.3s ease-in-out; animation: 2s ease-in-out 0s infinite normal none running claude-pulse; box-shadow: rgba(217, 119, 87, 0.5) 0px 0px 10px inset, rgba(217, 119, 87, 0.3) 0px 0px 20px inset, rgba(217, 119, 87, 0.1) 0px 0px 30px inset;"></div><script>
-(function(){
-// ══ ESENCIA FIX: INVENTARIO EDIT ══
-window.openEditInv = function(id) {
-  var INV2 = typeof INV !== 'undefined' ? INV : [];
-  var item = INV2.find(function(x){ return x.id===id; });
-  if(!item){ return; }
-  var form = document.getElementById('addInvForm');
-  if(!form){ return; }
-  if(!document.getElementById('af-editId')){
-    var h=document.createElement('input');
-    h.type='hidden'; h.id='af-editId'; h.value='';
-    form.appendChild(h);
+<script>
+window.openEditInv=function(id){
+  var INV2=typeof INV!="undefined"?INV:[];
+  var i=INV2.find(function(x){return x.id===id;});
+  if(!i)return;
+  var f=document.getElementById("addInvForm");
+  if(!f)return;
+  if(!document.getElementById("af-editId")){
+    var h=document.createElement("input");
+    h.type="hidden";h.id="af-editId";f.appendChild(h);
   }
-  document.getElementById('af-editId').value = id;
-  var sv=function(eid,val){ var el=document.getElementById(eid); if(el) el.value=(val===undefined||val===null)?'':val; };
-  sv('af-box',item.box); sv('af-name',item.name); sv('af-prov',item.prov);
-  sv('af-precio',item.precio); sv('af-fechac',item.fechac); sv('af-notas',item.notas);
-  sv('af-lb',item.lb); sv('af-grade',item.grade); sv('af-origin',item.origin); sv('af-min',item.min);
-  var catEl=document.getElementById('af-cat'); if(catEl) catEl.value=item.cat||'Tripa';
-  var tipEl=document.getElementById('af-tipo'); if(tipEl) tipEl.value=item.typ||item.tipo||'Seco';
-  form.classList.add('show'); form.style.display='block';
-  var saveBtn=form.querySelector('button[onclick*="addInvEntry"]');
-  if(saveBtn) saveBtn.setAttribute('onclick','saveEditInv()');
-  form.scrollIntoView({behavior:'smooth',block:'start'});
+  document.getElementById("af-editId").value=id;
+  var sv=function(k,v){var el=document.getElementById(k);if(el)el.value=(v==null)?"":v;};
+  sv("af-box",i.box);sv("af-name",i.name);sv("af-prov",i.prov);
+  sv("af-precio",i.precio);sv("af-fechac",i.fechac);sv("af-notas",i.notas);
+  sv("af-lb",i.lb);sv("af-grade",i.grade);sv("af-origin",i.origin);sv("af-min",i.min);
+  var c=document.getElementById("af-cat");if(c)c.value=i.cat||"Tripa";
+  var t=document.getElementById("af-tipo");if(t)t.value=i.typ||i.tipo||"Seco";
+  f.classList.add("show");f.style.display="block";
+  var b=f.querySelector("button");if(b)b.setAttribute("onclick","saveEditInv()");
+  f.scrollIntoView({behavior:"smooth",block:"start"});
 };
 
-window.saveEditInv = function() {
-  var eid=document.getElementById('af-editId');
-  var editId=eid?parseInt(eid.value):0;
-  if(!editId){ if(typeof addInvEntry==='function') addInvEntry(); return; }
-  var catEl=document.getElementById('af-cat');
-  var tipEl=document.getElementById('af-tipo');
-  var gv=function(id){ var el=document.getElementById(id); return el?el.value:''; };
-  var updated={
-    id:editId, box:gv('af-box'), name:gv('af-name'),
-    cat:catEl?catEl.value:'Tripa', typ:tipEl?tipEl.value:'Seco', tipo:tipEl?tipEl.value:'Seco',
-    prov:gv('af-prov'), precio:parseFloat(gv('af-precio'))||0,
-    fechac:gv('af-fechac'), notas:gv('af-notas'),
-    lb:parseFloat(gv('af-lb'))||0, grade:gv('af-grade'),
-    origin:gv('af-origin'), min:parseFloat(gv('af-min'))||0
-  };
-  var INV2=typeof INV!=='undefined'?INV:[];
+window.saveEditInv=function(){
+  var eid=document.getElementById("af-editId");
+  if(!eid||!eid.value){if(typeof addInvEntry==="function")addInvEntry();return;}
+  var editId=parseInt(eid.value);
+  var gv=function(k){var el=document.getElementById("af-"+k);return el?el.value:"";};
+  var c=document.getElementById("af-cat"),t=document.getElementById("af-tipo");
+  var u={id:editId,box:gv("box"),name:gv("name"),cat:c?c.value:"Tripa",
+    typ:t?t.value:"Seco",tipo:t?t.value:"Seco",prov:gv("prov"),
+    precio:parseFloat(gv("precio"))||0,fechac:gv("fechac"),notas:gv("notas"),
+    lb:parseFloat(gv("lb"))||0,grade:gv("grade"),origin:gv("origin"),min:parseFloat(gv("min"))||0};
+  var INV2=typeof INV!="undefined"?INV:[];
   var idx=INV2.findIndex(function(x){return x.id===editId;});
-  if(idx>=0){updated.consumido=INV2[idx].consumido||0; INV2[idx]=updated;}
-  else INV2.push(updated);
-  if(typeof lsSave==='function') lsSave();
-  if(typeof fbSaveInventario==='function') fbSaveInventario(updated);
-  var form=document.getElementById('addInvForm');
-  if(form){form.classList.remove('show'); form.style.display='';}
-  var saveBtn=form?form.querySelector('button[onclick*="saveEditInv"]'):null;
-  if(saveBtn) saveBtn.setAttribute('onclick','addInvEntry()');
-  if(eid) eid.value='';
-  if(typeof renderInventario==='function') renderInventario();
-  else if(typeof goTo==='function'){goTo('dashboard');setTimeout(function(){goTo('inventario');},150);}
-  var msg='\u2705 '+updated.name+' actualizado';
-  if(typeof showToast==='function') showToast(msg); else alert(msg);
+  if(idx>=0){u.consumido=INV2[idx].consumido||0;INV2[idx]=u;}else{INV2.push(u);}
+  if(typeof lsSave==="function")lsSave();
+  if(typeof fbSaveInventario==="function")fbSaveInventario(u);
+  var f=document.getElementById("addInvForm");
+  if(f){f.classList.remove("show");f.style.display="";}
+  eid.value="";
+  if(typeof renderInventario==="function")renderInventario();
+  alert("Actualizado: "+u.name);
 };
 
-// ══ PDF ══
-window.genPDF = function(reportId){
-  var REPS=typeof REPORTES!=='undefined'?REPORTES:[];
-  var rpt=reportId?REPS.find(function(r){return r.id===reportId;}):REPS[REPS.length-1];
-  if(!rpt){alert('No hay reporte'); return;}
-  var parejas=rpt.parejas||[];
-  var pRows=parejas.map(function(p,i){
-    var eff=p.buenos&&(p.buenos+p.malos)?Math.round(p.buenos/(p.buenos+p.malos)*100):0;
-    return '<tr><td>P'+(i+1)+'</td><td>'+(p.empNom||'')+(p.pegNom?' & '+p.pegNom:'')+'</td><td>'+(p.vitola||'-')+'</td><td style="color:#2d7a2d;font-weight:600">'+(p.buenos||0)+'</td><td style="color:#a02020">'+(p.malos||0)+'</td><td>'+eff+'%</td><td>'+(p.tipo==='recape'?'Recape':'Nuevo')+'</td></tr>';
-  }).join('');
-  var w=window.open('','_blank');
-  w.document.write('<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Reporte '+rpt.fecha+'</title><style>body{font-family:Georgia,serif;max-width:800px;margin:0 auto;padding:20px;color:#1a1208}h1{font-size:26px;color:#8B6914;text-align:center}h2{font-size:11px;color:#888;text-align:center;letter-spacing:2px;text-transform:uppercase}.la{text-align:center;border-bottom:2px solid #C9A84C;padding-bottom:12px;margin-bottom:16px}.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:14px 0}.kpi{background:#F9F5EC;border:1px solid #E8D88C;border-radius:7px;padding:10px;text-align:center}.kv{font-size:24px;font-weight:700;color:#8B6914}.kl{font-size:9px;color:#888;letter-spacing:1px;text-transform:uppercase}table{width:100%;border-collapse:collapse;font-size:12px;margin:12px 0}th{background:#8B6914;color:#fff;padding:7px 9px;text-align:left;font-size:10px;letter-spacing:1px}td{padding:6px 9px;border-bottom:1px solid #EEE}tr:nth-child(even) td{background:#FAFAFA}.footer{margin-top:26px;display:grid;grid-template-columns:1fr 1fr;gap:18px}.firma{border-top:1px solid #C9A84C;padding-top:7px;text-align:center;font-size:10px;color:#888}@media print{body{padding:10px}}</style></head><body>');
-  w.document.write('<div class="la"><h1>ESENCIA</h1><h2>Reporte Diario de Produccion</h2><p style="font-size:11px;color:#888">'+rpt.fecha+' &middot; Supervisor: '+(rpt.supervisor||'-')+' &middot; Parejas: '+(rpt.activas||parejas.length)+'</p></div>');
-  w.document.write('<div class="kpis"><div class="kpi"><div class="kv" style="color:#2d7a2d">'+(rpt.buenos||0)+'</div><div class="kl">Buenos</div></div><div class="kpi"><div class="kv" style="color:#a02020">'+(rpt.malos||0)+'</div><div class="kl">Malos</div></div><div class="kpi"><div class="kv">'+(rpt.lb_total?rpt.lb_total.toFixed(1):'0')+'lb</div><div class="kl">Tabaco</div></div><div class="kpi"><div class="kv" style="color:#8B6914">'+(rpt.eficiencia||0)+'%</div><div class="kl">Eficiencia</div></div></div>');
-  w.document.write('<h3 style="color:#8B6914;margin:14px 0 7px;font-size:13px">DETALLE POR PAREJA</h3>');
-  w.document.write('<table><thead><tr><th>#</th><th>Operarios</th><th>Vitola</th><th>Buenos</th><th>Malos</th><th>Efic.</th><th>Tipo</th></tr></thead><tbody>'+(pRows||'<tr><td colspan="7" style="text-align:center;color:#888">Sin detalle</td></tr>')+'</tbody></table>');
-  w.document.write('<div class="footer"><div class="firma">Firma Supervisor<br><br>_________________________<br>'+(rpt.supervisor||'')+'</div><div class="firma">Firma Administrador<br><br>_________________________<br>Angelo</div></div>');
-  w.document.write('</body></html>');
-  w.document.close(); setTimeout(function(){w.print();},600);
+window.genPDF=function(rid){
+  var R=typeof REPORTES!="undefined"?REPORTES:[];
+  var r=rid?R.find(function(x){return x.id===rid;}):R[R.length-1];
+  if(!r){alert("No hay reporte");return;}
+  var rows=(r.parejas||[]).map(function(x,i){
+    var e=(x.buenos&&(x.buenos+x.malos))?Math.round(x.buenos/(x.buenos+x.malos)*100):0;
+    return "<tr><td>P"+(i+1)+"</td><td>"+(x.empNom||"")+(x.pegNom?" & "+x.pegNom:"")+"</td><td>"+(x.vitola||"-")+"</td><td style='color:#2d7a2d'>"+(x.buenos||0)+"</td><td style='color:#a02020'>"+(x.malos||0)+"</td><td>"+e+"%</td></tr>";
+  }).join("");
+  var w=window.open("","_blank");if(!w)return;
+  w.document.write("<!DOCTYPE html><html><head><meta charset='UTF-8'><title>Reporte Esencia "+r.fecha+"</title><style>body{font-family:Georgia,serif;max-width:800px;margin:0 auto;padding:20px}h1{color:#8B6914;text-align:center}table{width:100%;border-collapse:collapse;font-size:12px;margin:12px 0}th{background:#8B6914;color:#fff;padding:7px;text-align:left}td{padding:6px;border-bottom:1px solid #EEE}.k{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:14px 0}.ki{background:#F9F5EC;border:1px solid #E8D88C;border-radius:7px;padding:10px;text-align:center}.kv{font-size:22px;font-weight:700;color:#8B6914}.kl{font-size:9px;color:#888;text-transform:uppercase}</style></head><body><h1>ESENCIA - Reporte Diario</h1><p style='text-align:center;color:#888'>"+r.fecha+" | Supervisor: "+(r.supervisor||"-")+"</p><div class='k'><div class='ki'><div class='kv' style='color:#2d7a2d'>"+(r.buenos||0)+"</div><div class='kl'>Buenos</div></div><div class='ki'><div class='kv' style='color:#a02020'>"+(r.malos||0)+"</div><div class='kl'>Malos</div></div><div class='ki'><div class='kv'>"+(r.lb_total?r.lb_total.toFixed(1):"0")+"lb</div><div class='kl'>Tabaco</div></div><div class='ki'><div class='kv' style='color:#8B6914'>"+(r.eficiencia||0)+"%</div><div class='kl'>Eficiencia</div></div></div><table><thead><tr><th>#</th><th>Operarios</th><th>Vitola</th><th>Buenos</th><th>Malos</th><th>Efic.</th></tr></thead><tbody>"+(rows||"<tr><td colspan='6' style='text-align:center'>Sin detalle</td></tr>")+"</tbody></table></body></html>");
+  w.document.close();setTimeout(function(){w.print();},600);
 };
 
-// ══ WHATSAPP ══
-window.sendWhatsApp = function(reportId){
-  var REPS=typeof REPORTES!=='undefined'?REPORTES:[];
-  var rpt=reportId?REPS.find(function(r){return r.id===reportId;}):REPS[REPS.length-1];
-  if(!rpt){alert('No hay reporte'); return;}
-  var parejas=rpt.parejas||[];
-  var det=parejas.map(function(p,i){
-    var eff=p.buenos&&(p.buenos+p.malos)?Math.round(p.buenos/(p.buenos+p.malos)*100):0;
-    return '   P'+(i+1)+' '+(p.tipo==='recape'?'🔄':'🆕')+' '+(p.empNom||'?')+(p.pegNom?' & '+p.pegNom:'')+'
-   '+(p.vitola||'-')+' ✅'+(p.buenos||0)+' ❌'+(p.malos||0)+' '+eff+'%';
-  }).join('
-');
-  var msg='📋 *REPORTE ESENCIA · '+rpt.fecha+'*
-Supervisor: '+(rpt.supervisor||'-')+'
-
-✅ *Buenos:* '+(rpt.buenos||0)+'
-❌ *Malos:* '+(rpt.malos||0)+'
-🎯 *Meta:* '+(rpt.meta_pct||0)+'%
-🌿 *Tabaco:* '+(rpt.lb_total?rpt.lb_total.toFixed(1):'0')+' lb
-📊 *Eficiencia:* '+(rpt.eficiencia||0)+'%
-
-👥 *POR PAREJA:*
-'+det+'
-
-_Tabacalera Esencia · ERP_';
-  window.open('https://wa.me/?text='+encodeURIComponent(msg),'_blank');
+window.sendWhatsApp=function(rid){
+  var R=typeof REPORTES!="undefined"?REPORTES:[];
+  var r=rid?R.find(function(x){return x.id===rid;}):R[R.length-1];
+  if(!r){alert("No hay reporte");return;}
+  var d=(r.parejas||[]).map(function(x,i){
+    var e=(x.buenos&&(x.buenos+x.malos))?Math.round(x.buenos/(x.buenos+x.malos)*100):0;
+    return "P"+(i+1)+" "+(x.empNom||"")+(x.pegNom?" & "+x.pegNom:"")+" - "+(x.vitola||"-")+" Buenos:"+(x.buenos||0)+" Malos:"+(x.malos||0)+" "+e+"%";
+  }).join("\n");
+  var m="REPORTE ESENCIA - "+r.fecha+"\nSupervisor: "+(r.supervisor||"-")+"\nBuenos: "+(r.buenos||0)+" | Malos: "+(r.malos||0)+" | Eficiencia: "+(r.eficiencia||0)+"%\nTabaco: "+(r.lb_total?r.lb_total.toFixed(1):"0")+"lb\n\n"+d+"\n\nTabacalera Esencia";
+  window.open("https://wa.me/?text="+encodeURIComponent(m),"_blank");
 };
 
-// ══ EDIT/DELETE REPORT (solo admin) ══
-window.editReport = function(id){
-  var CU=typeof CUR_USER!=='undefined'?CUR_USER:null;
-  if(!CU||CU.rol!=='admin'){alert('Solo administrador'); return;}
-  var REPS=typeof REPORTES!=='undefined'?REPORTES:[];
-  var rpt=REPS.find(function(r){return r.id===id;}); if(!rpt) return;
-  var b=prompt('Cigarros buenos:',rpt.buenos||0); if(b===null) return;
-  var m=prompt('Cigarros malos:',rpt.malos||0); if(m===null) return;
-  rpt.buenos=parseInt(b)||0; rpt.malos=parseInt(m)||0;
-  rpt.eficiencia=(rpt.buenos+rpt.malos)>0?Math.round(rpt.buenos/(rpt.buenos+rpt.malos)*100):0;
-  if(typeof lsSave==='function') lsSave();
-  if(typeof fbSaveReport==='function') fbSaveReport(rpt);
-  if(typeof renderHistorial==='function') renderHistorial();
-  alert('✅ Reporte actualizado');
-};
-window.deleteReport = function(id){
-  var CU=typeof CUR_USER!=='undefined'?CUR_USER:null;
-  if(!CU||CU.rol!=='admin'){alert('Solo administrador'); return;}
-  if(!confirm('¿Borrar este reporte?')) return;
-  var REPS=typeof REPORTES!=='undefined'?REPORTES:[];
-  var idx=REPS.findIndex(function(r){return r.id===id;}); if(idx>=0) REPS.splice(idx,1);
-  if(typeof lsSave==='function') lsSave();
-  if(typeof renderHistorial==='function') renderHistorial();
-  var mo=document.getElementById('histModal'); if(mo) mo.style.display='none';
+window.editReport=function(id){
+  if(typeof CUR_USER==="undefined"||CUR_USER.rol!=="admin"){alert("Solo admin puede editar reportes");return;}
+  var R=typeof REPORTES!="undefined"?REPORTES:[];
+  var r=R.find(function(x){return x.id===id;});if(!r)return;
+  var b=prompt("Cigarros buenos:",r.buenos||0);if(b===null)return;
+  var m=prompt("Cigarros malos:",r.malos||0);if(m===null)return;
+  r.buenos=parseInt(b)||0;r.malos=parseInt(m)||0;
+  r.eficiencia=(r.buenos+r.malos)>0?Math.round(r.buenos/(r.buenos+r.malos)*100):0;
+  if(typeof lsSave==="function")lsSave();
+  if(typeof fbSaveReport==="function")fbSaveReport(r);
+  if(typeof renderHistorial==="function")renderHistorial();
+  alert("Reporte actualizado");
 };
 
-// ══ PEDIDOS ══
-window.editPed = function(id){
-  var PEDS=typeof PEDIDOS!=='undefined'?PEDIDOS:[];
-  var p=PEDS.find(function(x){return x.id===id;}); if(!p) return;
-  var c=document.getElementById('pf-cli'); if(c) c.value=p.cliente||'';
-  var f=document.getElementById('pf-fecha'); if(f) f.value=p.fechaEnt||'';
-  var e=document.getElementById('pf-editId'); if(e) e.value=id;
-  var pr=document.getElementById('pf-pri'); if(pr) pr.value=p.prioridad||'normal';
-  var pf=document.getElementById('pedForm'); if(pf) pf.style.display='block';
+window.deleteReport=function(id){
+  if(typeof CUR_USER==="undefined"||CUR_USER.rol!=="admin"){alert("Solo admin puede borrar reportes");return;}
+  if(!confirm("Borrar este reporte?"))return;
+  var R=typeof REPORTES!="undefined"?REPORTES:[];
+  var i=R.findIndex(function(x){return x.id===id;});
+  if(i>=0)R.splice(i,1);
+  if(typeof lsSave==="function")lsSave();
+  if(typeof renderHistorial==="function")renderHistorial();
+  var mo=document.getElementById("histModal");if(mo)mo.style.display="none";
 };
-window.deletePed = function(id){
-  if(!confirm('¿Eliminar pedido?')) return;
-  var PEDS=typeof PEDIDOS!=='undefined'?PEDIDOS:[];
-  var idx=PEDS.findIndex(function(x){return x.id===id;}); if(idx>=0) PEDS.splice(idx,1);
-  if(typeof lsSave==='function') lsSave();
-  if(typeof fbDeletePedido==='function') fbDeletePedido(id);
-  if(typeof renderPedidos==='function') renderPedidos();
+
+window.editPed=function(id){
+  var P=typeof PEDIDOS!="undefined"?PEDIDOS:[];
+  var p=P.find(function(x){return x.id===id;});if(!p)return;
+  var c=document.getElementById("pf-cli");if(c)c.value=p.cliente||"";
+  var f=document.getElementById("pf-fecha");if(f)f.value=p.fechaEnt||"";
+  var e=document.getElementById("pf-editId");if(e)e.value=id;
+  var pr=document.getElementById("pf-pri");if(pr)pr.value=p.prioridad||"normal";
+  var pf=document.getElementById("pedForm");if(pf)pf.style.display="block";
 };
-window.savePed = function(){
-  var eid=document.getElementById('pf-editId');
-  var editId=eid?eid.value:'';
-  var cli=(document.getElementById('pf-cli')||{}).value||'';
-  var fec=(document.getElementById('pf-fecha')||{}).value||'';
-  var pr=document.getElementById('pf-pri');
-  var prioridad=pr?pr.value:'normal';
-  if(!cli){alert('Ingresa el cliente'); return;}
-  var PEDS=typeof PEDIDOS!=='undefined'?PEDIDOS:[];
-  if(editId){
-    var p=PEDS.find(function(x){return x.id===parseInt(editId);});
-    if(p){p.cliente=cli; p.fechaEnt=fec; p.prioridad=prioridad;}
-  } else {
-    PEDS.push({id:Date.now(),cliente:cli,fechaEnt:fec,prioridad:prioridad,vitolas:[],estado:'pendiente',fechaCreado:new Date().toISOString().split('T')[0]});
+
+window.deletePed=function(id){
+  if(!confirm("Eliminar pedido?"))return;
+  var P=typeof PEDIDOS!="undefined"?PEDIDOS:[];
+  var i=P.findIndex(function(x){return x.id===id;});
+  if(i>=0)P.splice(i,1);
+  if(typeof lsSave==="function")lsSave();
+  if(typeof fbDeletePedido==="function")fbDeletePedido(id);
+  if(typeof renderPedidos==="function")renderPedidos();
+};
+
+window.savePed=function(){
+  var eid=document.getElementById("pf-editId");
+  var eId=eid?eid.value:"";
+  var cli=(document.getElementById("pf-cli")||{}).value||"";
+  var fec=(document.getElementById("pf-fecha")||{}).value||"";
+  var pr=document.getElementById("pf-pri");var pri=pr?pr.value:"normal";
+  if(!cli){alert("Ingresa el cliente");return;}
+  var P=typeof PEDIDOS!="undefined"?PEDIDOS:[];
+  if(eId){
+    var p=P.find(function(x){return x.id===parseInt(eId);});
+    if(p){p.cliente=cli;p.fechaEnt=fec;p.prioridad=pri;}
+  }else{
+    P.push({id:Date.now(),cliente:cli,fechaEnt:fec,prioridad:pri,vitolas:[],estado:"pendiente",fechaCreado:new Date().toISOString().split("T")[0]});
   }
-  if(eid) eid.value='';
-  if(typeof lsSave==='function') lsSave();
-  if(typeof renderPedidos==='function') renderPedidos();
-  var pf=document.getElementById('pedForm'); if(pf) pf.style.display='none';
+  if(eid)eid.value="";
+  if(typeof lsSave==="function")lsSave();
+  if(typeof renderPedidos==="function")renderPedidos();
+  var pf=document.getElementById("pedForm");if(pf)pf.style.display="none";
 };
 
-// ══ NOMINAS ══
-window.openNomAjuste = function(empId){
-  var m=document.getElementById('nomAjusteModal'); if(!m) return;
+window.openNomAjuste=function(empId){
+  var m=document.getElementById("nomAjusteModal");if(!m)return;
   m.dataset.empId=empId;
-  var NOM2=typeof NOM_AJUSTES!=='undefined'?NOM_AJUSTES:{};
-  var adj=NOM2[empId]||{};
-  var d=document.getElementById('adj-dias'); if(d) d.value=adj.diasFaltados||0;
-  var h=document.getElementById('adj-horas'); if(h) h.value=adj.horasExtra||0;
-  var n=document.getElementById('adj-nota'); if(n) n.value=adj.nota||'';
-  m.style.display='flex';
-};
-window.saveNomAjuste = function(){
-  var m=document.getElementById('nomAjusteModal');
-  var empId=m?m.dataset.empId:null; if(!empId) return;
-  if(typeof NOM_AJUSTES==='undefined') window.NOM_AJUSTES={};
-  NOM_AJUSTES[empId]={
-    diasFaltados:parseFloat((document.getElementById('adj-dias')||{}).value)||0,
-    horasExtra:parseFloat((document.getElementById('adj-horas')||{}).value)||0,
-    nota:((document.getElementById('adj-nota')||{}).value||'').trim()
-  };
-  if(typeof lsSave==='function') lsSave();
-  if(m) m.style.display='none';
-  if(typeof renderNominas==='function') renderNominas();
+  var N=typeof NOM_AJUSTES!="undefined"?NOM_AJUSTES:{};
+  var a=N[empId]||{};
+  var d=document.getElementById("adj-dias");if(d)d.value=a.diasFaltados||0;
+  var h=document.getElementById("adj-horas");if(h)h.value=a.horasExtra||0;
+  var n=document.getElementById("adj-nota");if(n)n.value=a.nota||"";
+  m.style.display="flex";
 };
 
-console.log('✅ Esencia Fix cargado - todas las funciones OK');
-})();
+window.saveNomAjuste=function(){
+  var m=document.getElementById("nomAjusteModal");if(!m)return;
+  var empId=m.dataset.empId;if(!empId)return;
+  if(typeof NOM_AJUSTES==="undefined")window.NOM_AJUSTES={};
+  NOM_AJUSTES[empId]={
+    diasFaltados:parseFloat((document.getElementById("adj-dias")||{}).value)||0,
+    horasExtra:parseFloat((document.getElementById("adj-horas")||{}).value)||0,
+    nota:((document.getElementById("adj-nota")||{}).value||"").trim()
+  };
+  if(typeof lsSave==="function")lsSave();
+  m.style.display="none";
+  if(typeof renderNominas==="function")renderNominas();
+};
+
+console.log("Esencia Fix OK - funciones cargadas correctamente");
 </script>
 </body></html>
